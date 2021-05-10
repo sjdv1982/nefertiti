@@ -48,7 +48,7 @@ def write_pdb_atom(atom) -> str:
     if occ < 0:
         occ = 0
     args = (
-        "ATOM  " if atom["hetero"].decode() == " " else "HETATM",
+        "ATOM  " if atom["hetero"].decode().strip() == "" else "HETATM",
         atom["index"],
         name,
         atom["altloc"].decode(),
@@ -60,7 +60,7 @@ def write_pdb_atom(atom) -> str:
         atom["y"],
         atom["z"],
         occ,
-        atom["bfactor"],
+        np.minimum(atom["bfactor"], 100),
         atom["segid"].decode(),
         atom["element"].decode(),
         "",
@@ -93,7 +93,7 @@ def build_pdb_backbone(
     if sequence is not None:
         assert len(sequence) == len(struc)
     from . import parse_pdb
-    newstruc = np.empty(
+    newstruc = np.zeros(
         (len(struc), len(bb_atoms)),
         parse_pdb.atomic_dtype
     )
@@ -120,11 +120,32 @@ def build_pdb_backbone(
             a["element"] = bb_atoms[anr][0].encode()
     return newstruc.flatten()
 
-def write_pdb_backbone(
+def build_pdb_fragment_backbone(
     struc: np.ndarray, 
     bb_atoms: List[str],
-    sequence:str = None,
-) -> str:
-    atoms = build_pdb_backbone(struc, bb_atoms, sequence)
-    pdb = write_pdb(atoms)
-    return pdb
+    sequence:str = None
+):
+    assert struc.ndim == 4
+    assert struc.shape[2] == len(bb_atoms)
+    assert struc.shape[3] in (3,4)
+    struc = struc[:, :, :, :3]
+    nfrag, fraglen = struc.shape[:2]
+    if sequence is not None:
+        assert len(sequence) == nfrag + fraglen - 1, (len(sequence), nfrag, fraglen)
+    assert fraglen < 100
+    offset = 10 if fraglen < 10 else 100
+    assert len(sequence) * offset < 10000
+
+    from . import parse_pdb
+    atoms = np.empty(nfrag * fraglen * len(bb_atoms), parse_pdb.atomic_dtype)
+    for n in range(nfrag):
+        stride = fraglen * len(bb_atoms)
+        atoms[n*stride:(n+1)*stride] = build_pdb_backbone(
+            struc[n],
+            bb_atoms,
+            sequence[n:n+fraglen],
+            atomindex_offset=n * len(bb_atoms) * fraglen,
+            resid_offset= n * offset
+        )
+    return atoms
+    
