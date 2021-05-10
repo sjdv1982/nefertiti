@@ -12,6 +12,7 @@ from Bio.PDB.StructureBuilder import PDBConstructionWarning
 warnings.simplefilter('ignore', PDBConstructionWarning)
 from io import StringIO
 import numpy as np
+from typing import List
 
 atomic_dtype = [
     ("model", 'uint16'),            
@@ -34,7 +35,7 @@ atomic_dtype = [
 
 atomic_dtype = np.dtype(atomic_dtype, align=True)
 
-def parse_pdb(pdbdata):
+def parse_pdb(pdbdata: str) -> np.ndarray:
     
     pdb_obj = StringIO(pdbdata)
     
@@ -76,7 +77,7 @@ def parse_pdb(pdbdata):
             count += 1
     return atomstate
 
-def get_xyz(struc):
+def get_xyz(struc: np.ndarray) -> np.ndarray:
     struc2 = struc.flatten()
     result = np.zeros((len(struc2), 3))
     result[:, 0] = struc2["x"]
@@ -84,7 +85,7 @@ def get_xyz(struc):
     result[:, 2] = struc2["z"]
     return result.reshape(struc.shape + (3,))
 
-def get_backbone(struc, backbone_atoms):
+def get_backbone(struc: np.ndarray, backbone_atoms: List[str]) -> np.ndarray:
     assert struc.ndim == 1
     selections = []
     for atomnr, atom in enumerate(backbone_atoms):
@@ -96,6 +97,44 @@ def get_backbone(struc, backbone_atoms):
     result = np.empty((len(selections[0]), len(backbone_atoms)),atomic_dtype)
     for snr, s in enumerate(selections):
         result[:, snr] = s
+    return result
+
+def get_sequence(struc:np.ndarray) -> str:
+    code = {
+        "ALA": "A",
+        "CYS": "C",
+        "ASP": "D",
+        "GLU": "E",
+        "PHE": "F",
+        "GLY": "G",
+        "HIS": "H",
+        "ILE": "I",
+        "LYS": "K",
+        "LEU": "L",
+        "MET": "M",
+        "ASN": "N",
+        "PRO": "P",
+        "GLN": "Q",
+        "ARG": "R",
+        "SER": "S",
+        "THR": "T",
+        "VAL": "V",
+        "TRP": "W",
+        "TYR": "Y",
+    }
+    result = ""
+    assert struc.ndim == 1
+    res = None
+    for a in struc:
+        if a["altloc"].decode() not in ("A", " "):
+            continue
+        curr_res = a["model"], a["chain"], a["icode"], a["resid"]
+        if res == curr_res:
+            continue
+        res = curr_res
+        c = a["resname"]
+        aa = code.get(c.decode(), "X")
+        result += aa
     return result
 
 if __name__ == "__main__":

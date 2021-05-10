@@ -29,7 +29,7 @@ def validate_coor_dtype(arr: ndarray, state: "State") -> None:
 
 
 def ndarray_shape_validator(arr: ndarray, state: "State", shape_expr: str) -> None:
-    shape = state.eval_in_scope(shape_expr, evaluate_strings=True)
+    shape = state._eval_in_scope(shape_expr, evaluate_strings=True)
     if len(shape) != len(arr.shape):
         raise ShapeError(shape, arr.shape)
     for x, y in zip(shape, arr.shape):
@@ -102,7 +102,7 @@ class State:
                 assert callable(type_descr[1])
                 validator, validator_args = type_descr[1:]
         #typeclass = self._globals[typename]
-        typeclass = self.eval_in_scope(typename, True)
+        typeclass = self._eval_in_scope(typename, True)
         if isinstance(value, BASICTYPES):
             if issubclass(typeclass, State):
                 if not isinstance(value, dict):
@@ -124,7 +124,7 @@ class State:
             else:
                 validator(value, self, validator_args)
         super().__setattr__(attr, value)
-        self.validate()
+        self._validate()
 
     def __getattr__(self, attr):
         in_state = False
@@ -142,7 +142,7 @@ class State:
         assert parent is not None  # logical consistency
         return getattr(parent, attr)
 
-    def _eval_in_scope(self, scope, expr, evaluate_strings, *, nest):
+    def _eval_in_scope2(self, scope, expr, evaluate_strings, *, nest):
         if isinstance(expr, str):
             if nest > 0 and not evaluate_strings:
                 return expr
@@ -151,7 +151,7 @@ class State:
         elif isinstance(expr, dict):
             result = {}
             for k, v in expr.items():
-                eval_v = self._eval_in_scope(
+                eval_v = self._eval_in_scope2(
                     scope, v, evaluate_strings, 
                     nest=nest+1
                 )
@@ -160,7 +160,7 @@ class State:
         elif isinstance(expr, (list, tuple)):
             result = []
             for v in expr.items():
-                eval_v = self._eval_in_scope(
+                eval_v = self._eval_in_scope2(
                     scope, v, evaluate_strings, 
                     nest=nest+1
                 )
@@ -169,10 +169,12 @@ class State:
         else:
             return expr       
 
-    def eval_in_scope(self, expr: str, evaluate_strings: bool):
+    def _eval_in_scope(self, expr: str, evaluate_strings: bool):
         scope = _StateScope(self)
-        return self._eval_in_scope(scope, expr, evaluate_strings, nest=0)
+        return self._eval_in_scope2(scope, expr, evaluate_strings, nest=0)
 
-    def validate(self) -> None:
+    def _validate(self) -> None:
         pass
 
+    def __dir__(self):
+        return list(self._state.keys()) 

@@ -19,14 +19,19 @@ class MainState(State):
 # Structure representation (of reference structure)
 ################################################################
 
+def validate_sequence(seq: str,  state: "State"):
+    for aa in seq:
+        assert aa in "ACDEFGHIKLMNPQRSTVWXYZ", aa
+
 class StructureRepresentation(State):
     _state = {
         "coor": ("ndarray", validate_coor_dtype),
+        "sequence": ("str", validate_sequence),
         "coor_fragment": "FragmentCoordinateRepresentation",
         "coor_residue": "CoordinateRepresentation",
         "nresidues": "uint",
         "fraglen": "uint",
-        "bbatoms": "ListOf(str)",
+        "bb_atoms": "ListOf(str)",
     }
 
 class CenteredState(State):
@@ -41,16 +46,16 @@ class CenteredState(State):
             com = value2.mean(axis=0)
             if not np.allclose(com, np.zeros(3)):
                 raise ValueError("Not centered", attr, com)        
-    def validate(self):
+    def _validate(self):
         self._check_centered()
 
 class FragmentCoordinateRepresentation(CenteredState):
     """Note that different representations may not have the same center-of-mass!"""
     _state = {
         "nfrags": "uint",
-        "backbone": ("ndarray", "(nfrags, fraglen, len(bbatoms), 3)"),
-        "backbone4": ("ndarray", "(nfrags, fraglen, len(bbatoms), 4)"),
-        "backbone4_centered": ("ndarray", "(nfrags, fraglen, len(bbatoms), 4)"),
+        "backbone": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 3)"),
+        "backbone4": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
+        "backbone4_centered": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
         "backbone_residuals": ("ndarray", "(nfrags,)"),
         "ca": ("ndarray", "(nfrags, fraglen, 3)"),
         "ca4": ("ndarray", "(nfrags, fraglen, 4)"),
@@ -61,9 +66,9 @@ class FragmentCoordinateRepresentation(CenteredState):
 class CoordinateRepresentation(CenteredState):
     """Note that different representations may not have the same center-of-mass!"""
     _state = {
-        "backbone": ("ndarray", "(nresidues, len(bbatoms), 3)"),
-        "backbone4": ("ndarray", "(nresidues, len(bbatoms), 4)"),
-        "backbone4_centered": ("ndarray", "(nresidues, len(bbatoms), 4)"),
+        "backbone": ("ndarray", "(nresidues, len(bb_atoms), 3)"),
+        "backbone4": ("ndarray", "(nresidues, len(bb_atoms), 4)"),
+        "backbone4_centered": ("ndarray", "(nresidues, len(bb_atoms), 4)"),
         "backbone_residual": "float",
         "ca": ("ndarray", "(nresidues, 3)"),
         "ca4": ("ndarray", "(nresidues, 4)"),
@@ -72,7 +77,7 @@ class CoordinateRepresentation(CenteredState):
     }
 
 ################################################################
-# Fragment library representation (of reference structure)
+# Fragment library 
 ################################################################
 
 class FragmentLibrary(CenteredState):

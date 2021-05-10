@@ -37,7 +37,7 @@ def prepare_backbone(struc, fraglen, bblen=4):
     residuals = (result.reshape(k,-1)**2).sum(axis=1)
     residuals = np.cumsum(residuals)
     refe4 = np.ones(refe.shape[:-1]+(4,))
-    refe4[:, :, :3] = refe
+    refe4[:, :, :3] = refe - com
     refe_frag4 =  np.ones(result.shape[:-1]+(4,))
     refe_frag4[:, :, :, :3] = result
     return refe4, refe_frag4, residuals
