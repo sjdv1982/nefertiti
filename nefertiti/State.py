@@ -8,6 +8,7 @@ This file is part of the Nefertiti project.
 
 import sys
 import numpy as np
+from numpy.lib.arraysetops import isin
 
 BASICTYPES = (dict, list, tuple, int, float, bool, str, np.number)
 
@@ -124,6 +125,9 @@ class State:
             else:
                 validator(value, self, validator_args)
         super().__setattr__(attr, value)
+        if isinstance(value, State):
+            value.parent = self
+            value._validate()
         self._validate()
 
     def __getattr__(self, attr):
@@ -136,11 +140,13 @@ class State:
             stateholder = stateholder.parent
         if not in_state:
             raise AttributeError(attr)
-        if attr in self._state:
-            return None
         parent = self.parent
-        assert parent is not None  # logical consistency
-        return getattr(parent, attr)
+        if parent is None:
+            return None
+        try:
+            return getattr(parent, attr)
+        except AttributeError:
+            return None
 
     def _eval_in_scope2(self, scope, expr, evaluate_strings, *, nest):
         if isinstance(expr, str):

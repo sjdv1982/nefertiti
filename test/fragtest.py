@@ -1,11 +1,21 @@
 import numpy as np
 fraglib0 = np.load("../fraglib/dummy.npy")
 print(fraglib0.shape)
+
+from nefertiti.MainState import FragmentLibrary
+from nefertiti.progressions.fraglib import load_backbone_fraglib
+"""
 from nefertiti.functions.fraglib import (
     prepare_fraglib_backbone, calc_fraglib_matrices_backbone
 )
 fraglib, residuals = prepare_fraglib_backbone(fraglib0)
 matrices = calc_fraglib_matrices_backbone(fraglib)
+"""
+f = FragmentLibrary()
+load_backbone_fraglib(f, fraglib0)
+
+fraglib = f.coor.backbone4_centered
+matrices = f.matrices
 
 from nefertiti.functions.matrix import matmult, dotmat
 

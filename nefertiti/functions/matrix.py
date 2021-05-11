@@ -1,6 +1,10 @@
 import numpy as np
 
-def matmult(curr_matrices, mult_matrices, indices):
+def matmult(
+    curr_matrices: np.ndarray, 
+    mult_matrices: np.ndarray, 
+    indices: np.ndarray
+) -> np.ndarray:
     """Matrix multiplication
     No verification of array shape is done!
 
@@ -23,7 +27,11 @@ def matmult(curr_matrices, mult_matrices, indices):
     return result
 
 
-def dotmat(matrices, vectors, vector_indices):
+def dotmat(
+    matrices: np.ndarray, 
+    vectors: np.ndarray, 
+    vector_indices: np.ndarray
+) -> np.ndarray:
     """Vector-matrix multiplication
     No verification of array shape is done!
 

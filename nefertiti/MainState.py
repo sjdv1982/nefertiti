@@ -53,6 +53,9 @@ class FragmentCoordinateRepresentation(CenteredState):
     """Note that different representations may not have the same center-of-mass!"""
     _state = {
         "nfrags": "uint",
+        "fraglen": "uint",
+        "bb_atoms": "ListOf(str)",
+        
         "backbone": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 3)"),
         "backbone4": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
         "backbone4_centered": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
@@ -83,6 +86,8 @@ class CoordinateRepresentation(CenteredState):
 class FragmentLibrary(CenteredState):
     _state = {
         "nfrags": "uint",
+        "fraglen": "uint",
+        "bb_atoms": "ListOf(str)",
         "coor": "FragmentCoordinateRepresentation",
         "matrices":("ndarray", "(nfrags,nfrags,4,4)"),
     }
