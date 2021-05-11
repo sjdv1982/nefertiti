@@ -37,7 +37,7 @@ def dotmat(matrices, vectors, vector_indices):
     
     for each m in range(M),
       r[m] = vector[ind[m]].dot(matrix[m])
-    and then the 4-dimensional vector x,y,z,q has dimension q removed
+    and then the 4-dimensional vector x,y,z,w has dimension w removed
     """
     vv = vectors[vector_indices]
     result = np.einsum("ijk,ikl->ijl", vv, matrices) #diagonally broadcasted form of vv.dot(matrices)
