@@ -37,6 +37,8 @@ def prepare_backbone(s: StructureRepresentation, bb_coor:np.ndarray) -> None:
     if s.fraglen is None:
         s.fraglen = 4
     s.nresidues = len(bb_coor)
+    if s.nfrags is None:
+        s.nfrags = s.nresidues - s.fraglen + 1
     s.coor_residue = {}
     s.coor_residue.backbone =  bb_coor
     bb_coor4, bb_coor_frag, bb_residuals_frag = prepare_backbone_func(
@@ -46,6 +48,6 @@ def prepare_backbone(s: StructureRepresentation, bb_coor:np.ndarray) -> None:
     com = bb_coor4.reshape(-1, 4).mean(axis=0)
     com[3] = 0
     s.coor_residue.backbone4_centered = bb_coor4 - com
-    s.coor_fragment = {"nfrags": len(bb_coor_frag)}
+    s.coor_fragment = {}
     s.coor_fragment.backbone4_centered = bb_coor_frag
     s.coor_fragment.backbone_residuals = bb_residuals_frag

@@ -65,3 +65,27 @@ def superimpose_array(coor1_array, coor2):
     ss = np.maximum(ss, 0)
     rmsd = sqrt(ss / natoms)
     return rotmat, rmsd    
+
+def superimpose_array_from_covar(covar, residuals, natoms, return_sd:bool):
+    """Returns the rotation matrix and RMSD between coor1 and coor2
+    where coor1 is every element of coor1_array
+    
+    Instead of the coordinates themselves, provide the covariance
+     and residuals.
+
+    Do np.einsum("ijk,ikl->ijl", coor1_array, rotmat) to perform the superpositions
+
+    If return_sd, calculate the SD instead of (rotmat, rmsd)
+    """
+    v, s, wt = svd(covar)
+    reflect = det(v) * det(wt)
+    s[:,-1] *= reflect
+    sd = residuals - 2 * s.sum(axis=1)
+    sd = np.maximum(sd, 0)
+    if not return_sd:
+        v[:, :, -1] *= reflect[:, None]
+        rotmat = np.einsum('...ij,...jk->...ik', v, wt)
+        rmsd = sqrt(sd / natoms)
+        return rotmat, rmsd    
+    else:
+        return sd

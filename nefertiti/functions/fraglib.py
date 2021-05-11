@@ -23,7 +23,7 @@ def prepare_fraglib_backbone(fraglib: np.ndarray) -> np.ndarray:
     fraglib = fraglib - fraglib_com[:, None, None, :]
     fraglib4 = np.ones(fraglib.shape[:-1] + (4,))
     fraglib4[:, :, :, :3] = fraglib
-    residuals = np.einsum("ijkl->i", fraglib)
+    residuals = np.einsum("ijkl,ijkl->i", fraglib, fraglib)
     return fraglib4, residuals
 
 def calc_fraglib_matrices(

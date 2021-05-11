@@ -25,17 +25,21 @@ def prepare_backbone(struc, fraglen, bblen=4):
       The structure is centered so that the average atom (after duplication!) is (0,0,0)
     
     - Residuals (sum of squares) of the centered structure
-      K residuals are returned. Residual n is for the structure up to fragment n
+      K residuals are returned. 
+      Residual n is for the structure up to fragment n, 
+       *centered for the coordinates up to fragment n*
     """
     refe = struc.reshape(-1, bblen, 3)
     k = len(refe) - fraglen + 1
     result = np.zeros((k, fraglen, bblen, 3))
+    residuals = np.zeros(k)
     for kk in range(k):
         result[kk] = refe[kk:kk+fraglen]
+        upto = refe[:kk+fraglen].reshape(-1, 3) 
+        upto = upto - upto.mean(axis=0)
+        residuals[kk] = (upto*upto).sum()
     com = result.reshape(-1, 3).mean(axis=0)
     result -= com
-    residuals = (result.reshape(k,-1)**2).sum(axis=1)
-    residuals = np.cumsum(residuals)
     refe4 = np.ones(refe.shape[:-1]+(4,))
     refe4[:, :, :3] = refe - com
     refe_frag4 =  np.ones(result.shape[:-1]+(4,))
