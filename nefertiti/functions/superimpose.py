@@ -59,7 +59,7 @@ def superimpose_array(coor1_array, coor2):
     v, s, wt = svd(covar)
     reflect = det(v) * det(wt)
     s[:,-1] *= reflect
-    v[:, :, -1] *= reflect
+    v[:, :, -1] *= reflect[:, None]
     rotmat = np.einsum('...ij,...jk->...ik', v, wt)
     ss = (residual1 + residual2) - 2 * s.sum(axis=1)
     ss = np.maximum(ss, 0)

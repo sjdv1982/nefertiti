@@ -82,7 +82,7 @@ class CoordinateRepresentation(CenteredState):
 
 class FragmentLibrary(CenteredState):
     _state = {
-        "coor": "FragmentCoordinateRepresentation"
-        
+        "nfrags": "uint",
+        "coor": "FragmentCoordinateRepresentation",
+        "matrices":("ndarray", "(nfrags,nfrags,4,4)"),
     }
-# fraglib: coors and matrices
