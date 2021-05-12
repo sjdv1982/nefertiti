@@ -33,7 +33,11 @@ def greedy(
         s1 = s.stages[active]
         s2 = s.stages[active+1]
         if s1.size == 0:
-            logger.info("Greedy done: %d, %.3f sec", active+1, time.time()-t)
+            logger.info(
+                "Greedy done: %d/%d, %.3f sec", 
+                active+1, time.time()-t,
+                
+            )
             active += 1
             continue
 
