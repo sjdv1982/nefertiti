@@ -66,10 +66,12 @@ class FragmentCoordinateRepresentation(CenteredState):
         "backbone4": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
         "backbone4_centered": ("ndarray", "(nfrags, fraglen, len(bb_atoms), 4)"),
         "backbone_residuals": ("ndarray", "(nfrags,)"),
+        "backbone_com": ("ndarray", "(nfrags, 3)"),
         "ca": ("ndarray", "(nfrags, fraglen, 3)"),
         "ca4": ("ndarray", "(nfrags, fraglen, 4)"),
         "ca4_centered": ("ndarray", "(nfrags, fraglen, 4)"),
         "ca_residuals": ("ndarray", "(nfrags,)"),
+        "ca_com": ("ndarray", "(nfrags, 3)"),
     }
 
 class CoordinateRepresentation(CenteredState):
@@ -122,6 +124,7 @@ class Stage(State):
         # If RMSD calculation to a reference
         "covar": ("ndarray", "(-1,3,3)"),
         "residuals": ("ndarray", "(-1,)"),
+        "fragcoms": ("ndarray", "(-1, fragindex, 3)"),
         
         # If we need to store *all* matrices (e.g. for forcefield calculations)
         # We could also re-compute these at any time from the trajectories

@@ -10,19 +10,23 @@ def matmult(
 
     Inputs: 
     - curr_matrices (cm), of shape Nx4x4
-    - mult_matrices (mm) of shape Mx4x4
-    - Indices (ind) of shape Kx2, 
+    - mult_matrices (mm) of shape M1xM2x4x4
+    - Indices (ind) of shape Kx3, 
         with ind[:,0] in range 0..N
-        and ind[:, 1] range 0..M
+        and ind[:, 1] range 0..M1
+        and ind[:, 2] range 0..M2
     
     returns r of shape Kx4x4
     
     for each k in range(K),
-      r[k] = mm[m].dot(cm[n]),
-    where n = ind[k][0] and m = ind[k][1]
+      r[k] = mm[m1,m2].dot(cm[n]),
+    where n = ind[k][0] 
+     and m1 = ind[k][1]
+     and m2 = ind[k][2]
     """
     cm = curr_matrices[indices[:, 0]]
-    mm = mult_matrices[indices[:, 1]]
+    m1, m2 = indices[:, 1], indices[:, 2]
+    mm = mult_matrices[m1, m2]
     result = np.einsum("ijk,ikl->ijl", mm, cm) #diagonally broadcasted form of mm.dot(cm)
     return result
 

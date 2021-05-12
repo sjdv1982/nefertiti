@@ -29,7 +29,7 @@ def greedy_backbone_rmsd(
     *,
     format: str,
     poolsize: int,
-    chunksize: int=100000,    
+    chunksize: int=100000,
     bb_atoms = ["N", "CA", "C", "O"]
 ) -> MainState:
     """
@@ -45,13 +45,16 @@ def greedy_backbone_rmsd(
     (keep the best <poolsize> RMSDs at each trajectory growing stage)
 
     chunksize: maximum storage space per stage. Affects memory requirements:
-    What is stored at each stage N (N goes from 1 to nres-fraglen+1)
+    What is stored at each stage N: 
+    - an array of shape (chunksize, N, 3) fragment centers-of-mass
     - an array of shape (chunksize, N) trajectories (ints)
     - an array of shape (chunksize, 4, 4) matrices
     - an array of shape (chunksize, 3, 3) covariance matrices
     - an array of shape (chunksize,) residuals
     - an array of shape (chunksize, len(bb_atoms), 3) coordinates
     - an array of shape (chunksize, 3) scores
+    Normally, N goes from 1 to nres-fraglen+1, but buffers are swapped,
+     so there are only 2 independent stages.
 
     bb_atoms: a list of backbone atoms. default: ["N", "CA", "C", "O"]
 
@@ -91,7 +94,8 @@ def greedy_backbone_rmsd(
     init(ms, nstages=nstages, maxsize=chunksize, 
         with_coor=True,
         with_rmsd=True,
-        with_all_matrices=False
+        with_all_matrices=False,
+        swap_buffers=True
     )
     init_coor_backbone(ms, fraglen, len(bb_atoms))
     
@@ -102,7 +106,8 @@ def greedy_backbone_rmsd(
     _greedy(
         ms,
         scorer=rmsd_backbone,
-        updaters=updaters
+        updaters=updaters,
+        poolsize=poolsize
     )
     
     return ms

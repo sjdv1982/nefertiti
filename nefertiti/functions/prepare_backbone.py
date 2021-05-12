@@ -24,24 +24,30 @@ def prepare_backbone(struc, fraglen, bblen=4):
       This means that residues beyond the first (and before the last) get duplicated
       The structure is centered so that the average atom (after duplication!) is (0,0,0)
     
-    - Residuals (sum of squares) of the centered structure
-      K residuals are returned. 
-      Residual n is for the structure up to fragment n, 
-       *centered for the coordinates up to fragment n*
+    - Residuals (sum of squares) of the fragments
+      K residuals are returned.
+      Each residual is for that fragment, after centering it
+
+    - Center-of-masses of the fragments
+      This is the center-of-mass of each fragment within the centered structure
     """
     refe = struc.reshape(-1, bblen, 3)
     k = len(refe) - fraglen + 1
     result = np.zeros((k, fraglen, bblen, 3))
     residuals = np.zeros(k)
+    fragcoms = np.zeros((k, 3))
     for kk in range(k):
         result[kk] = refe[kk:kk+fraglen]
-        upto = refe[:kk+fraglen].reshape(-1, 3) 
-        upto = upto - upto.mean(axis=0)
-        residuals[kk] = (upto*upto).sum()
     com = result.reshape(-1, 3).mean(axis=0)
     result -= com
+    for kk in range(k):
+        frag = refe[kk:kk+fraglen].reshape(-1, 3) - com
+        fragcom = frag.mean(axis=0)
+        fragcoms[kk] = fragcom
+        fragc = frag - fragcom
+        residuals[kk] = (fragc*fragc).sum()
     refe4 = np.ones(refe.shape[:-1]+(4,))
     refe4[:, :, :3] = refe - com
     refe_frag4 =  np.ones(result.shape[:-1]+(4,))
     refe_frag4[:, :, :, :3] = result
-    return refe4, refe_frag4, residuals
+    return refe4, refe_frag4, residuals, fragcoms
