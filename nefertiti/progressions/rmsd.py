@@ -32,6 +32,8 @@ def update_residuals_covar_backbone(
 def rmsd_backbone(
     s: Stage, newsize
 ) -> None:
+    # TODO: optimize the code within this function, 
+    #   as it becomes a speed bottleneck for long molecules
     size = s.size
 
     refe = s.refe.coor_fragment

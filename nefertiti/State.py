@@ -108,6 +108,8 @@ class State:
             if issubclass(typeclass, State):
                 if not isinstance(value, dict):
                     raise TypeError(attr, typeclass, type(value))
+                value = value.copy()
+                value.pop("parent", None)
                 value = typeclass(**value, parent=self)
             else:
                 cast_value = typeclass(value)
@@ -182,5 +184,18 @@ class State:
     def _validate(self) -> None:
         pass
 
+    def copy(self):
+        """Returns a shallow copy"""
+        d = {}
+        for attr in self._state:
+            try:
+                v = self.__dict__[attr]
+            except KeyError:
+                continue            
+            if v is not None:
+                d[attr] = v
+        d["parent"] = self.parent
+        return type(self)(**d)
+        
     def __dir__(self):
         return list(self._state.keys()) 

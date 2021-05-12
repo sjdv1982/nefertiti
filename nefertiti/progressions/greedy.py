@@ -1,4 +1,4 @@
-"""Progressions to builds fragment trajectories in a greedy way
+"""Progressions to build fragment trajectories in a greedy way
 
 Author: Sjoerd de Vries
 License: GPLv3, https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -35,7 +35,7 @@ def greedy(
         if s1.size == 0:
             logger.info(
                 "Greedy done: %d/%d, %.3f sec", 
-                active+1, time.time()-t,
+                active+1, len(s.stages), time.time()-t,
                 
             )
             active += 1

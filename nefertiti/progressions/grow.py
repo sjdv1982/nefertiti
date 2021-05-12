@@ -217,3 +217,44 @@ def sort_score(stage: Stage) -> None:
             v = getattr(stage.coor, attr)
             if v is not None:
                 v[:size] = v[ind]
+
+def filter_score(stage: Stage) -> None:
+    """Filters stage by score_threshold, if it has one
+    Assumes that the stage has been sorted by score"""
+    if stage.size and stage.score_threshold is not None:
+        pos = np.searchsorted(
+            stage.scores[:stage.size], 
+            stage.score_threshold, 
+            side='right'
+        )
+        if pos < stage.size:
+            stage.size = pos
+
+def filter_score_unsorted(stage: Stage, old_size) -> None:
+    """Filters new trajectories in stage by score_threshold, if it has one
+    Does not assume that the stage has been sorted by score
+    Trajectories beyond old_size are assumed to be new"""
+    if stage.size > old_size and stage.score_threshold is not None:
+        mask = (stage.scores[old_size:stage.size] <= stage.score_threshold)
+        masksum = mask.sum()
+        if masksum == stage.size - old_size: # Nothing to do
+            return
+        if masksum == 0:
+            stage.size = old_size
+            return
+        new_size = stage.size + masksum
+
+        for attr in (
+            "trajectories", "matrices", "scores", 
+            "covar", "residuals", "fragcoms",
+            "all_matrices"
+        ):
+            v = getattr(stage.coor, attr)
+            if v is not None:
+                v[old_size:new_size] = v[old_size:stage.size][mask]
+        if stage.coor is not None:
+            for attr in dir(stage.coor):
+                v = getattr(stage.coor, attr)
+                if v is not None:
+                    v[old_size:new_size] = v[old_size:stage.size][mask]
+        stage.size = new_size

@@ -53,3 +53,22 @@ def prepare_backbone(s: StructureRepresentation, bb_coor:np.ndarray) -> None:
     s.coor_fragment.backbone4_centered = bb_coor_frag
     s.coor_fragment.backbone_residuals = bb_residuals_frag
     s.coor_fragment.backbone_com = bb_com_frag
+
+def select_last_backbone(s: StructureRepresentation, nfrags:int) -> None:
+    """Updates `s` that has a prepared backbone, by selecting the last residues"""
+    nresidues = int(nfrags + s.fraglen - 1)
+    s.nresidues = nresidues
+    s.nfrags = nfrags
+    s.coor_residue.backbone =  s.coor_residue.backbone[-nresidues:]
+    prep = prepare_backbone_func(
+        s.coor_residue.backbone, s.fraglen, len(s.bb_atoms)
+    )
+    bb_coor4, bb_coor_frag, bb_residuals_frag, bb_com_frag = prep
+    s.coor_residue.backbone4 = bb_coor4
+    com = bb_coor4.reshape(-1, 4).mean(axis=0)
+    com[3] = 0
+    s.coor_residue.backbone4_centered = bb_coor4 - com
+    s.coor_fragment = {}
+    s.coor_fragment.backbone4_centered = bb_coor_frag
+    s.coor_fragment.backbone_residuals = bb_residuals_frag
+    s.coor_fragment.backbone_com = bb_com_frag    

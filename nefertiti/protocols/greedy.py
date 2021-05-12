@@ -33,7 +33,9 @@ def greedy_backbone_rmsd(
     bb_atoms = ["N", "CA", "C", "O"]
 ) -> MainState:
     """
-    Builds fragment trajectories in a greedy way
+    Builds near-native fragment trajectories in a greedy way
+    using a fragment-duplicated backbone RMSD
+
     Input: 
     - a reference structure with nres residues.
       "format" indicates the format.
