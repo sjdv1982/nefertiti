@@ -146,7 +146,6 @@ def kbest_backbone_rmsd(
         select_last_backbone(s, stagelen)
         ms.nfrags = stagelen
 
-        assert maxblocksize > k
         init(ms, nstages=stagelen, 
             maxsize=maxblocksize, 
             with_coor=True,
@@ -194,8 +193,10 @@ def kbest_backbone_rmsd(
     ms.refe = s_copy.copy()
     ms.nfrags = tot_nfrags
 
+    maxblocksizes = [maxblocksize] * tot_nfrags
+    maxblocksizes[-1] += k
     init(ms, nstages=tot_nfrags, 
-        maxsize=maxblocksize, 
+        maxsize=maxblocksizes, 
         with_coor=True,
         with_rmsd=True,
         with_all_matrices=False,
