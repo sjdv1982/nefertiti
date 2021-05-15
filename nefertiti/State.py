@@ -83,6 +83,9 @@ class State:
             return
         if attr not in self._state:
             raise AttributeError(attr)
+        if value is None:
+            super().__setattr__(attr, value)
+            return
         type_descr = self._state[attr]
         validator = None
         validator_args = None

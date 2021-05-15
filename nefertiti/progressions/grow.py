@@ -109,7 +109,7 @@ def init(
 
         ms.stages.append(stage)    
 
-def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):    
+def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):
     space = stage2.maxsize - stage2.size
     fraglib = stage2.fraglib
     transition_matrices = fraglib.matrices

@@ -6,13 +6,14 @@ logging.basicConfig()
 logging.getLogger("nefertiti").setLevel(logging.INFO)
 
 fraglib = np.load("../fraglib/dummy.npy")
-#refe = np.load("../benchmarks/octacommon-aligned.npy")[0]
-refe = np.load("../benchmarks/dodecacommon-aligned.npy")[13]
-k = 10000   #12m32s
-#k = 1
+refe = open("1AVXA-unbound-heavy.pdb").read()
+#refe = "\n".join(refe.splitlines()[:143])  # 20 residues, 9min15s  1.24213513 A
+refe = "\n".join(refe.splitlines()[1009:1152]) #20 residues, 2m1s 1.1878649 A  
+
+k = 1
 main_state = kbest_backbone_rmsd(
     refe, fraglib,
-    format="npy",
+    format="pdb",
     k=k
 )
 natoms = main_state.refe.nfrags * main_state.refe.fraglen * len(main_state.refe.bb_atoms)

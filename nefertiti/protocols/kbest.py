@@ -33,7 +33,7 @@ def kbest_backbone_rmsd(
     format: str,
     k: int,
     maxblocksize: int=50000,
-    minblocksize: int=100,
+    minblocksize: int=200,
     bb_atoms = ["N", "CA", "C", "O"]
 ) -> MainState:
     """
@@ -146,6 +146,7 @@ def kbest_backbone_rmsd(
         select_last_backbone(s, stagelen)
         ms.nfrags = stagelen
 
+        assert maxblocksize > k
         init(ms, nstages=stagelen, 
             maxsize=maxblocksize, 
             with_coor=True,
@@ -155,29 +156,41 @@ def kbest_backbone_rmsd(
         )
         init_coor_backbone(ms, fraglen, len(bb_atoms))
         
+        upper_estimate=None
+        if greedy_best is not None:
+            upper_estimate=greedy_best+0.001 #in case of rounding errors
         _kbest(
             ms,
             scorer=rmsd_backbone,
             updaters=updaters,
             k=1,
             minblocksize=minblocksize,
-            upper_estimate=greedy_best+0.001, #in case of rounding errors
+            upper_estimate=upper_estimate,
             downstream_best=best_msds,
         )
 
     best_msds = []
     tot_nfrags = s_copy.nfrags
     for n in range(tot_nfrags-1):
+        print("PRECALC {}/{}".format(n+1, tot_nfrags-1))
         _greedy_iter(n+1)
         natoms = ms.nfrags * ms.fraglen * len(ms.bb_atoms)
-        greedy_best = ms.stages[-1].scores[0]
+        greedy_best = ms.stages[-1].scores[0]        
         print("GBEST", n+1, greedy_best, np.sqrt(greedy_best/natoms))
         _best_iter(n+1, greedy_best, best_msds)
         best = ms.stages[-1].scores[0]
         print("BEST ", n+1, best, np.sqrt(best/natoms))
         best_msds.insert(0, best)
         print()
-        
+
+    upper_estimate = None
+    if k == 1:
+        _greedy_iter(tot_nfrags)
+        natoms = ms.nfrags * ms.fraglen * len(ms.bb_atoms)
+        greedy_best = ms.stages[-1].scores[0]
+        print("GBEST", tot_nfrags, greedy_best, np.sqrt(greedy_best/natoms))
+        upper_estimate=greedy_best+0.001 #in case of rounding errors
+
     ms.refe = s_copy.copy()
     ms.nfrags = tot_nfrags
 
@@ -189,14 +202,14 @@ def kbest_backbone_rmsd(
         swap_buffers=False
     )
     init_coor_backbone(ms, fraglen, len(bb_atoms))
-    
+
     _kbest(
         ms,
         scorer=rmsd_backbone,
         updaters=updaters,
         k=k,
         minblocksize=minblocksize,
-        upper_estimate=None,
+        upper_estimate=upper_estimate,
         downstream_best=best_msds,
     )
 
