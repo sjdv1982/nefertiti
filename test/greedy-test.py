@@ -11,5 +11,13 @@ refe = open("1AVXA-unbound-heavy.pdb").read()
 main_state = greedy_backbone_rmsd(
     refe, fraglib,
     format="pdb",
-    poolsize=1000
+    poolsize=200
 )
+natoms = main_state.refe.nfrags * main_state.refe.fraglen * len(main_state.refe.bb_atoms)
+scores = main_state.stages[-1].scores[0]
+rmsd = np.sqrt(scores/natoms)
+print(rmsd)
+
+# poolsize 100: 55s, 1.49A
+# poolsize 200: 111s, 1.44702A
+# poolsize 500: 277s, 1.44097A

@@ -1,0 +1,17 @@
+Greedy, poolsize 100: 
+up to 1000 residues, ~10 mins
+
+Greedy, poolsize 200: 
+up to 500 residues, ~10 mins
+
+Greedy, poolsize 500: 
+up to 100 residues, ~10 mins
+
+kbest, k=1
+up to 20 residues, ~10 mins
+
+kbest, k=10000
+up to 12 residues, ~10 mins
+
+kbest, k=100000
+up to 8 residues, ~10 mins
