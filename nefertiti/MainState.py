@@ -17,6 +17,7 @@ class MainState(State):
         "nfrags": "uint", # Here: number of fragments to describe the trajectory
         "bb_atoms": "ListOf(str)",
         "stages": "ListOf(Stage)",
+        "downstream_best_score": "ListOf(float)", # the best score that was found for fragment N until the end
     }
 
 ################################################################

@@ -109,37 +109,58 @@ def init(
 
         ms.stages.append(stage)    
 
-def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):
+def _grow(stage1: Stage, stage2: Stage, *, scorer, updaters, random):
     space = stage2.maxsize - stage2.size
     fraglib = stage2.fraglib
     transition_matrices = fraglib.matrices
     fraglibsize = fraglib.nfrags
-    assert space >= fraglibsize
-    ngrow = space // fraglibsize    
-    if stage1 is None:
-        ngrow = 1
-        newtraj = np.arange(fraglibsize)[:, None]
-        newmatrices = np.eye(4)
-    else:  
-        ngrow = min(ngrow, stage1.size)
-        traj = stage1.trajectories[:ngrow]
-        traj_indices0 = cartesian_product((
-            np.arange(ngrow),            
-            np.arange(fraglibsize)
-        ))
-        traj_indices = np.empty((ngrow*fraglibsize, 3), int)
-        ind = traj_indices0[:, 0]
-        traj_indices[:, 0] = ind
-        traj_indices[:, 1] = traj[:, -1][ind]
-        traj_indices[:, 2] = traj_indices0[:, 1]
+    if not random:
+        assert space >= fraglibsize
+        ngrow = space // fraglibsize
+    else:
+        ngrow = space
+            
+    if not random:
+        if stage1 is None:
+            ngrow = 1
+            newtraj = np.arange(fraglibsize)[:, None]
+            newmatrices = np.eye(4)
+            ngrow2 = fraglibsize
+        else:  
+            ngrow = min(ngrow, stage1.size)
+            traj = stage1.trajectories[:ngrow]
+            traj_indices0 = cartesian_product((
+                np.arange(ngrow),            
+                np.arange(fraglibsize)
+            ))
+            traj_indices = np.empty((ngrow*fraglibsize, 3), int)
+            ind = traj_indices0[:, 0]
+            traj_indices[:, 0] = ind
+            traj_indices[:, 1] = traj[:, -1][ind]
+            traj_indices[:, 2] = traj_indices0[:, 1]
+    else:
+        ngrow2 = ngrow
+        if stage1 is None:
+            newtraj = np.random.choice(fraglibsize, ngrow)[:, None]
+            newmatrices = np.eye(4)
+        else:  
+            ngrow = min(ngrow, stage1.size)
+            traj = stage1.trajectories[:ngrow]
+            ind = np.arange(ngrow)
+            traj_indices = np.empty((ngrow, 3), int)
+            traj_indices[:, 0] = np.arange(len(traj))
+            traj_indices[:, 1] = traj[:, -1]
+            traj_indices[:, 2] = np.random.choice(fraglibsize, ngrow)
+
+    if stage1 is not None:
+        ngrow2 = len(traj_indices)
         mat = stage1.matrices[:ngrow]
         newmatrices = matmult(
             mat, transition_matrices, traj_indices
         )
         newtraj0 = traj[ind]
         newtraj = np.concatenate((newtraj0, traj_indices[:, 2,][:, None]), axis=1)
-    
-    ngrow2 = ngrow * fraglibsize
+        
     newsize = stage2.size + ngrow2
     stage2.trajectories[stage2.size: newsize] = newtraj
     stage2.matrices[stage2.size:newsize] = newmatrices
@@ -152,6 +173,13 @@ def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):
         if stage2.fragcoms is not None:
             if stage1 is not None:
                 stage2.fragcoms[stage2.size:newsize, :-1] = stage1.fragcoms[ind]
+    else:
+        if stage2.covar is not None:
+            stage2.covar[stage2.size:newsize] = 0
+        if stage2.residuals is not None:
+            stage2.residuals[stage2.size:newsize] = 0
+        if stage2.fragcoms is not None:
+            stage2.fragcoms[stage2.size:newsize] = 0
 
     if stage2.all_matrices is not None:
         if stage1 is not None:
@@ -191,6 +219,12 @@ def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):
                     if isinstance(v, np.ndarray):
                         v[:size] = v[ngrow:oldsize]
 
+def grow(stage1: Stage, stage2: Stage, *, scorer, updaters):
+    return _grow(stage1, stage2, scorer=scorer, updaters=updaters, random=False)
+
+def grow_random(stage1: Stage, stage2: Stage, *, scorer, updaters):
+    return _grow(stage1, stage2, scorer=scorer, updaters=updaters, random=True)
+
 def init_coor_backbone(ms, fraglen, bbsize):
     for stage in ms.stages:
         stage.coor.backbone = np.zeros((stage.maxsize,fraglen, bbsize, 3))
@@ -218,7 +252,7 @@ def sort_score(stage: Stage) -> None:
             if v is not None:
                 v[:size] = v[ind]
 
-def filter_score(stage: Stage) -> None:
+def filter_score_sorted(stage: Stage) -> None:
     """Filters stage by score_threshold, if it has one
     Assumes that the stage has been sorted by score"""
     if stage.size and stage.score_threshold is not None:
@@ -242,7 +276,7 @@ def filter_score_unsorted(stage: Stage, old_size) -> None:
         if masksum == 0:
             stage.size = old_size
             return
-        new_size = stage.size + masksum
+        new_size = old_size + masksum
 
         for attr in (
             "trajectories", "matrices", "scores", 

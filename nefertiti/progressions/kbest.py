@@ -7,10 +7,8 @@ This file is part of the Nefertiti project.
 """
 
 from ..MainState import MainState
-from .grow import grow, sort_score, filter_score, filter_score_unsorted
+from .grow import grow, sort_score, filter_score_sorted, filter_score_unsorted
 import numpy as np
-import time
-
 import time
 import logging
 logger = logging.getLogger("nefertiti")
@@ -77,7 +75,7 @@ def kbest(
                     return
             else:
                 stage.score_threshold = threshold
-            filter_score(stage)
+            filter_score_sorted(stage)
         if stagenr > 0:
             next_threshold = final_threshold - downstream_best[stagenr-1]
             propagate_threshold(stagenr-1, next_threshold, final_threshold)        
@@ -101,7 +99,7 @@ def kbest(
                 if n < nstages-2:
                     s1, s2 = s.stages[n], s.stages[n+1]
                     space = s2.maxsize - s2.size
-                    if space // s.fraglib.nfrags < minblocksize:
+                    if space // s.fraglib.nfrags < curr_minblocksize:
                         continue
                 if s.stages[n].size >= optblocksize:
                     break
@@ -113,7 +111,7 @@ def kbest(
                     if n < nstages-2:
                         s1, s2 = s.stages[n], s.stages[n+1]
                         space = s2.maxsize - s2.size
-                        if space // s.fraglib.nfrags < minblocksize:
+                        if space // s.fraglib.nfrags < curr_minblocksize:
                             continue
                     if s.stages[n].size >= curr_minblocksize:
                         break
@@ -133,6 +131,7 @@ def kbest(
                     s2.size = k
             else:
                 sort_score(s2)
-                filter_score(s2)            
+                filter_score_sorted(s2)            
         if not progress:
             break
+    s.downstream_best_score = [s.stages[-1].scores[0]] + downstream_best

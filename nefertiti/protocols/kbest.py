@@ -43,7 +43,7 @@ def kbest_backbone_rmsd(
     - a reference structure with nres residues.
       "format" indicates the format.
       - "pdb": in PDB format (text string)
-      - "npy": as a shape=(natoms, 3) numpy array
+      - "npy": as a shape=(nresidues, len(bb_atoms), 3) numpy array
     - a fragment library of shape (nfrag, fraglen, len(bb_atoms), 3)
 
     k: the best trajectories to keep
