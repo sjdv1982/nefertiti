@@ -77,7 +77,7 @@ def randombest_backbone_rmsd(
     """
     np.random.seed(random_seed)
 
-    from nefertiti.protocols.kbest import kbest_backbone_rmsd
+    from nefertiti.procedures.kbest import kbest_backbone_rmsd
     fraglen = fraglib.shape[1]
 
     assert fraglib.shape[2] == len(bb_atoms), (fraglib.shape, bb_atoms)

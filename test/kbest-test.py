@@ -1,5 +1,5 @@
 import numpy as np
-from nefertiti.protocols.kbest import kbest_backbone_rmsd
+from nefertiti.procedures.kbest import kbest_backbone_rmsd
 
 import logging
 logging.basicConfig()

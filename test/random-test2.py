@@ -1,5 +1,5 @@
 import numpy as np
-from nefertiti.protocols.randombest import randombest_backbone_rmsd
+from nefertiti.procedures.randombest import randombest_backbone_rmsd
 
 import logging
 logging.basicConfig()

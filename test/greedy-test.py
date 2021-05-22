@@ -1,5 +1,5 @@
 import numpy as np
-from nefertiti.protocols.greedy import greedy_backbone_rmsd
+from nefertiti.procedures.greedy import greedy_backbone_rmsd
 
 import logging
 logging.basicConfig()

@@ -6,7 +6,7 @@ License: GPLv3, https://www.gnu.org/licenses/gpl-3.0.en.html
 This file is part of the Nefertiti project.
 """
 
-from nefertiti.protocols.greedy import greedy_backbone_rmsd
+from nefertiti.procedures.greedy import greedy_backbone_rmsd
 import numpy as np
 
 from nefertiti.MainState import (

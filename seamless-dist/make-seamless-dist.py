@@ -31,7 +31,7 @@ zip = ctx.get_zip()
 
 def kbest_test(refe, fraglib, k):
     import numpy as np
-    from .nefertiti.protocols.kbest import kbest_backbone_rmsd
+    from .nefertiti.procedures.kbest import kbest_backbone_rmsd
     main_state = kbest_backbone_rmsd(
         refe, fraglib,
         format="npy",
