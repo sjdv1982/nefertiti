@@ -24,6 +24,8 @@ def kbest(
     minblocksize:int,
     upper_estimate:float,
     downstream_best:List[float],
+    optblocksize=100,   # for stages at the end
+    optblocksize2=5,    # for stages at the end, k=1
 ) -> None:
 
     def report():
@@ -90,8 +92,6 @@ def kbest(
             report()
             last_time = curr_time
         progress = False
-        optblocksize = 100
-        optblocksize2 = 5
         for curr_minblocksize in (minblocksize, 1):
             if curr_minblocksize == 1 and progress:
                 break

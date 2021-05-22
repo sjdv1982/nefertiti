@@ -31,18 +31,17 @@ zip = ctx.get_zip()
 
 def kbest_test(refe, fraglib, k):
     import numpy as np
-    from .nefertiti.procedures.kbest import kbest_backbone_rmsd
-    main_state = kbest_backbone_rmsd(
+    from .nefertiti.protocols.kbest import kbest_backbone_rmsd
+
+    import logging
+    logging.basicConfig()
+    logging.getLogger("nefertiti").setLevel(logging.INFO)
+
+    traj, rmsd = kbest_backbone_rmsd(
         refe, fraglib,
         format="npy",
         k=k
     )
-    natoms = main_state.refe.nfrags * main_state.refe.fraglen * len(main_state.refe.bb_atoms)
-    traj = main_state.stages[-1].trajectories[:k]
-    for t in traj[:10]:
-        print(t)
-    scores = main_state.stages[-1].scores[:k]
-    rmsd = np.sqrt(scores/natoms)
     print(rmsd[:30], rmsd[-10:])
     return {
         "traj": traj,

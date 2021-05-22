@@ -1,5 +1,5 @@
 """Progressions to grow fragment trajectories by one fragment,
-adding them t
+adding them to the next stage
 
 Author: Sjoerd de Vries
 License: GPLv3, https://www.gnu.org/licenses/gpl-3.0.en.html
