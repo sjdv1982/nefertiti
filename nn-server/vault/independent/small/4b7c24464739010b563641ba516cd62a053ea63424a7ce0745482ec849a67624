@@ -1,0 +1,37 @@
+def do_run(params):
+    run_threshold = False
+    run_random = False
+    run_greedy = False
+    run_nn = False
+
+    phigh2 = params["high-rmsd"]["analysis"]
+    high_mode = phigh2["mode"]
+    high_mode = high_mode.split(",")
+    if len(high_mode) == 1:
+        high_fit_mode = high_show_mode = high_mode[0]
+    else:
+        high_fit_mode, high_show_mode = high_mode
+    if high_fit_mode in ("threshold", "random") or high_show_mode in ("threshold", "random"):
+        run_threshold = True
+        if high_fit_mode == "random" or high_show_mode == "random":
+            run_random = True    
+
+
+    plow2 = params["low-rmsd"]["analysis"]
+    low_mode = plow2["mode"]
+    low_mode = low_mode.split(",")
+    if len(low_mode) == 1:
+        low_fit_mode = low_show_mode = low_mode[0]
+    else:
+        low_fit_mode, low_show_mode = low_mode
+    if low_fit_mode == "greedy" or low_show_mode == "greedy":
+        run_greedy = True
+    if low_fit_mode == "nn" or low_show_mode == "nn":
+        run_nn = True
+
+    return {
+        "run_greedy": run_greedy,
+        "run_nn": run_nn,
+        "run_threshold": run_threshold,
+        "run_random": run_random,
+    }

@@ -1,0 +1,28 @@
+def calc_specificity(equation, rmsd1, rmsd2):
+    from math import sqrt, log, exp
+    result = equation["text"] + "\n"
+    a, c = equation["a"], equation["c"]
+    p, q = equation["p"], equation["q"]
+    logN2_1 = p * rmsd1 + q
+    logN2_2 = p * rmsd2 + q
+    if logN2_1 < 0:
+        result += "RMSD 1 is below the lowest RMSD"
+        return result
+    if logN2_2 < 0:
+        result += "RMSD 2 is below the lowest RMSD"
+        return result
+    logN_1 = sqrt(logN2_1)
+    logN_2 = sqrt(logN2_2)
+    if logN_1 > logN_2:
+        word = "less"
+        logNa, logNb = logN_2, logN_1 
+    else:
+        word = "more"
+        logNa, logNb = logN_1, logN_2
+    d = (logNb - logNa) / log(10)
+    if d < 4:
+        txt = "%d times" % (int(exp(d))+0.5)
+    else:
+        txt = "%.2f orders of magnitude" % d
+    result += "RMSD 1 is %s %s specific than RMSD 2" % (txt, word)
+    return result

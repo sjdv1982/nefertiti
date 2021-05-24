@@ -1,0 +1,10 @@
+def calc_nn(do_run, refe, fraglib, k):
+    from .nefertiti.protocols.kbest import kbest_backbone_rmsd
+    if not do_run:
+        return
+    _, rmsds = kbest_backbone_rmsd(
+        refe.unsilk, fraglib.unsilk,
+        format="npy",
+        k=k
+    )  
+    return rmsds  

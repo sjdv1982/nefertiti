@@ -1,0 +1,7 @@
+def validate_cost(params):
+    from seamless.core.transformation import SeamlessTransformationError
+    from .nefertiti.utils.nn_cost import nn_cost
+    has_err, reason = nn_cost(params)
+    if has_err:
+        raise SeamlessTransformationError(reason)
+    return params

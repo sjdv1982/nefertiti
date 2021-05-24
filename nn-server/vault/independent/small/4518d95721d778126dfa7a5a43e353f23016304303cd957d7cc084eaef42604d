@@ -1,0 +1,6 @@
+def load_pdb(pdbdata):        
+    from .nefertiti.functions.parse_pdb import parse_pdb, get_backbone, get_xyz, get_sequence
+    struc = parse_pdb(pdbdata)
+    bb = get_backbone(struc, ["N", "CA", "C", "O"])
+    bb_coor = get_xyz(bb)
+    return bb_coor, len(bb_coor)

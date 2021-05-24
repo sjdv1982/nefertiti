@@ -1,0 +1,10 @@
+def calc_greedy(do_run, refe, fraglib, poolsize):
+    if not do_run:
+        return
+    from .nefertiti.protocols.greedy import greedy_backbone_rmsd
+    _, rmsds = greedy_backbone_rmsd(
+        refe.unsilk, fraglib.unsilk,
+        format="npy",
+        poolsize=poolsize
+    )
+    return rmsds

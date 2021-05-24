@@ -1,0 +1,12 @@
+def calc_random(do_run, refe, fraglib, nstruc, threshold):
+    if not do_run:
+        return
+    from .nefertiti.protocols.randombest import randombest_backbone_rmsd
+    _, rmsds = randombest_backbone_rmsd(
+        refe.unsilk, fraglib.unsilk,
+        format="npy",
+        ntrajectories=nstruc,
+        use_downstream_best=False,
+        max_rmsd=threshold
+    )
+    return rmsds

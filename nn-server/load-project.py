@@ -38,7 +38,8 @@ async def define_graph(ctx):
     # /import nefertiti 
 
 
-    ctx.params0 = Cell("plain").mount("mounts/params0.json")
+    #ctx.params0 = Cell("plain").mount("mounts/params0.json")
+    ctx.params0 = Cell() 
     ctx.pdb = Cell("text").mount("mounts/input.pdb")
 
     def load_pdb(pdbdata):        
@@ -276,8 +277,79 @@ async def define_graph(ctx):
     ctx.calc_specificity.rmsd2 = ctx.rmsd2
     ctx.calc_specificity.equation = ctx.result["equation"]
     
+    await ctx.translation()
+
+    c = ctx.high_comp_random_nstructures = Cell("int").set(1000)
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].computation.random.nstructures = c
+
+    c = ctx.high_comp_threshold_factor = Cell("int").set(1000)
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].computation.threshold.best_of_factor = c
+
+    c = ctx.high_comp_threshold_redundancy = Cell("int").set(200)
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].computation.threshold.redundancy = c
+
+    c = ctx.high_ana_mode = Cell("str").set("random")
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].analysis.mode = c
+
+    c = ctx.high_ana_greedy_bins = Cell("int").set(10)
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].analysis.random.bins = c
+
+    c = ctx.high_ana_greedy_mode = Cell("str").set("binning")
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].analysis.random.mode = c
+
+    c = ctx.high_ana_greedy_discard_lower = Cell("int").set(50)    
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].analysis.random.discard_lower = c
+
+    c = ctx.high_ana_greedy_discard_upper = Cell("int").set(0)
+    c.share(readonly=False)
+    ctx.params0["high-rmsd"].analysis.random.discard_upper = c
+    
+    c = ctx.low_comp_greedy_poolsize = Cell("int").set(500)
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].computation.greedy.poolsize = c
+
+    c = ctx.low_comp_nn_k = Cell("int").set(100000)
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].computation["near-native"].k = c
+
+    c = ctx.low_ana_mode = Cell("str").set("nn,greedy")
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis.mode = c
+
+    c = ctx.high_ana_greedy_bins = Cell("int").set(10)
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis.greedy.bins = c
+
+    c = ctx.high_ana_greedy_mode = Cell("str").set("binning")
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis.greedy.mode = c
+
+    c = ctx.high_ana_greedy_discard_lower = Cell("int").set(50)    
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis.greedy.discard = c
+
+    c = ctx.high_ana_nn_bins = Cell("int").set(10)
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis["near-native"].bins = c
+
+    c = ctx.high_ana_nn_mode = Cell("str").set("binning")
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis["near-native"].mode = c
+
+    c = ctx.high_ana_nn_discard_lower = Cell("int").set(50)    
+    c.share(readonly=False)
+    ctx.params0["low-rmsd"].analysis["near-native"].discard = c
 
     await ctx.translation()
+
+
 
 async def load():
     from seamless.metalevel.bind_status_graph import bind_status_graph_async

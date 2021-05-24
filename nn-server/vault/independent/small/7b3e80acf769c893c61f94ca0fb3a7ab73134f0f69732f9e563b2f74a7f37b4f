@@ -1,0 +1,11 @@
+def fit_nn(data, params, nfraglib, fraglen):
+    import numpy as np
+    from .nefertiti.utils.fit_nn import fit_nn #as _fit_nn (BUG in Seamless)
+    from silk import Silk
+    if isinstance(data, Silk):
+        data = data.unsilk
+    if isinstance(params, Silk):
+        params = params.unsilk
+    result = fit_nn(params, data, nfraglib, fraglen)
+    result["plot"] = np.array(result["plot"]) #BUG in seamless
+    return result

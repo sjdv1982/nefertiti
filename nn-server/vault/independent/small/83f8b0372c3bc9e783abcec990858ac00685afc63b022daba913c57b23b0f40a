@@ -1,0 +1,14 @@
+def calc_threshold(do_run, refe, fraglib, best_of_factor, redundancy):
+    if not do_run:
+        return
+    from .nefertiti.protocols.randombest import randombest_backbone_rmsd
+    _, rmsds = randombest_backbone_rmsd(
+        refe.unsilk, fraglib.unsilk,
+        format="npy",
+        ntrajectories=best_of_factor * redundancy,
+        use_downstream_best=False,
+        max_rmsd=None
+    )
+    threshold = rmsds[redundancy-1] 
+
+    return threshold
