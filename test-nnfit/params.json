@@ -9,8 +9,8 @@
       "mode_@5": "threshold,random",
       "mode_@6": "random",
       "random": {
-        "bins": 10,
-        "discard_lower": 100,
+        "bins": 50,
+        "discard_lower": 0,
         "discard_upper": 0,
         "mode": "binning",
         "mode_@1": "binning",
@@ -51,8 +51,8 @@
       "mode_@A": "nn",
       "mode_@B": "nn,greedy",
       "near-native": {
-        "bins": 10,
-        "discard": 50,
+        "bins": 50,
+        "discard": 0,
         "mode": "binning",
         "mode_@1": "binning",
         "mode_@2": "lowest_point",
@@ -76,6 +76,6 @@
       }
     }
   },
-  "name": "octa4",
+  "name": "octa1",
   "nresidues": 8
 }

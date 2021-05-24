@@ -43,6 +43,10 @@ ctx.plot = ctx.fitted_nn["plot"]
 ctx.equation = Cell("plain")
 ctx.equation = ctx.fitted_nn["equation"]
 ctx.equation.mount("equation.json", "w")
+ctx.nn_cost = Transformer()
+ctx.nn_cost.code.mount("nn_cost.py", "r")
+ctx.nn_cost.parameters = ctx.parameters
+ctx.validated_parameters = ctx.nn_cost 
 ctx.compute()
 
 def load_parameters(name):

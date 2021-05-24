@@ -295,7 +295,7 @@ def fit_nn(parameters, data, nfraglib, fraglen):
             }
             text = "log(N)² = %.2f * RMSD + %.2f" % (p,q)
             text += "\n"
-            text += "RMSD = %.6f * log(N)² + %.3f" % (a,c)
+            text += "RMSD = %.6e * log(N)² + %.3f" % (a,c)
             equation["text"] = text
             result["equation"] = equation
 
