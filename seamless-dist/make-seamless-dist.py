@@ -31,6 +31,7 @@ zip = ctx.get_zip()
 
 def kbest_test(refe, fraglib, k):
     import numpy as np
+    from .nefertiti.utils.fit_nn import fit_nn
     from .nefertiti.protocols.kbest import kbest_backbone_rmsd
 
     import logging

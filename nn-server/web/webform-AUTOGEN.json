@@ -1,0 +1,83 @@
+{
+  "cells": {
+    "plot": {
+      "celltype": "bytes",
+      "component": "",
+      "params": {
+        "auto_read": true,
+        "title": "Cell Plot"
+      },
+      "share": {
+        "encoding": "text",
+        "read": true
+      }
+    }
+  },
+  "extra_components": [
+    {
+      "cell": "plot",
+      "component": "",
+      "id": "EXAMPLE_ID",
+      "params": {}
+    }
+  ],
+  "index": {
+    "title": "Seamless webform"
+  },
+  "transformers": {
+    "calc_greedy": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_greedy"
+      }
+    },
+    "calc_nn": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_nn"
+      }
+    },
+    "calc_random": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_random"
+      }
+    },
+    "calc_specificity": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_specificity"
+      }
+    },
+    "calc_threshold": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_threshold"
+      }
+    },
+    "do_run": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer do_run"
+      }
+    },
+    "fit_nn": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer fit_nn"
+      }
+    },
+    "load_pdb": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer load_pdb"
+      }
+    },
+    "validate_cost": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer validate_cost"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "high-rmsd": {
+    "analysis": {
+      "mode": "random",
+      "random": {
+        "bins": 50,
+        "discard_lower": 0,
+        "discard_upper": 0,
+        "mode": "binning"
+      }
+    },
+    "computation": {
+      "random": {
+        "nstructures": 1000
+      },
+      "threshold": {
+        "best_of_factor": 1000,
+        "redundancy": 200
+      }
+    }
+  },
+  "low-rmsd": {
+    "analysis": {
+      "greedy": {
+        "bins": 50,
+        "discard": 0,
+        "mode": "binning"
+      },
+      "mode": "nn,greedy",
+      "near-native": {
+        "bins": 50,
+        "discard": 0,
+        "mode": "binning"
+      }
+    },
+    "computation": {
+      "greedy": {
+        "poolsize": 500
+      },
+      "near-native": {
+        "k": 100000
+      }
+    }
+  },
+  "nresidues": 8
+}

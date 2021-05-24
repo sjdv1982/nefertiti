@@ -2,18 +2,22 @@
   "connections": [
     {
       "source": [
+        "ctx_nefertiti",
         "package_dirdict"
       ],
       "target": [
+        "ctx_nefertiti",
         "package_dirdict_value"
       ],
       "type": "connection"
     },
     {
       "source": [
+        "ctx_nefertiti",
         "package"
       ],
       "target": [
+        "ctx_nefertiti",
         "module"
       ],
       "type": "connection"
@@ -137,11 +141,18 @@
   ],
   "nodes": [
     {
-      "checksum": "cd59033366047e5fb14582f8bb1ce7debb3030555ea5760b19ddf46e92305512",
+      "path": [
+        "ctx_nefertiti"
+      ],
+      "type": "context"
+    },
+    {
+      "checksum": "a9deb93f483ecd0c985352f9e04f0f8e769e4f03efbf270a7d163e37714d6e63",
       "dependencies": [],
       "language": "python",
       "module_type": "interpreted",
       "path": [
+        "ctx_nefertiti",
         "module"
       ],
       "type": "module"
@@ -149,7 +160,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "cd59033366047e5fb14582f8bb1ce7debb3030555ea5760b19ddf46e92305512"
+        "value": "a9deb93f483ecd0c985352f9e04f0f8e769e4f03efbf270a7d163e37714d6e63"
       },
       "datatype": "mixed",
       "mount": {
@@ -160,6 +171,7 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package"
       ],
       "type": "cell"
@@ -167,7 +179,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "3b08cc8217c75713a9ca5e37b319c799cc5a2fe658512ae819351ba40badc817"
+        "value": "7ffe719d6f26628b5fd6321329d33797dac7c244a395cf5cd03e45c15bee8bfd"
       },
       "datatype": "mixed",
       "mount": {
@@ -178,6 +190,7 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package_dirdict"
       ],
       "type": "cell"
@@ -185,7 +198,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "3b08cc8217c75713a9ca5e37b319c799cc5a2fe658512ae819351ba40badc817"
+        "value": "7ffe719d6f26628b5fd6321329d33797dac7c244a395cf5cd03e45c15bee8bfd"
       },
       "datatype": "mixed",
       "mount": {
@@ -196,6 +209,7 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package_dirdict_value"
       ],
       "type": "cell"
@@ -203,9 +217,11 @@
     {
       "arguments": {
         "package": [
+          "ctx_nefertiti",
           "package"
         ],
         "package_dirdict": [
+          "ctx_nefertiti",
           "package_dirdict"
         ],
         "package_name": "nefertiti"
@@ -214,9 +230,21 @@
         "python_package"
       ],
       "path": [
+        "ctx_nefertiti",
         "python_package"
       ],
       "type": "libinstance"
+    },
+    {
+      "UNTRANSLATED": true,
+      "checksum": "a9deb93f483ecd0c985352f9e04f0f8e769e4f03efbf270a7d163e37714d6e63",
+      "dependencies": [],
+      "language": "python",
+      "module_type": "interpreted",
+      "path": [
+        "nefertiti"
+      ],
+      "type": "module"
     }
   ],
   "params": {

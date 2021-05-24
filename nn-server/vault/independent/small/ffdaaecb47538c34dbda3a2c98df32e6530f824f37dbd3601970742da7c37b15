@@ -2,19 +2,96 @@
   "connections": [
     {
       "source": [
+        "ctx_nefertiti",
         "package_dirdict"
       ],
       "target": [
+        "ctx_nefertiti",
         "package_dirdict_value"
       ],
       "type": "connection"
     },
     {
       "source": [
+        "ctx_nefertiti",
         "package"
       ],
       "target": [
+        "ctx_nefertiti",
         "module"
+      ],
+      "type": "connection"
+    },
+    {
+      "source": [
+        "ctx_nefertiti",
+        "package_dirdict"
+      ],
+      "target": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package_dirdict"
+      ],
+      "type": "connection"
+    },
+    {
+      "source": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package"
+      ],
+      "target": [
+        "ctx_nefertiti",
+        "package"
+      ],
+      "type": "connection"
+    },
+    {
+      "source": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package_dirdict"
+      ],
+      "target": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "build_package",
+        "package_dirdict"
+      ],
+      "type": "connection"
+    },
+    {
+      "source": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "analyze_dependencies"
+      ],
+      "target": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "build_package",
+        "analyze_dependencies"
+      ],
+      "type": "connection"
+    },
+    {
+      "source": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "build_package"
+      ],
+      "target": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package"
       ],
       "type": "connection"
     }
@@ -137,20 +214,24 @@
   ],
   "nodes": [
     {
-      "checksum": "cd59033366047e5fb14582f8bb1ce7debb3030555ea5760b19ddf46e92305512",
+      "path": [
+        "ctx_nefertiti"
+      ],
+      "type": "context"
+    },
+    {
+      "checksum": "a9deb93f483ecd0c985352f9e04f0f8e769e4f03efbf270a7d163e37714d6e63",
       "dependencies": [],
       "language": "python",
       "module_type": "interpreted",
       "path": [
+        "ctx_nefertiti",
         "module"
       ],
       "type": "module"
     },
     {
       "celltype": "plain",
-      "checksum": {
-        "value": "cd59033366047e5fb14582f8bb1ce7debb3030555ea5760b19ddf46e92305512"
-      },
       "datatype": "mixed",
       "mount": {
         "as_directory": false,
@@ -160,6 +241,7 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package"
       ],
       "type": "cell"
@@ -167,7 +249,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "3b08cc8217c75713a9ca5e37b319c799cc5a2fe658512ae819351ba40badc817"
+        "value": "7ffe719d6f26628b5fd6321329d33797dac7c244a395cf5cd03e45c15bee8bfd"
       },
       "datatype": "mixed",
       "mount": {
@@ -178,6 +260,7 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package_dirdict"
       ],
       "type": "cell"
@@ -185,7 +268,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "3b08cc8217c75713a9ca5e37b319c799cc5a2fe658512ae819351ba40badc817"
+        "value": "7ffe719d6f26628b5fd6321329d33797dac7c244a395cf5cd03e45c15bee8bfd"
       },
       "datatype": "mixed",
       "mount": {
@@ -196,27 +279,94 @@
         "persistent": true
       },
       "path": [
+        "ctx_nefertiti",
         "package_dirdict_value"
       ],
       "type": "cell"
     },
     {
-      "arguments": {
-        "package": [
-          "package"
-        ],
-        "package_dirdict": [
-          "package_dirdict"
-        ],
-        "package_name": "nefertiti"
-      },
-      "libpath": [
-        "python_package"
-      ],
       "path": [
+        "ctx_nefertiti",
         "python_package"
       ],
-      "type": "libinstance"
+      "type": "context"
+    },
+    {
+      "path": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx"
+      ],
+      "type": "context"
+    },
+    {
+      "checksum": "a00e72d1e6a69a732565a498071908450d149b10fd898e2bbda4825564cc9e41",
+      "dependencies": [],
+      "language": "python",
+      "module_type": "interpreted",
+      "path": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "analyze_dependencies"
+      ],
+      "type": "module"
+    },
+    {
+      "INPUT": "inp",
+      "RESULT": "result",
+      "SCHEMA": null,
+      "checksum": {
+        "code": "0b7878a8d950a7a61bf04df3af435d0acc462d27b3e00e2939b887ee97937d7b",
+        "input_auth": "8165cfc9e9458a1a3305eaa169d162e0b80b115a388884ff4341dad69fa801d1"
+      },
+      "compiled": false,
+      "debug": false,
+      "hash_pattern": {
+        "*": "#"
+      },
+      "language": "python",
+      "path": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "build_package"
+      ],
+      "pins": {
+        "analyze_dependencies": {
+          "celltype": "plain",
+          "subcelltype": "module"
+        },
+        "package_dirdict": {
+          "celltype": "mixed"
+        },
+        "package_name": {
+          "celltype": "mixed"
+        }
+      },
+      "type": "transformer"
+    },
+    {
+      "celltype": "plain",
+      "datatype": "mixed",
+      "path": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package"
+      ],
+      "type": "cell"
+    },
+    {
+      "celltype": "plain",
+      "datatype": "mixed",
+      "path": [
+        "ctx_nefertiti",
+        "python_package",
+        "ctx",
+        "package_dirdict"
+      ],
+      "type": "cell"
     }
   ],
   "params": {
