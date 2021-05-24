@@ -30,7 +30,7 @@ def greedy_backbone_rmsd(
         raise ValueError("This function takes data content, not file names or URLs")
     main_state = _greedy_backbone_rmsd(
         refe, fraglib,
-        format="pdb",
+        format=format,
         poolsize=poolsize
     )
     natoms = main_state.refe.nfrags * main_state.refe.fraglen * len(main_state.refe.bb_atoms)

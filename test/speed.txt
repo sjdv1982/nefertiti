@@ -15,3 +15,7 @@ up to 12 residues, ~10 mins
 
 kbest, k=100000
 up to 8 residues, ~10 mins
+
+randombest: up to 250 residues
+Need to look into: memory issues (slices?)
+Allow only up to 120 residues for now

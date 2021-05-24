@@ -32,7 +32,7 @@ def randombest_backbone_rmsd(
     ntrajectories: int,
     max_rmsd: float,
     use_downstream_best: bool,
-    minblocksize: int=10000,
+    minblocksize: int=2000,
     bb_atoms = ["N", "CA", "C", "O"],
     random_seed = 0,
 ) -> MainState:

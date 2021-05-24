@@ -33,7 +33,7 @@ def kbest_backbone_rmsd(
     format: str,
     k: int,
     maxblocksize: int=50000,
-    minblocksize: int=200,
+    minblocksize: int=10000,
     bb_atoms = ["N", "CA", "C", "O"]
 ) -> MainState:
     """
