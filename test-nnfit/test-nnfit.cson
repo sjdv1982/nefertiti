@@ -1,0 +1,178 @@
+[
+  {
+    "name": "octa1",
+    "nresidues": 8
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "octa4",
+    "nresidues": 8
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+        
+      }
+    },
+      "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "octa17",
+    "nresidues": 8
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "dodeca1",
+    "nresidues": 12
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "dodeca14",
+    "nresidues": 12
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "casp14",
+    "nresidues": 100
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 100,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "trypsin",
+    "nresidues": 223
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 100,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+        }
+    }
+  }
+]

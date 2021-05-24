@@ -16,6 +16,7 @@ Thresholded randombest computation parameters:
 (Number of structures to sample is Best-of factor x this)
 Thresholded randombest fitting parameters:
 - Number of highest-RMSD structures to discard
+- Number of lowest-RMSD structures to discard
 - Mode: 
     - binning
     - lowest RMSD point
@@ -28,12 +29,13 @@ Low-RMSD analysis and fitting:
 - No low-RMSD fitting, but show greedy intercept for comparison
 - No low-RMSD fitting, but show near-native intercept for comparison
 - Greedy intercept
-- Fit on greedy intercept, but also show near-native intercept for comparison
-- Fit on greedy intercept, but also show near-native ensemble for comparison
+- Fit on greedy intercept, but show near-native intercept for comparison
+- Fit on greedy intercept, but show near-native ensemble for comparison
 - Near-native intercept 
-- Fit on near-native intercept, but also show greedy intercept for comparison
+- Fit on near-native intercept, but show greedy intercept for comparison
+- Fit on near-native intercept, but show near-native ensemble for comparison
 - Near-native ensemble
-- Fit on near-native ensemble, but also show greedy intercept for comparison
+- Fit on near-native ensemble, but show greedy intercept for comparison
 
 Greedy intercept computation parameters
 - Pool size
@@ -44,6 +46,8 @@ Greedy intercept extrapolation parameters:
     - lowest RMSD point
 - Number of bins
 
+Near-native ensemble computation parameters
+- Size
 Near-native ensemble fitting parameters
 - Number of lowest-RMSD structures to discard
 - Mode: 
