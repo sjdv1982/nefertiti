@@ -182,9 +182,9 @@
       "component": "slider",
       "params": {
         "auto_read": true,
-        "max": 1000,
+        "max": 100,
         "min": 0,
-        "title": "Number of lowest-RMSD structures to discard"
+        "title": "Cell Low_ana_greedy_discard"
       },
       "share": {
         "encoding": "json",
@@ -194,21 +194,11 @@
     },
     "low_ana_greedy_mode": {
       "celltype": "str",
-      "component": "select",
+      "component": "input",
       "params": {
         "auto_read": true,
         "editable": true,
-        "options": [
-          {
-            "text": "Binning",
-            "value": "binning"
-          },
-          {
-            "text": "Lowest RMSD point",
-            "value": "lowest_point"
-          }
-        ],
-        "title": "Greedy fitting mode"
+        "title": "Cell Low_ana_greedy_mode"
       },
       "share": {
         "encoding": "json",
@@ -296,9 +286,9 @@
       "component": "slider",
       "params": {
         "auto_read": true,
-        "max": 10000,
+        "max": 100,
         "min": 0,
-        "title": "Number of lowest-RMSD structures to discard"
+        "title": "Cell Low_ana_nn_discard"
       },
       "share": {
         "encoding": "json",
@@ -308,29 +298,11 @@
     },
     "low_ana_nn_mode": {
       "celltype": "str",
-      "component": "select",
+      "component": "input",
       "params": {
         "auto_read": true,
         "editable": true,
-        "options": [
-          {
-            "text": "Binning",
-            "value": "binning"
-          },
-          {
-            "text": "Lowest RMSD point",
-            "value": "lowest_point"
-          },
-          {
-            "text": "Median RMSD point",
-            "value": "midpoint"
-          },
-          {
-            "text": "Highest RMSD point",
-            "value": "highest_point"
-          }
-        ],
-        "title": "Near-native ensemble fitting mode"
+        "title": "Cell Low_ana_nn_mode"
       },
       "share": {
         "encoding": "json",
@@ -343,9 +315,9 @@
       "component": "slider",
       "params": {
         "auto_read": true,
-        "max": 1000,
+        "max": 100,
         "min": 0,
-        "title": "Pool size"
+        "title": "Cell Low_comp_greedy_poolsize"
       },
       "share": {
         "encoding": "json",
@@ -358,9 +330,9 @@
       "component": "slider",
       "params": {
         "auto_read": true,
-        "max": 100000,
+        "max": 100,
         "min": 0,
-        "title": "Size"
+        "title": "Cell Low_comp_nn_k"
       },
       "share": {
         "encoding": "json",
@@ -373,7 +345,7 @@
       "component": "image",
       "params": {
         "auto_read": true,
-        "title": "Conformational space plot"
+        "title": "Cell Plot"
       },
       "share": {
         "encoding": "text",

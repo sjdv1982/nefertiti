@@ -1,64 +1,5 @@
 {
   "cells": {
-    "high_ana_greedy_bins": {
-      "celltype": "int",
-      "component": "slider",
-      "params": {
-        "auto_read": true,
-        "max": 100,
-        "min": 0,
-        "title": "Cell High_ana_greedy_bins"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
-    "high_ana_greedy_discard_lower": {
-      "celltype": "int",
-      "component": "slider",
-      "params": {
-        "auto_read": true,
-        "max": 100,
-        "min": 0,
-        "title": "Cell High_ana_greedy_discard_lower"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
-    "high_ana_greedy_discard_upper": {
-      "celltype": "int",
-      "component": "slider",
-      "params": {
-        "auto_read": true,
-        "max": 100,
-        "min": 0,
-        "title": "Cell High_ana_greedy_discard_upper"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
-    "high_ana_greedy_mode": {
-      "celltype": "str",
-      "component": "input",
-      "params": {
-        "auto_read": true,
-        "editable": true,
-        "title": "Cell High_ana_greedy_mode"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
     "high_ana_mode": {
       "celltype": "str",
       "component": "input",
@@ -73,14 +14,14 @@
         "write": true
       }
     },
-    "high_ana_nn_bins": {
+    "high_ana_random_bins": {
       "celltype": "int",
       "component": "slider",
       "params": {
         "auto_read": true,
         "max": 100,
         "min": 0,
-        "title": "Cell High_ana_nn_bins"
+        "title": "Cell High_ana_random_bins"
       },
       "share": {
         "encoding": "json",
@@ -88,14 +29,14 @@
         "write": true
       }
     },
-    "high_ana_nn_discard_lower": {
+    "high_ana_random_discard_lower": {
       "celltype": "int",
       "component": "slider",
       "params": {
         "auto_read": true,
         "max": 100,
         "min": 0,
-        "title": "Cell High_ana_nn_discard_lower"
+        "title": "Cell High_ana_random_discard_lower"
       },
       "share": {
         "encoding": "json",
@@ -103,13 +44,28 @@
         "write": true
       }
     },
-    "high_ana_nn_mode": {
+    "high_ana_random_discard_upper": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell High_ana_random_discard_upper"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_ana_random_mode": {
       "celltype": "str",
       "component": "input",
       "params": {
         "auto_read": true,
         "editable": true,
-        "title": "Cell High_ana_nn_mode"
+        "title": "Cell High_ana_random_mode"
       },
       "share": {
         "encoding": "json",
@@ -162,6 +118,50 @@
         "write": true
       }
     },
+    "low_ana_greedy_bins": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Low_ana_greedy_bins"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_greedy_discard": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Low_ana_greedy_discard"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_greedy_mode": {
+      "celltype": "str",
+      "component": "input",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "title": "Cell Low_ana_greedy_mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
     "low_ana_mode": {
       "celltype": "str",
       "component": "input",
@@ -169,6 +169,50 @@
         "auto_read": true,
         "editable": true,
         "title": "Cell Low_ana_mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_bins": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Low_ana_nn_bins"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_discard": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Low_ana_nn_discard"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_mode": {
+      "celltype": "str",
+      "component": "input",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "title": "Cell Low_ana_nn_mode"
       },
       "share": {
         "encoding": "json",
@@ -221,7 +265,7 @@
   },
   "extra_components": [
     {
-      "cell": "high_ana_greedy_bins",
+      "cell": "high_ana_mode",
       "component": "",
       "id": "EXAMPLE_ID",
       "params": {}

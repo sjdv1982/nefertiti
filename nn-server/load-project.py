@@ -123,7 +123,7 @@ async def define_graph(ctx):
 
     def calc_greedy(do_run, refe, fraglib, poolsize):
         if not do_run:
-            return
+            return -1
         from .nefertiti.protocols.greedy import greedy_backbone_rmsd
         _, rmsds = greedy_backbone_rmsd(
             refe.unsilk, fraglib.unsilk,
@@ -142,7 +142,7 @@ async def define_graph(ctx):
     def calc_nn(do_run, refe, fraglib, k):
         from .nefertiti.protocols.kbest import kbest_backbone_rmsd
         if not do_run:
-            return
+            return -1
         _, rmsds = kbest_backbone_rmsd(
             refe.unsilk, fraglib.unsilk,
             format="npy",
@@ -160,7 +160,7 @@ async def define_graph(ctx):
 
     def calc_threshold(do_run, refe, fraglib, best_of_factor, redundancy):
         if not do_run:
-            return
+            return -1
         from .nefertiti.protocols.randombest import randombest_backbone_rmsd
         _, rmsds = randombest_backbone_rmsd(
             refe.unsilk, fraglib.unsilk,
@@ -184,7 +184,7 @@ async def define_graph(ctx):
 
     def calc_random(do_run, refe, fraglib, nstruc, threshold):
         if not do_run:
-            return
+            return -1
         from .nefertiti.protocols.randombest import randombest_backbone_rmsd
         _, rmsds = randombest_backbone_rmsd(
             refe.unsilk, fraglib.unsilk,
@@ -205,6 +205,8 @@ async def define_graph(ctx):
 
 
     ctx.data = Cell()
+    await ctx.translation()
+    ctx.data.set({}) 
     ctx.calc_greedy_result = ctx.calc_greedy
     ctx.data.greedy = ctx.calc_greedy_result
     ctx.data.threshold = ctx.threshold
@@ -295,19 +297,19 @@ async def define_graph(ctx):
     c.share(readonly=False)
     ctx.params0["high-rmsd"].analysis.mode = c
 
-    c = ctx.high_ana_greedy_bins = Cell("int").set(10)
+    c = ctx.high_ana_random_bins = Cell("int").set(10)
     c.share(readonly=False)
     ctx.params0["high-rmsd"].analysis.random.bins = c
 
-    c = ctx.high_ana_greedy_mode = Cell("str").set("binning")
+    c = ctx.high_ana_random_mode = Cell("str").set("binning")
     c.share(readonly=False)
     ctx.params0["high-rmsd"].analysis.random.mode = c
 
-    c = ctx.high_ana_greedy_discard_lower = Cell("int").set(50)    
+    c = ctx.high_ana_random_discard_lower = Cell("int").set(50)    
     c.share(readonly=False)
     ctx.params0["high-rmsd"].analysis.random.discard_lower = c
 
-    c = ctx.high_ana_greedy_discard_upper = Cell("int").set(0)
+    c = ctx.high_ana_random_discard_upper = Cell("int").set(0)
     c.share(readonly=False)
     ctx.params0["high-rmsd"].analysis.random.discard_upper = c
     
@@ -323,27 +325,27 @@ async def define_graph(ctx):
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis.mode = c
 
-    c = ctx.high_ana_greedy_bins = Cell("int").set(10)
+    c = ctx.low_ana_greedy_bins = Cell("int").set(10)
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis.greedy.bins = c
 
-    c = ctx.high_ana_greedy_mode = Cell("str").set("binning")
+    c = ctx.low_ana_greedy_mode = Cell("str").set("binning")
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis.greedy.mode = c
 
-    c = ctx.high_ana_greedy_discard_lower = Cell("int").set(50)    
+    c = ctx.low_ana_greedy_discard = Cell("int").set(50)    
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis.greedy.discard = c
 
-    c = ctx.high_ana_nn_bins = Cell("int").set(10)
+    c = ctx.low_ana_nn_bins = Cell("int").set(10)
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis["near-native"].bins = c
 
-    c = ctx.high_ana_nn_mode = Cell("str").set("binning")
+    c = ctx.low_ana_nn_mode = Cell("str").set("binning")
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis["near-native"].mode = c
 
-    c = ctx.high_ana_nn_discard_lower = Cell("int").set(50)    
+    c = ctx.low_ana_nn_discard = Cell("int").set(50)    
     c.share(readonly=False)
     ctx.params0["low-rmsd"].analysis["near-native"].discard = c
 

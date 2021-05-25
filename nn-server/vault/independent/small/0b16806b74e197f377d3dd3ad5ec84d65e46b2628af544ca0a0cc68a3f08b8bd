@@ -1,21 +1,21 @@
 {
   "high-rmsd": {
     "analysis": {
-      "mode": "random",
+      "mode": "threshold,random",
       "random": {
         "bins": 10,
-        "discard_lower": 50,
-        "discard_upper": 0,
+        "discard_lower": 8,
+        "discard_upper": 44,
         "mode": "binning"
       }
     },
     "computation": {
       "random": {
-        "nstructures": 1000
+        "nstructures": 100
       },
       "threshold": {
         "best_of_factor": 1000,
-        "redundancy": 200
+        "redundancy": 20
       }
     }
   },
@@ -26,10 +26,10 @@
         "discard": 50,
         "mode": "binning"
       },
-      "mode": "nn,greedy",
+      "mode": "no",
       "near-native": {
-        "bins": 11,
-        "discard": 48,
+        "bins": 10,
+        "discard": 50,
         "mode": "binning"
       }
     },
@@ -38,7 +38,7 @@
         "poolsize": 100
       },
       "near-native": {
-        "k": 10000
+        "k": 100
       }
     }
   },
