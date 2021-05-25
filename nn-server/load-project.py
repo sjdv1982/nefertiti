@@ -41,6 +41,7 @@ async def define_graph(ctx):
     #ctx.params0 = Cell("plain").mount("mounts/params0.json")
     ctx.params0 = Cell() 
     ctx.pdb = Cell("text").mount("mounts/input.pdb")
+    ctx.pdb.share(readonly=False)
 
     def load_pdb(pdbdata):        
         from .nefertiti.functions.parse_pdb import parse_pdb, get_backbone, get_xyz, get_sequence
@@ -152,7 +153,7 @@ async def define_graph(ctx):
         
     ctx.calc_nn = calc_nn
     ctx.calc_nn.nefertiti = ctx.nefertiti
-    ctx.calc_nn.do_run = ctx.do_run_result["run_greedy"]
+    ctx.calc_nn.do_run = ctx.do_run_result["run_nn"]
     ctx.calc_nn.refe = ctx.load_pdb_result[0]
     ctx.calc_nn.fraglib = ctx.fraglib
     ctx.calc_nn.k = ctx.validated_params["low-rmsd"]["computation"]["near-native"]["k"]
@@ -269,7 +270,7 @@ async def define_graph(ctx):
             logNa, logNb = logN_1, logN_2
         d = (logNb - logNa) / log(10)
         if d < 4:
-            txt = "%d times" % (int(exp(d))+0.5)
+            txt = "%d times" % (int(10**d)+0.5)
         else:
             txt = "%.2f orders of magnitude" % d
         result += "RMSD 1 is %s %s specific than RMSD 2" % (txt, word)
@@ -278,6 +279,12 @@ async def define_graph(ctx):
     ctx.calc_specificity.rmsd1 = ctx.rmsd1 
     ctx.calc_specificity.rmsd2 = ctx.rmsd2
     ctx.calc_specificity.equation = ctx.result["equation"]
+
+    ctx.rmsd1.share(readonly=False)
+    ctx.rmsd2.share(readonly=False)
+    ctx.specificity = ctx.calc_specificity
+    ctx.specificity.celltype = "text"
+    ctx.specificity.share()    
     
     await ctx.translation()
 

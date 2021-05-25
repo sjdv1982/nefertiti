@@ -14,7 +14,7 @@
         "nstructures": 1000
       },
       "threshold": {
-        "best_of_factor": 100,
+        "best_of_factor": 1000,
         "redundancy": 200
       }
     }
@@ -26,21 +26,21 @@
         "discard": 50,
         "mode": "binning"
       },
-      "mode": "greedy",
+      "mode": "greedy,nn",
       "near-native": {
-        "bins": 10,
-        "discard": 50,
+        "bins": 5,
+        "discard": 501,
         "mode": "binning"
       }
     },
     "computation": {
       "greedy": {
-        "poolsize": 500
+        "poolsize": 100
       },
       "near-native": {
-        "k": 100000
+        "k": 10000
       }
     }
   },
-  "nresidues": 100
+  "nresidues": 8
 }

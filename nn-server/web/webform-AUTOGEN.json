@@ -250,12 +250,67 @@
         "write": true
       }
     },
+    "pdb": {
+      "celltype": "text",
+      "component": "fileupload",
+      "params": {
+        "auto_read": true,
+        "title": "Cell Pdb"
+      },
+      "share": {
+        "encoding": "text",
+        "read": true,
+        "write": true
+      }
+    },
     "plot": {
       "celltype": "bytes",
       "component": "",
       "params": {
         "auto_read": true,
         "title": "Cell Plot"
+      },
+      "share": {
+        "encoding": "text",
+        "read": true
+      }
+    },
+    "rmsd1": {
+      "celltype": "float",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Rmsd1"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "rmsd2": {
+      "celltype": "float",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100,
+        "min": 0,
+        "title": "Cell Rmsd2"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "specificity": {
+      "celltype": "text",
+      "component": "card",
+      "params": {
+        "auto_read": true,
+        "title": "Cell Specificity"
       },
       "share": {
         "encoding": "text",

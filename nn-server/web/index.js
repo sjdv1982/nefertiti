@@ -5,7 +5,9 @@ app_globals.createObjectURL = URL.createObjectURL
 
 seamless_read_cells = {
   "text": [
-    "plot"
+    "pdb",
+    "plot",
+    "specificity"
   ],
   "json": [
     "high_ana_mode",
@@ -24,11 +26,15 @@ seamless_read_cells = {
     "low_comp_nn_k",
     "low_ana_nn_discard",
     "low_ana_nn_mode",
-    "low_ana_nn_bins"
+    "low_ana_nn_bins",
+    "rmsd1",
+    "rmsd2"
   ]
 }
 seamless_write_cells = {
-  "text": [],
+  "text": [
+    "pdb"
+  ],
   "json": [
     "high_ana_mode",
     "high_comp_threshold_factor",
@@ -46,7 +52,9 @@ seamless_write_cells = {
     "low_comp_nn_k",
     "low_ana_nn_discard",
     "low_ana_nn_mode",
-    "low_ana_nn_bins"
+    "low_ana_nn_bins",
+    "rmsd1",
+    "rmsd2"
   ]
 }
 seamless_auto_read_cells = []
@@ -132,6 +140,10 @@ const app = new Vue({
   data() {
     return {
       ...{
+        "pdb": {
+          "checksum": null,
+          "value": ""
+        },
         "high_ana_mode": {
           "checksum": null,
           "value": ""
@@ -203,6 +215,18 @@ const app = new Vue({
         "plot": {
           "checksum": null,
           "value": null
+        },
+        "rmsd1": {
+          "checksum": null,
+          "value": 0.0
+        },
+        "rmsd2": {
+          "checksum": null,
+          "value": 0.0
+        },
+        "specificity": {
+          "checksum": null,
+          "value": ""
         }
       }, 
       ...{
@@ -227,6 +251,9 @@ const app = new Vue({
     
   },
   watch: {
+    "pdb.value": function (value) {
+      seamless_update("pdb", value, "text")
+    },
     "high_ana_mode.value": function (value) {
       seamless_update("high_ana_mode", value, "json")
     },
@@ -277,6 +304,15 @@ const app = new Vue({
     },
     "low_ana_nn_bins.value": function (value) {
       seamless_update("low_ana_nn_bins", value, "json")
+    },
+    "rmsd1.value": function (value) {
+      seamless_update("rmsd1", value, "json")
+    },
+    "rmsd2.value": function (value) {
+      seamless_update("rmsd2", value, "json")
+    },
+    "pdb.file": function (file) {
+      this.METHOD_file_upload("pdb", file)
     },
   },
 })

@@ -585,15 +585,6 @@
     },
     {
       "source": [
-        "calc_specificity"
-      ],
-      "target": [
-        "specificity"
-      ],
-      "type": "connection"
-    },
-    {
-      "source": [
         "high_comp_random_nstructures"
       ],
       "target": [
@@ -810,6 +801,15 @@
         "discard"
       ],
       "type": "connection"
+    },
+    {
+      "source": [
+        "calc_specificity"
+      ],
+      "target": [
+        "specificity"
+      ],
+      "type": "connection"
     }
   ],
   "lib": [
@@ -937,7 +937,7 @@
         "code": "55ed0ffaa83c0a66f7f1a021d58050e38abf5f8b9fc54965362940fb115672c1",
         "input": "4418cae9080920817619f7374b67fda04af6f14933c1dd4d05791b043a121b3e",
         "input_buffer": "4418cae9080920817619f7374b67fda04af6f14933c1dd4d05791b043a121b3e",
-        "result": "134ca685df5c6f294e64adae234b84ba97c2e6ad14fec7090d7e40a314a0180d",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -974,6 +974,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "134ca685df5c6f294e64adae234b84ba97c2e6ad14fec7090d7e40a314a0180d",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "134ca685df5c6f294e64adae234b84ba97c2e6ad14fec7090d7e40a314a0180d"
       },
       "datatype": "mixed",
@@ -991,7 +992,7 @@
         "code": "ae77c3b48bd1b7e6f0fb715ad945f77bb18147f5afa89eca311b9ef229db17bd",
         "input": "6b7d9adddde36672f2b284928ab60f6209290e26c9f7b3dc57656bb107e99f66",
         "input_buffer": "6b7d9adddde36672f2b284928ab60f6209290e26c9f7b3dc57656bb107e99f66",
-        "result": "7cffea39f0e4e77528eeb525d64c7e5d33f81d3b57c1ca19e0e1e1330652f104",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1028,6 +1029,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "7cffea39f0e4e77528eeb525d64c7e5d33f81d3b57c1ca19e0e1e1330652f104",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "7cffea39f0e4e77528eeb525d64c7e5d33f81d3b57c1ca19e0e1e1330652f104"
       },
       "datatype": "mixed",
@@ -1045,7 +1047,7 @@
         "code": "c23a51b4856b2545840db8eddfc472a3f9d2beb02450488e39e233c63696132c",
         "input": "3affd6d4a5fe2c9d7babfc1e9ad8036472c4a3abae8a0aaf22a1de3a15d62686",
         "input_buffer": "3affd6d4a5fe2c9d7babfc1e9ad8036472c4a3abae8a0aaf22a1de3a15d62686",
-        "result": "712da8262f9420ef4ea72a81292441cdd9620aad5d11a21a0b4bf84d729f5a5e",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1085,6 +1087,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "712da8262f9420ef4ea72a81292441cdd9620aad5d11a21a0b4bf84d729f5a5e",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "712da8262f9420ef4ea72a81292441cdd9620aad5d11a21a0b4bf84d729f5a5e"
       },
       "datatype": "mixed",
@@ -1100,9 +1103,9 @@
       "SCHEMA": null,
       "checksum": {
         "code": "fdb9878a7db3effcb0df3fc8f11eae1b169f55ff472b267826f663db5d784f96",
-        "input": "bb731cf2bdf2c3f77d68356e51493ae7e6f5903314c390450b7c4b627b48fb9e",
-        "input_buffer": "bb731cf2bdf2c3f77d68356e51493ae7e6f5903314c390450b7c4b627b48fb9e",
-        "result": "859bc3d3ebe134055b878a5797e5b4b5f60cc9e83fd8c3a79a3892b7a6839aa7",
+        "input": "be592abe99abae523a96869d9a84c92a7f5be8cf74189b9a0419df985682e3a5",
+        "input_buffer": "be592abe99abae523a96869d9a84c92a7f5be8cf74189b9a0419df985682e3a5",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1136,7 +1139,7 @@
         "code": "d5404c8ed88791b9e6be37a5537232718d94ceef106e6f436d25732ddef8aff2",
         "input": "8e894b1c62f381bdd640c724f97e729d8561096c7c8d6e681dd210079309e745",
         "input_buffer": "8e894b1c62f381bdd640c724f97e729d8561096c7c8d6e681dd210079309e745",
-        "result": "aa75e0686e2eeaf17eeefbcf507435ce38baa2e10cda31fb5d03fa5abf636d74",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1179,7 +1182,6 @@
       "type": "context"
     },
     {
-      "checksum": "cd59033366047e5fb14582f8bb1ce7debb3030555ea5760b19ddf46e92305512",
       "dependencies": [],
       "language": "python",
       "module_type": "interpreted",
@@ -1250,9 +1252,9 @@
       "celltype": "structured",
       "checksum": {
         "auth": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "buffer": "029bec47b08a66cde2f50ec5e925d65bcf0888b286672e772e08489f230903a7",
+        "buffer": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "value": "029bec47b08a66cde2f50ec5e925d65bcf0888b286672e772e08489f230903a7"
+        "value": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
       "datatype": "mixed",
       "hash_pattern": null,
@@ -1269,7 +1271,7 @@
         "code": "4b7c24464739010b563641ba516cd62a053ea63424a7ce0745482ec849a67624",
         "input": "a0ca67ae1b9cf3cb54258aa0b73a27517f3821b68b73172939b96c3cd7f827bf",
         "input_buffer": "a0ca67ae1b9cf3cb54258aa0b73a27517f3821b68b73172939b96c3cd7f827bf",
-        "result": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1293,6 +1295,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba"
       },
       "datatype": "mixed",
@@ -1310,7 +1313,7 @@
         "code": "7b3e80acf769c893c61f94ca0fb3a7ab73134f0f69732f9e563b2f74a7f37b4f",
         "input": "521681a88ca77bbcca833d55320bb36e0dcd1e4187b7c720149e75425e53c91f",
         "input_buffer": "521681a88ca77bbcca833d55320bb36e0dcd1e4187b7c720149e75425e53c91f",
-        "result": "cff444727b343fb058902888fa7d0d0933c1c9623712a18fc34f7f9454974b43",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1497,7 +1500,7 @@
         "code": "4518d95721d778126dfa7a5a43e353f23016304303cd957d7cc084eaef42604d",
         "input": "e2e0b552e60352d38737aaca10e31d14a16a4e99fa6998f87d996dff66e955dc",
         "input_buffer": "e2e0b552e60352d38737aaca10e31d14a16a4e99fa6998f87d996dff66e955dc",
-        "result": "888a4e317724ca3b0fe23cdd5115475ce8d26ffd6872b8293b55ac50db61cba1",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1717,6 +1720,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "5d6d709b9a4123f1dfdd232a8300995dff06bd0e2aac70240c12c093e44f1309",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "5d6d709b9a4123f1dfdd232a8300995dff06bd0e2aac70240c12c093e44f1309"
       },
       "datatype": "mixed",
@@ -1730,6 +1734,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "5d6d709b9a4123f1dfdd232a8300995dff06bd0e2aac70240c12c093e44f1309",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "5d6d709b9a4123f1dfdd232a8300995dff06bd0e2aac70240c12c093e44f1309"
       },
       "datatype": "mixed",
@@ -1803,6 +1808,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "131261d94415233408c02a03a851ce0b1a7572600e3b21be3ff15417aa3844ec",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "131261d94415233408c02a03a851ce0b1a7572600e3b21be3ff15417aa3844ec"
       },
       "datatype": "mixed",
@@ -1816,6 +1822,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "cff444727b343fb058902888fa7d0d0933c1c9623712a18fc34f7f9454974b43",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "cff444727b343fb058902888fa7d0d0933c1c9623712a18fc34f7f9454974b43"
       },
       "datatype": "mixed",
@@ -1828,7 +1835,7 @@
     {
       "celltype": "float",
       "checksum": {
-        "value": "191fb5fc4a9bf2ded9a09a0a2c4eb3eb90f15ee96deb1eec1a970df0a79d09ba"
+        "value": "eccf14463471b4105c12aa6105820e7ea1557f6c49b5d9aa7dde97c5df4d9ad6"
       },
       "datatype": "mixed",
       "path": [
@@ -1843,7 +1850,7 @@
     {
       "celltype": "float",
       "checksum": {
-        "value": "4e80dff7040d2219b16a715802b49050890ac3af08593b5317d2a138de0ef765"
+        "value": "8680a668f33ed1ed9d177cb473af2e2774f8cdeb036b12d559070d5041cc60c4"
       },
       "datatype": "mixed",
       "path": [
@@ -1857,9 +1864,6 @@
     },
     {
       "celltype": "text",
-      "checksum": {
-        "value": "d25ce2f1a57feeb4e717e32ec9a25935aaa0fc1f4b542a5f50f5e0cd0b1d1535"
-      },
       "datatype": "mixed",
       "path": [
         "specificity"
@@ -1874,6 +1878,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "aa75e0686e2eeaf17eeefbcf507435ce38baa2e10cda31fb5d03fa5abf636d74",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "aa75e0686e2eeaf17eeefbcf507435ce38baa2e10cda31fb5d03fa5abf636d74"
       },
       "datatype": "mixed",
@@ -1891,7 +1896,7 @@
         "code": "d773004943ea366d24099a1b10ef6ad0b19162aa9966c0e180bfc07346305efb",
         "input": "9f1a765c58427b547eb6787903e93a62b58f0225d157a7923470bbef2f4e39fb",
         "input_buffer": "9f1a765c58427b547eb6787903e93a62b58f0225d157a7923470bbef2f4e39fb",
-        "result": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571",
+        "result": null,
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1919,6 +1924,7 @@
       "celltype": "structured",
       "checksum": {
         "buffer": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571",
+        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "value": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571"
       },
       "datatype": "mixed",

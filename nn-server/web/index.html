@@ -15,10 +15,27 @@
 <body>
     <div id="app">
         <v-app id="vuetify-app">
-            <section>
-            <h2 class="title">High-RMSD analysis and fitting</h2>
-            </section>
-            <section>
+        <section>
+            <h2 class="title">Input structure</h2>            
+            <b-field label="Protein or peptide in PDB format">                    
+            </b-field>
+            <b-field class="file is-primary" :class="{'has-name': !!pdb.file}">
+                <b-upload 
+                    v-model="pdb.file" 
+                    class="file-label"
+                >
+                    <span class="file-cta">
+                        <b-icon class="file-icon" icon="upload"></b-icon>
+                        <span class="file-label">Click to upload</span>
+                    </span>
+                    <span class="file-name" v-if="pdb.file">
+                        {{ pdb.file.name }}
+                    </span>
+                </b-upload>
+            </b-field>
+        </section>
+<section>
+    <h2 class="title">High-RMSD analysis and fitting</h2>
     <b-field label="High-RMSD analysis and fitting mode">
         <b-select placeholder="" v-model="high_ana_mode.value">
             <option
@@ -29,17 +46,17 @@
             </option>
         </b-select>
     </b-field>
+            <section>
     <section>
         <h3 class="title">Threshold detection computation parameters</h3>
-        </section>
     <section>
-                <b-collapse class="card" animation="slide" aria-id="id-9559">
+                <b-collapse class="card" animation="slide" aria-id="id-2408">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-9559">
+                        aria-controls="id-2408">
                         <p class="card-header-title">
                             Threshold best-of factor
                         </p>
@@ -63,13 +80,13 @@
 
             </section>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-2408">
+                <b-collapse class="card" animation="slide" aria-id="id-5181">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-2408">
+                        aria-controls="id-5181">
                         <p class="card-header-title">
                             Threshold redundancy parameter
                         </p>
@@ -94,13 +111,13 @@
             </section>
             <h3 class="title">Thresholded randombest computation parameters</h3>            
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-5181">
+                <b-collapse class="card" animation="slide" aria-id="id-1529">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-5181">
+                        aria-controls="id-1529">
                         <p class="card-header-title">
                             Number of structures to generate
                         </p>
@@ -125,13 +142,13 @@
             </section>
             <h3 class="title">Thresholded randombest analysis parameters</h3>                        
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-1529">
+                <b-collapse class="card" animation="slide" aria-id="id-3633">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-1529">
+                        aria-controls="id-3633">
                         <p class="card-header-title">
                             Structures to discard at the high-RMSD range
                         </p>
@@ -155,13 +172,13 @@
 
             </section>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-3633">
+                <b-collapse class="card" animation="slide" aria-id="id-1787">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-3633">
+                        aria-controls="id-1787">
                         <p class="card-header-title">
                             Structures to discard at the low-RMSD range
                         </p>
@@ -196,13 +213,13 @@
         </b-select>
     </b-field>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-8966">
+                <b-collapse class="card" animation="slide" aria-id="id-4757">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-8966">
+                        aria-controls="id-4757">
                         <p class="card-header-title">
                             Number of bins
                         </p>
@@ -239,14 +256,8 @@
             </option>
         </b-select>
     </b-field>
-            <b-field label="Cell Low_ana_mode">
-                <b-input
-                    v-bind:value="low_ana_mode.value"
-                    v-model="low_ana_mode.value"
-                    :editable="true"
-                />
-            </b-field>
             <section>
+                <b-collapse class="card" animation="slide" aria-id="id-9664">
                 <h3 class="title">Greedy intercept computation parameters</h3>
                 </section>                    
             <section>
@@ -256,7 +267,7 @@
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-2451">
+                        aria-controls="id-9664">
                         <p class="card-header-title">
                             Pool size
                         </p>
@@ -279,17 +290,17 @@
                 </b-collapse>
 
             </section>
-            <section>
+            <section>                
                 <h3 class="title">Greedy intercept analysis parameters</h3>
-                </section>                    
+            </section>                    
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-9664">
+                <b-collapse class="card" animation="slide" aria-id="id-7970">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-9664">
+                        aria-controls="id-7970">
                         <p class="card-header-title">
                             Number of lowest-RMSD structures to discard
                         </p>
@@ -324,13 +335,13 @@
         </b-select>
     </b-field>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-2794">
+                <b-collapse class="card" animation="slide" aria-id="id-9866">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-2794">
+                        aria-controls="id-9866">
                         <p class="card-header-title">
                             Number of bins
                         </p>
@@ -355,13 +366,13 @@
             </section>
             <h3 class="title">Near-native ensemble computation parameters</h3>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-9866">
+                <b-collapse class="card" animation="slide" aria-id="id-6065">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-9866">
+                        aria-controls="id-6065">
                         <p class="card-header-title">
                             Size
                         </p>
@@ -389,13 +400,13 @@
         <section>
 
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-6065">
+                <b-collapse class="card" animation="slide" aria-id="id-1001">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-6065">
+                        aria-controls="id-1001">
                         <p class="card-header-title">
                             Number of lowest-RMSD structures to discard
                         </p>
@@ -430,13 +441,13 @@
         </b-select>
     </b-field>
             <section>
-                <b-collapse class="card" animation="slide" aria-id="id-5740">
+                <b-collapse class="card" animation="slide" aria-id="id-5875">
                     <div
                         slot="trigger"
                         slot-scope="props"
                         class="card-header"
                         role="button"
-                        aria-controls="id-5740">
+                        aria-controls="id-5875">
                         <p class="card-header-title">
                             Number of bins
                         </p>
@@ -459,12 +470,99 @@
                 </b-collapse>
 
             </section>
+            <b-field label="Conformational space plot">                
         </section>
         <h3 class="title">Conformational space plot</h3>
         <section>
             <b-field label="">                
                 <img :src="plot.value ? METHOD_get_app_globals().createObjectURL(plot.value) : ''" width= height=></img>
             </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-5103">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-5103">
+                        <p class="card-header-title">
+                            RMSD 1
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="rmsd1.value" v-model.number="rmsd1.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="rmsd1.value" v-model="rmsd1.value" :min="0" :max="20" :step="0.01" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-749">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-749">
+                        <p class="card-header-title">
+                            RMSD 2
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="rmsd2.value" v-model.number="rmsd2.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="rmsd2.value" v-model="rmsd2.value" :min="0" :max="20" :step="0.01" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+
+                <b-collapse class="card" animation="slide" aria-id="id-9672">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-9672">
+                        <p class="card-header-title">
+                            Specificity comparison
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content" style="overflow: auto; height: 400px;">
+                            <pre>{{ specificity.value }}</pre>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
         <section v-if="STATUS.value.transformers">
             <b-field label="Transformer calc_greedy">>                 
             <b-icon
@@ -505,14 +603,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-4108">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-5103">
                 <div
                     v-if="STATUS.value.transformers.calc_greedy.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-4108">
+                    aria-controls="id-5103">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -570,14 +668,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-5103">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-749">
                 <div
                     v-if="STATUS.value.transformers.calc_nn.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-5103">
+                    aria-controls="id-749">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -635,14 +733,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-749">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9672">
                 <div
                     v-if="STATUS.value.transformers.calc_random.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-749">
+                    aria-controls="id-9672">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -700,14 +798,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9672">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-2623">
                 <div
                     v-if="STATUS.value.transformers.calc_specificity.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-9672">
+                    aria-controls="id-2623">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -765,14 +863,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-2623">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-767">
                 <div
                     v-if="STATUS.value.transformers.calc_threshold.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-2623">
+                    aria-controls="id-767">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -830,14 +928,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-767">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9896">
                 <div
                     v-if="STATUS.value.transformers.do_run.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-767">
+                    aria-controls="id-9896">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -895,14 +993,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9896">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8988">
                 <div
                     v-if="STATUS.value.transformers.fit_nn.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-9896">
+                    aria-controls="id-8988">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -960,14 +1058,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8988">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8657">
                 <div
                     v-if="STATUS.value.transformers.load_pdb.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-8988">
+                    aria-controls="id-8657">
                     <p class="card-header-title">
                         Error message
                     </p>
@@ -1025,14 +1123,14 @@
                 type="is-danger">
             </b-icon>
             </b-field>
-            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8657">
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-7793">
                 <div
                     v-if="STATUS.value.transformers.validate_cost.status"
                     slot="trigger"
                     slot-scope="props"
                     class="card-header"
                     role="button"
-                    aria-controls="id-8657">
+                    aria-controls="id-7793">
                     <p class="card-header-title">
                         Error message
                     </p>

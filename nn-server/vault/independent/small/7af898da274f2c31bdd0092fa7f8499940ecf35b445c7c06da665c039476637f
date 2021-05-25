@@ -392,48 +392,6 @@
         "encoding": "text",
         "read": true
       }
-    },
-    "rmsd1": {
-      "celltype": "float",
-      "component": "slider",
-      "params": {
-        "auto_read": true,
-        "max": 20,
-        "min": 0,
-        "title": "RMSD 1"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
-    "rmsd2": {
-      "celltype": "float",
-      "component": "slider",
-      "params": {
-        "auto_read": true,
-        "max": 20,
-        "min": 0,
-        "title": "RMSD 2"
-      },
-      "share": {
-        "encoding": "json",
-        "read": true,
-        "write": true
-      }
-    },
-    "specificity": {
-      "celltype": "text",
-      "component": "card",
-      "params": {
-        "auto_read": true,
-        "title": "Specificity comparison"
-      },
-      "share": {
-        "encoding": "text",
-        "read": true
-      }
     }
   },
   "extra_components": [
@@ -465,11 +423,7 @@
     "low_comp_nn_k",
     "low_ana_nn_discard",
     "low_ana_nn_mode",
-    "low_ana_nn_bins",
-    "plot",
-    "rmsd1",
-    "rmsd2",
-    "specificity"
+    "low_ana_nn_bins"
   ],
   "transformers": {
     "calc_greedy": {
