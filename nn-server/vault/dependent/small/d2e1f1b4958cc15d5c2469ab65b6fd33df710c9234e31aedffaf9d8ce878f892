@@ -1,0 +1,18 @@
+def constructor(
+    ctx, libctx,
+    package_dirdict, 
+    package_name,
+    package,
+):
+    mod = ctx.analyze_dependencies = Module()
+    mod.code = libctx.code.analyze_dependencies.value
+    tf = ctx.build_package = Transformer()
+    tf.code = libctx.code.build_package.value
+    ctx.package_dirdict = Cell("plain")
+    tf.package_dirdict = ctx.package_dirdict
+    package_dirdict.connect(ctx.package_dirdict) 
+    tf.analyze_dependencies = mod
+    tf.package_name = package_name
+    ctx.package = tf
+    ctx.package.celltype = "plain"
+    package.connect_from(ctx.package)

@@ -1,0 +1,1 @@
+"log(N)\u00b2 = 316.00 * RMSD + -314.77\nRMSD = 3.164592e-03 * log(N)\u00b2 + 0.996\nRMSD 1 is 7.25 orders of magnitude more specific than RMSD 2"

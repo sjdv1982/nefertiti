@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Conformational ensemble size modeller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vuetify@2.3.20/dist/vuetify.min.css'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.0.6/css/all.css'>
+</head>
+
+<body>
+    <div id="app">
+        <v-app id="vuetify-app">
+        <section>
+            <h2 class="title">Input structure</h2>            
+            <b-field label="Protein or peptide in PDB format">                    
+            </b-field>
+            <b-field class="file is-primary" :class="{'has-name': !!pdb.file}">
+                <b-upload 
+                    v-model="pdb.file" 
+                    class="file-label"
+                >
+                    <span class="file-cta">
+                        <b-icon class="file-icon" icon="upload"></b-icon>
+                        <span class="file-label">Click to upload</span>
+                    </span>
+                    <span class="file-name" v-if="pdb.file">
+                        {{ pdb.file.name }}
+                    </span>
+                </b-upload>
+            </b-field>
+        </section>
+<section>
+    <h2 class="title">High-RMSD analysis and fitting</h2>
+    <b-field label="High-RMSD analysis and fitting mode">
+        <b-select placeholder="" v-model="high_ana_mode.value">
+            <option
+                v-for="option in [{'text': 'No high-RMSD analysis or fitting', 'value': 'no'}, {'text': 'No high-RMSD fitting, but show detected threshold for comparison', 'value': 'no,threshold'}, {'text': 'No high-RMSD fitting, but show thresholded randombest for comparison', 'value': 'no,random'}, {'text': 'Fit only on threshold', 'value': 'threshold'}, {'text': 'Fit only on threshold, but show thresholded randombest for comparison', 'value': 'threshold,random'}, {'text': 'Fit on thresholded randombest', 'value': 'random'}]"
+                :value="option.value"
+                :key="option.value">
+                {{ option.text }}
+            </option>
+        </b-select>
+    </b-field>
+            <section>
+    <section>
+        <h3 class="title">Threshold detection computation parameters</h3>
+    <section>
+                <b-collapse class="card" animation="slide" aria-id="id-2408">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-2408">
+                        <p class="card-header-title">
+                            Threshold best-of factor
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_comp_threshold_factor.value" v-model.number="high_comp_threshold_factor.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_comp_threshold_factor.value" v-model="high_comp_threshold_factor.value" :min="0" :max="1000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-5181">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-5181">
+                        <p class="card-header-title">
+                            Threshold redundancy parameter
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_comp_threshold_redundancy.value" v-model.number="high_comp_threshold_redundancy.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_comp_threshold_redundancy.value" v-model="high_comp_threshold_redundancy.value" :min="0" :max="300" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <h3 class="title">Thresholded randombest computation parameters</h3>            
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-1529">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-1529">
+                        <p class="card-header-title">
+                            Number of structures to generate
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_comp_random_nstructures.value" v-model.number="high_comp_random_nstructures.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_comp_random_nstructures.value" v-model="high_comp_random_nstructures.value" :min="0" :max="2000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <h3 class="title">Thresholded randombest analysis parameters</h3>                        
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-3633">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-3633">
+                        <p class="card-header-title">
+                            Structures to discard at the high-RMSD range
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_ana_random_discard_upper.value" v-model.number="high_ana_random_discard_upper.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_ana_random_discard_upper.value" v-model="high_ana_random_discard_upper.value" :min="0" :max="500" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-1787">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-1787">
+                        <p class="card-header-title">
+                            Structures to discard at the low-RMSD range
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_ana_random_discard_lower.value" v-model.number="high_ana_random_discard_lower.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_ana_random_discard_lower.value" v-model="high_ana_random_discard_lower.value" :min="0" :max="500" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+<section>
+    <b-field label="Thresholded randombest fitting mode">
+        <b-select placeholder="" v-model="high_ana_random_mode.value">
+            <option
+                v-for="option in [{'text': 'Binning', 'value': 'binning'}, {'text': 'Lowest RMSD point', 'value': 'lowest_point'}, {'text': 'Median RMSD point', 'value': 'midpoint'}, {'text': 'Highest RMSD point', 'value': 'highest_point'}]"
+                :value="option.value"
+                :key="option.value">
+                {{ option.text }}
+            </option>
+        </b-select>
+    </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-4757">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-4757">
+                        <p class="card-header-title">
+                            Number of bins
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="high_ana_random_bins.value" v-model.number="high_ana_random_bins.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="high_ana_random_bins.value" v-model="high_ana_random_bins.value" :min="0" :max="50" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+<section>
+    <section>
+        <h2 class="title">Low-RMSD analysis and fitting</h2>
+        </section>    
+    <b-field label="Low-RMSD analysis and fitting mode">
+        <b-select placeholder="" v-model="low_ana_mode.value">
+            <option
+                v-for="option in [{'text': 'No low-RMSD analysis or fitting', 'value': 'no'}, {'text': 'No low-RMSD fitting, but show greedy intercept for comparison', 'value': 'no,greedy'}, {'text': 'No low-RMSD fitting, but show near-native intercept for comparison', 'value': 'no,nn_intercept'}, {'text': 'Greedy intercept', 'value': 'greedy'}, {'text': 'Fit on greedy intercept, but show near-native intercept for comparison', 'value': 'greedy,nn_intercept'}, {'text': 'Fit on greedy intercept, but show near-native ensemble for comparison', 'value': 'greedy,nn'}, {'text': 'Near-native intercept', 'value': 'nn_intercept'}, {'text': 'Fit on near-native intercept, but show greedy intercept for comparison', 'value': 'nn_intercept,greedy'}, {'text': 'Fit on near-native intercept, but show near-native ensemble for comparison', 'value': 'nn_intercept,nn'}, {'text': 'Near-native ensemble', 'value': 'nn'}, {'text': 'Fit on near-native ensemble, but show greedy intercept for comparison', 'value': 'nn,greedy'}]"
+                :value="option.value"
+                :key="option.value">
+                {{ option.text }}
+            </option>
+        </b-select>
+    </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-9664">
+                <h3 class="title">Greedy intercept computation parameters</h3>
+                </section>                    
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-2451">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-9664">
+                        <p class="card-header-title">
+                            Pool size
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_comp_greedy_poolsize.value" v-model.number="low_comp_greedy_poolsize.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_comp_greedy_poolsize.value" v-model="low_comp_greedy_poolsize.value" :min="0" :max="1000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>                
+                <h3 class="title">Greedy intercept analysis parameters</h3>
+            </section>                    
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-7970">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-7970">
+                        <p class="card-header-title">
+                            Number of lowest-RMSD structures to discard
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_ana_greedy_discard.value" v-model.number="low_ana_greedy_discard.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_ana_greedy_discard.value" v-model="low_ana_greedy_discard.value" :min="0" :max="1000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+<section>
+    <b-field label="Greedy fitting mode">
+        <b-select placeholder="" v-model="low_ana_greedy_mode.value">
+            <option
+                v-for="option in [{'text': 'Binning', 'value': 'binning'}, {'text': 'Lowest RMSD point', 'value': 'lowest_point'}]"
+                :value="option.value"
+                :key="option.value">
+                {{ option.text }}
+            </option>
+        </b-select>
+    </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-9866">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-9866">
+                        <p class="card-header-title">
+                            Number of bins
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_ana_greedy_bins.value" v-model.number="low_ana_greedy_bins.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_ana_greedy_bins.value" v-model="low_ana_greedy_bins.value" :min="0" :max="50" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <h3 class="title">Near-native ensemble computation parameters</h3>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-6065">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-6065">
+                        <p class="card-header-title">
+                            Size
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_comp_nn_k.value" v-model.number="low_comp_nn_k.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_comp_nn_k.value" v-model="low_comp_nn_k.value" :min="0" :max="100000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+        </section>
+        <h3 class="title">Near-native ensemble analysis parameters</h3>
+        <section>
+
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-1001">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-1001">
+                        <p class="card-header-title">
+                            Number of lowest-RMSD structures to discard
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_ana_nn_discard.value" v-model.number="low_ana_nn_discard.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_ana_nn_discard.value" v-model="low_ana_nn_discard.value" :min="0" :max="10000" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+<section>
+    <b-field label="Near-native ensemble fitting mode">
+        <b-select placeholder="" v-model="low_ana_nn_mode.value">
+            <option
+                v-for="option in [{'text': 'Binning', 'value': 'binning'}, {'text': 'Lowest RMSD point', 'value': 'lowest_point'}, {'text': 'Median RMSD point', 'value': 'midpoint'}, {'text': 'Highest RMSD point', 'value': 'highest_point'}]"
+                :value="option.value"
+                :key="option.value">
+                {{ option.text }}
+            </option>
+        </b-select>
+    </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-5875">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-5875">
+                        <p class="card-header-title">
+                            Number of bins
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="low_ana_nn_bins.value" v-model.number="low_ana_nn_bins.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="low_ana_nn_bins.value" v-model="low_ana_nn_bins.value" :min="0" :max="50" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <b-field label="Conformational space plot">                
+        </section>
+        <h3 class="title">Conformational space plot</h3>
+        <section>
+            <b-field label="">                
+                <img :src="plot.value ? METHOD_get_app_globals().createObjectURL(plot.value) : ''" width= height=></img>
+            </b-field>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-5103">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-5103">
+                        <p class="card-header-title">
+                            RMSD1
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="rmsd1.value" v-model.number="rmsd1.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="rmsd1.value" v-model="rmsd1.value" :min="0" :max="20" :step="0.01" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+                <b-collapse class="card" animation="slide" aria-id="id-749">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-749">
+                        <p class="card-header-title">
+                            RMSD2
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            <b-field grouped>
+                                <b-input :value="rmsd2.value" v-model.number="rmsd2.value" type="number"></b-input>
+                            </b-field>
+                            <b-field>
+                                <b-slider :value="rmsd2.value" v-model="rmsd2.value" :min="0" :max="20" :step="0.01" lazy></b-slider>
+                            </b-field>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+            <section>
+
+                <b-collapse class="card" animation="slide" aria-id="id-9672">
+                    <div
+                        slot="trigger"
+                        slot-scope="props"
+                        class="card-header"
+                        role="button"
+                        aria-controls="id-9672">
+                        <p class="card-header-title">
+                            Specificity comparison
+                        </p>
+                        <a class="card-header-icon">
+                            <b-icon
+                                :icon="props.open ? 'menu-down' : 'menu-up'">
+                            </b-icon>
+                        </a>
+                    </div>
+                    <div class="card-content">
+                        <div class="content" style="overflow: auto; height: 400px;">
+                            <pre>{{ specificity.value }}</pre>
+                        </div>
+                    </div>
+                </b-collapse>
+
+            </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer calc_greedy">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.calc_greedy.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_greedy.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_greedy.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_greedy.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_greedy.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-5103">
+                <div
+                    v-if="STATUS.value.transformers.calc_greedy.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-5103">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.calc_greedy.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.calc_greedy.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer calc_nn">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.calc_nn.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_nn.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_nn.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_nn.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_nn.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-749">
+                <div
+                    v-if="STATUS.value.transformers.calc_nn.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-749">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.calc_nn.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.calc_nn.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer calc_random">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.calc_random.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_random.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_random.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_random.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_random.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9672">
+                <div
+                    v-if="STATUS.value.transformers.calc_random.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-9672">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.calc_random.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.calc_random.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer calc_specificity">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.calc_specificity.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_specificity.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_specificity.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_specificity.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_specificity.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-2623">
+                <div
+                    v-if="STATUS.value.transformers.calc_specificity.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-2623">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.calc_specificity.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.calc_specificity.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer calc_threshold">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.calc_threshold.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_threshold.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_threshold.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_threshold.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.calc_threshold.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-767">
+                <div
+                    v-if="STATUS.value.transformers.calc_threshold.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-767">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.calc_threshold.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.calc_threshold.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer do_run">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.do_run.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.do_run.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.do_run.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.do_run.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.do_run.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-9896">
+                <div
+                    v-if="STATUS.value.transformers.do_run.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-9896">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.do_run.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.do_run.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer fit_nn">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.fit_nn.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.fit_nn.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.fit_nn.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.fit_nn.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.fit_nn.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8988">
+                <div
+                    v-if="STATUS.value.transformers.fit_nn.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-8988">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.fit_nn.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.fit_nn.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer load_pdb">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.load_pdb.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.load_pdb.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.load_pdb.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.load_pdb.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.load_pdb.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-8657">
+                <div
+                    v-if="STATUS.value.transformers.load_pdb.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-8657">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.load_pdb.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.load_pdb.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+        <section v-if="STATUS.value.transformers">
+            <b-field label="Transformer validate_cost">>                 
+            <b-icon
+                v-if="STATUS.value.transformers.validate_cost.color == 'royalblue'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-info">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.validate_cost.color == 'forestgreen'"
+                pack="fas"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-success">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.validate_cost.color == 'yellow'"
+                pack="fa"
+                icon="sync-alt"
+                size="is-large"
+                custom-class="fa-spin"
+                type="is-warning">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.validate_cost.color == 'orange'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            <b-icon
+                v-if="STATUS.value.transformers.validate_cost.color == 'red'"
+                pack="fa"
+                icon="circle"
+                size="is-large"
+                type="is-danger">
+            </b-icon>
+            </b-field>
+            <b-collapse class="card" :open="false" animation="slide" aria-id="id-7793">
+                <div
+                    v-if="STATUS.value.transformers.validate_cost.status"
+                    slot="trigger"
+                    slot-scope="props"
+                    class="card-header"
+                    role="button"
+                    aria-controls="id-7793">
+                    <p class="card-header-title">
+                        Error message
+                    </p>
+                    <a class="card-header-icon">
+                        <b-icon
+                            :icon="props.open ? 'menu-down' : 'menu-up'">
+                        </b-icon>
+                    </a>
+                </div>
+                <div class="card-content" v-if="STATUS.value.transformers.validate_cost.status">
+                    <div class="content" style="overflow: auto; height: 400px;">
+                        <pre>{{ STATUS.value.transformers.validate_cost.status }}</pre>
+                    </div>
+                </div>
+            </b-collapse>
+
+        </section>
+
+        </v-app>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/vuetify@2.3.20/dist/vuetify.min.js'></script>
+    <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
+    <script type="text/javascript" src="./seamless-client.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "connections": [
+    {
+      "source": 1,
+      "target": 2,
+      "type": "connection"
+    },
+    {
+      "source": 1,
+      "target": 5,
+      "type": "connection"
+    },
+    {
+      "source": 4,
+      "target": 0,
+      "type": "connection"
+    },
+    {
+      "source": 5,
+      "target": 3,
+      "type": "connection"
+    },
+    {
+      "source": 3,
+      "target": 4,
+      "type": "connection"
+    }
+  ],
+  "nodes": [
+    {
+      "color": "royalblue",
+      "id": 0,
+      "name": "ctx_nefertiti.package",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 1,
+      "name": "ctx_nefertiti.package_dirdict",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 2,
+      "name": "ctx_nefertiti.package_dirdict_value",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 3,
+      "name": "ctx_nefertiti.python_package.ctx.build_package",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 4,
+      "name": "ctx_nefertiti.python_package.ctx.package",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 5,
+      "name": "ctx_nefertiti.python_package.ctx.package_dirdict",
+      "type": "cell"
+    }
+  ]
+}

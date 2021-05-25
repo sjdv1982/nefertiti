@@ -7,7 +7,7 @@
 vault/dependent/big/*
 
 # 3. Dependent, small buffers. Comment out the following line to put them under version control
-vault/dependent/small/*
+#vault/dependent/small/*
 
 # 4. Backups of the Seamless graph. Comment out the following line to put them under version control
 graph/*.seamless.bak*

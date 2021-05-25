@@ -219,7 +219,7 @@
     {
       "source": [
         "do_run_result",
-        "run_nn"
+        "run_greedy"
       ],
       "target": [
         "calc_nn",
@@ -585,15 +585,6 @@
     },
     {
       "source": [
-        "calc_specificity"
-      ],
-      "target": [
-        "specificity"
-      ],
-      "type": "connection"
-    },
-    {
-      "source": [
         "high_comp_random_nstructures"
       ],
       "target": [
@@ -645,7 +636,7 @@
     },
     {
       "source": [
-        "high_ana_random_bins"
+        "high_ana_greedy_bins"
       ],
       "target": [
         "params0",
@@ -658,7 +649,7 @@
     },
     {
       "source": [
-        "high_ana_random_mode"
+        "high_ana_greedy_mode"
       ],
       "target": [
         "params0",
@@ -671,7 +662,7 @@
     },
     {
       "source": [
-        "high_ana_random_discard_lower"
+        "high_ana_greedy_discard_lower"
       ],
       "target": [
         "params0",
@@ -684,7 +675,7 @@
     },
     {
       "source": [
-        "high_ana_random_discard_upper"
+        "high_ana_greedy_discard_upper"
       ],
       "target": [
         "params0",
@@ -735,7 +726,7 @@
     },
     {
       "source": [
-        "low_ana_greedy_bins"
+        "high_ana_greedy_bins"
       ],
       "target": [
         "params0",
@@ -748,7 +739,7 @@
     },
     {
       "source": [
-        "low_ana_greedy_mode"
+        "high_ana_greedy_mode"
       ],
       "target": [
         "params0",
@@ -761,7 +752,7 @@
     },
     {
       "source": [
-        "low_ana_greedy_discard"
+        "high_ana_greedy_discard_lower"
       ],
       "target": [
         "params0",
@@ -774,7 +765,7 @@
     },
     {
       "source": [
-        "low_ana_nn_bins"
+        "high_ana_nn_bins"
       ],
       "target": [
         "params0",
@@ -787,7 +778,7 @@
     },
     {
       "source": [
-        "low_ana_nn_mode"
+        "high_ana_nn_mode"
       ],
       "target": [
         "params0",
@@ -800,7 +791,7 @@
     },
     {
       "source": [
-        "low_ana_nn_discard"
+        "high_ana_nn_discard_lower"
       ],
       "target": [
         "params0",
@@ -934,9 +925,10 @@
       "RESULT": "result",
       "SCHEMA": null,
       "checksum": {
-        "code": "55ed0ffaa83c0a66f7f1a021d58050e38abf5f8b9fc54965362940fb115672c1",
-        "input": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
-        "input_buffer": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
+        "code": "248ea8a99ef9c969b8a838ee5d7e6bb030822034254de38982e08f4787bde839",
+        "input": "0ef8c602b8bfa8cad8f3901d671a309c835ac919dc5868f4294539fe898da91a",
+        "input_buffer": "0ef8c602b8bfa8cad8f3901d671a309c835ac919dc5868f4294539fe898da91a",
+        "result": "34ce864d670c4a9429b0c85a648bb652bee0d4ba651d82fc9d14df2bbbc10ec4",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -971,6 +963,10 @@
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "34ce864d670c4a9429b0c85a648bb652bee0d4ba651d82fc9d14df2bbbc10ec4",
+        "value": "34ce864d670c4a9429b0c85a648bb652bee0d4ba651d82fc9d14df2bbbc10ec4"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
@@ -983,9 +979,10 @@
       "RESULT": "result",
       "SCHEMA": null,
       "checksum": {
-        "code": "ae77c3b48bd1b7e6f0fb715ad945f77bb18147f5afa89eca311b9ef229db17bd",
-        "input": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
-        "input_buffer": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
+        "code": "88d581e2e81ef9a1e446306334d75f82bbd4c7aa610b45db363a6621ebad2657",
+        "input": "731d8e5789c0660f8f08838f05fe6d58a76ea48e5a47dc52ad98d8ebe62f0eb8",
+        "input_buffer": "731d8e5789c0660f8f08838f05fe6d58a76ea48e5a47dc52ad98d8ebe62f0eb8",
+        "result": "5a2ba0ffe5081b22e4a3a34b1c11400b46963fd3ac9bb33aa58acc6f3a27cd5d",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1020,6 +1017,10 @@
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "5a2ba0ffe5081b22e4a3a34b1c11400b46963fd3ac9bb33aa58acc6f3a27cd5d",
+        "value": "5a2ba0ffe5081b22e4a3a34b1c11400b46963fd3ac9bb33aa58acc6f3a27cd5d"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
@@ -1032,9 +1033,10 @@
       "RESULT": "result",
       "SCHEMA": null,
       "checksum": {
-        "code": "c23a51b4856b2545840db8eddfc472a3f9d2beb02450488e39e233c63696132c",
-        "input": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
-        "input_buffer": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
+        "code": "f5b044674f0f97aebf16b097e50feaa2c72030bf5f63cc42991b695ad9204966",
+        "input": "a3c8f2d21b74828519879a7110ccdedc2ec2044dccdd240f259a3b12fe2a00ed",
+        "input_buffer": "a3c8f2d21b74828519879a7110ccdedc2ec2044dccdd240f259a3b12fe2a00ed",
+        "result": "0957adae3dd96a808459cd65fc9b416c220f82e04177e2162c3c03f817475b71",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1072,6 +1074,10 @@
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "0957adae3dd96a808459cd65fc9b416c220f82e04177e2162c3c03f817475b71",
+        "value": "0957adae3dd96a808459cd65fc9b416c220f82e04177e2162c3c03f817475b71"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
@@ -1084,9 +1090,10 @@
       "RESULT": "result",
       "SCHEMA": null,
       "checksum": {
-        "code": "8dd39bc9ad99767a2900c3808cb6aee90c87bb6e99cddf0fcc66bb90e93aa68c",
-        "input": "f0e0781fceffee6a9ca13d4b944968aaf1ab6215039aaa274ca00265c4519bb0",
-        "input_buffer": "f0e0781fceffee6a9ca13d4b944968aaf1ab6215039aaa274ca00265c4519bb0",
+        "code": "fdb9878a7db3effcb0df3fc8f11eae1b169f55ff472b267826f663db5d784f96",
+        "input": "6e480432e8e929e9c4eb49ca9510c974bba8b4986c31d4bcc7ef73bced0e7ee2",
+        "input_buffer": "6e480432e8e929e9c4eb49ca9510c974bba8b4986c31d4bcc7ef73bced0e7ee2",
+        "result": "6820a4fba25b0f5b98f173155b58287fac79c7363f0e3d1e97f0559e2603a152",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1117,9 +1124,10 @@
       "RESULT": "result",
       "SCHEMA": null,
       "checksum": {
-        "code": "d5404c8ed88791b9e6be37a5537232718d94ceef106e6f436d25732ddef8aff2",
-        "input": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
-        "input_buffer": "0bae24f1ec340180ae381e411930eab89a07788a10e623da2a45bb0f8a293407",
+        "code": "83f8b0372c3bc9e783abcec990858ac00685afc63b022daba913c57b23b0f40a",
+        "input": "c2e51a25cbb07ff1d7ee491b0c090262fa020ffc47bce1697545f2f025920678",
+        "input_buffer": "c2e51a25cbb07ff1d7ee491b0c090262fa020ffc47bce1697545f2f025920678",
+        "result": "fada29ce89ab99fb55bf91f5ef94c595e9955b97771146933f81a72a68b165e4",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1232,10 +1240,8 @@
     {
       "celltype": "structured",
       "checksum": {
-        "auth": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "buffer": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "value": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
+        "buffer": "6b123da2b97286143ec82860749f280bc887d9406ffe9ae2467716d17df24b2d",
+        "value": "6b123da2b97286143ec82860749f280bc887d9406ffe9ae2467716d17df24b2d"
       },
       "datatype": "mixed",
       "hash_pattern": null,
@@ -1250,6 +1256,9 @@
       "SCHEMA": null,
       "checksum": {
         "code": "4b7c24464739010b563641ba516cd62a053ea63424a7ce0745482ec849a67624",
+        "input": "a0ca67ae1b9cf3cb54258aa0b73a27517f3821b68b73172939b96c3cd7f827bf",
+        "input_buffer": "a0ca67ae1b9cf3cb54258aa0b73a27517f3821b68b73172939b96c3cd7f827bf",
+        "result": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1271,6 +1280,10 @@
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba",
+        "value": "f2987dc610d1ec6b438adfe279b9b3ff57cfa2c66883b3e689e4184ac410e3ba"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
@@ -1284,9 +1297,9 @@
       "SCHEMA": null,
       "checksum": {
         "code": "7b3e80acf769c893c61f94ca0fb3a7ab73134f0f69732f9e563b2f74a7f37b4f",
-        "input": "098bc1b99863ed2665aa956827add77e9190c64698b1f4e482593fa1588adf12",
-        "input_buffer": "098bc1b99863ed2665aa956827add77e9190c64698b1f4e482593fa1588adf12",
-        "result": "d06d3a6a44ca9701c38da5af0314bfbcf3743a7a64de9fd1386209d9cc988408",
+        "input": "c9da6c5390cb3b5c7e78bd080d1196b972601ef81ce1a2efd3e19bd4a4c2acef",
+        "input_buffer": "c9da6c5390cb3b5c7e78bd080d1196b972601ef81ce1a2efd3e19bd4a4c2acef",
+        "result": "ebf83f35393fcdc174f7873dd8bbdcf182712f9d6fcafdf77922d365194c9068",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1346,6 +1359,66 @@
       "type": "cell"
     },
     {
+      "celltype": "int",
+      "checksum": {
+        "value": "6132e913fd0ae2c9aeacc8d99a02880df196fbab2ef62dbb62a6a4ae6d3f5fdd"
+      },
+      "datatype": "mixed",
+      "path": [
+        "high_ana_greedy_bins"
+      ],
+      "share": {
+        "path": null,
+        "readonly": false
+      },
+      "type": "cell"
+    },
+    {
+      "celltype": "int",
+      "checksum": {
+        "value": "baeceb8ecb2d4507afc98fab624e322662e0a09b2bfe461713533af79d38d971"
+      },
+      "datatype": "mixed",
+      "path": [
+        "high_ana_greedy_discard_lower"
+      ],
+      "share": {
+        "path": null,
+        "readonly": false
+      },
+      "type": "cell"
+    },
+    {
+      "celltype": "int",
+      "checksum": {
+        "value": "7fc65e8a22c2f74b9b307d68270e94e56608b54dafbc797cc6f58747253b0e84"
+      },
+      "datatype": "mixed",
+      "path": [
+        "high_ana_greedy_discard_upper"
+      ],
+      "share": {
+        "path": null,
+        "readonly": false
+      },
+      "type": "cell"
+    },
+    {
+      "celltype": "str",
+      "checksum": {
+        "value": "5d26a3dfd193fb58cdf1f27d22ff44230728a01ad48d5af60df0ae2f1732a117"
+      },
+      "datatype": "mixed",
+      "path": [
+        "high_ana_greedy_mode"
+      ],
+      "share": {
+        "path": null,
+        "readonly": false
+      },
+      "type": "cell"
+    },
+    {
       "celltype": "str",
       "checksum": {
         "value": "13b66b53f5fef40d345c0c7076fe236f7dec1b2d6cebd0ed1bcd72c776be5986"
@@ -1367,7 +1440,7 @@
       },
       "datatype": "mixed",
       "path": [
-        "high_ana_random_bins"
+        "high_ana_nn_bins"
       ],
       "share": {
         "path": null,
@@ -1382,22 +1455,7 @@
       },
       "datatype": "mixed",
       "path": [
-        "high_ana_random_discard_lower"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "int",
-      "checksum": {
-        "value": "7fc65e8a22c2f74b9b307d68270e94e56608b54dafbc797cc6f58747253b0e84"
-      },
-      "datatype": "mixed",
-      "path": [
-        "high_ana_random_discard_upper"
+        "high_ana_nn_discard_lower"
       ],
       "share": {
         "path": null,
@@ -1412,7 +1470,7 @@
       },
       "datatype": "mixed",
       "path": [
-        "high_ana_random_mode"
+        "high_ana_nn_mode"
       ],
       "share": {
         "path": null,
@@ -1471,9 +1529,9 @@
       "SCHEMA": null,
       "checksum": {
         "code": "4518d95721d778126dfa7a5a43e353f23016304303cd957d7cc084eaef42604d",
-        "input": "a6c5ae7bfd1f52af3c1b418517d00c08b3a3a15e175e840f12a513ddfb41b341",
-        "input_buffer": "a6c5ae7bfd1f52af3c1b418517d00c08b3a3a15e175e840f12a513ddfb41b341",
-        "result": "65ddac109f610ca3e552dbf8457a90b62b0adb06f2d40f195b0902120cfe08f4",
+        "input": "4e7fdabf20cf79a790432224962f7894ffb004b582f636d20366c0de78c83d13",
+        "input_buffer": "4e7fdabf20cf79a790432224962f7894ffb004b582f636d20366c0de78c83d13",
+        "result": "0e6261f327a2ab2e05ba91a5b964375ff2c977331b6c665addff7d50967b3719",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1500,60 +1558,15 @@
     {
       "celltype": "structured",
       "checksum": {
-        "buffer": "65ddac109f610ca3e552dbf8457a90b62b0adb06f2d40f195b0902120cfe08f4",
+        "buffer": "0e6261f327a2ab2e05ba91a5b964375ff2c977331b6c665addff7d50967b3719",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "value": "65ddac109f610ca3e552dbf8457a90b62b0adb06f2d40f195b0902120cfe08f4"
+        "value": "0e6261f327a2ab2e05ba91a5b964375ff2c977331b6c665addff7d50967b3719"
       },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
         "load_pdb_result"
       ],
-      "type": "cell"
-    },
-    {
-      "celltype": "int",
-      "checksum": {
-        "value": "6132e913fd0ae2c9aeacc8d99a02880df196fbab2ef62dbb62a6a4ae6d3f5fdd"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_greedy_bins"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "int",
-      "checksum": {
-        "value": "baeceb8ecb2d4507afc98fab624e322662e0a09b2bfe461713533af79d38d971"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_greedy_discard"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "str",
-      "checksum": {
-        "value": "5d26a3dfd193fb58cdf1f27d22ff44230728a01ad48d5af60df0ae2f1732a117"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_greedy_mode"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
       "type": "cell"
     },
     {
@@ -1564,51 +1577,6 @@
       "datatype": "mixed",
       "path": [
         "low_ana_mode"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "int",
-      "checksum": {
-        "value": "6132e913fd0ae2c9aeacc8d99a02880df196fbab2ef62dbb62a6a4ae6d3f5fdd"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_nn_bins"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "int",
-      "checksum": {
-        "value": "baeceb8ecb2d4507afc98fab624e322662e0a09b2bfe461713533af79d38d971"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_nn_discard"
-      ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "str",
-      "checksum": {
-        "value": "5d26a3dfd193fb58cdf1f27d22ff44230728a01ad48d5af60df0ae2f1732a117"
-      },
-      "datatype": "mixed",
-      "path": [
-        "low_ana_nn_mode"
       ],
       "share": {
         "path": null,
@@ -1674,7 +1642,7 @@
     {
       "celltype": "plain",
       "checksum": {
-        "value": "7c4ae6da45ab20bd3e0b680b760401ecdbfccd08f713c5cdeb18f35a8f7eabae"
+        "value": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571"
       },
       "datatype": "mixed",
       "mount": {
@@ -1718,9 +1686,9 @@
     {
       "celltype": "structured",
       "checksum": {
-        "buffer": "7c4ae6da45ab20bd3e0b680b760401ecdbfccd08f713c5cdeb18f35a8f7eabae",
+        "buffer": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
-        "value": "7c4ae6da45ab20bd3e0b680b760401ecdbfccd08f713c5cdeb18f35a8f7eabae"
+        "value": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571"
       },
       "datatype": "mixed",
       "hash_pattern": null,
@@ -1732,7 +1700,7 @@
     {
       "celltype": "text",
       "checksum": {
-        "value": "dd8217865b7dbe4bb91518d8cb8054a4d5e97a53145729fb025d8f7a1f84ffdf"
+        "value": "70774a258b8e64e0a515ae2f413e63a2735352308ca641962837d4f8125752da"
       },
       "datatype": "mixed",
       "mount": {
@@ -1745,16 +1713,12 @@
       "path": [
         "pdb"
       ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
       "type": "cell"
     },
     {
       "celltype": "bytes",
       "checksum": {
-        "value": "4b4eee3a46c438aa86ff0b7ffa0eb0efef47ae462f9562eb3e1848ed50636821"
+        "value": "f5f28d550c51b5e2b1e79b909f5c5914eb9d5aecdc40fb169910fc609a1433f1"
       },
       "datatype": "mixed",
       "file_extension": "png",
@@ -1778,8 +1742,8 @@
     {
       "celltype": "structured",
       "checksum": {
-        "buffer": "c6713ef0b215a98abd2807610afbb7724c9a9037c03c5bf65d3d2f9b604d8ae2",
-        "value": "c6713ef0b215a98abd2807610afbb7724c9a9037c03c5bf65d3d2f9b604d8ae2"
+        "buffer": "36b34830553a27035d5f45ac2c165b8d93651a2df7c47008c0250a04bd5afe6d",
+        "value": "36b34830553a27035d5f45ac2c165b8d93651a2df7c47008c0250a04bd5afe6d"
       },
       "datatype": "mixed",
       "hash_pattern": null,
@@ -1791,8 +1755,8 @@
     {
       "celltype": "structured",
       "checksum": {
-        "buffer": "d06d3a6a44ca9701c38da5af0314bfbcf3743a7a64de9fd1386209d9cc988408",
-        "value": "d06d3a6a44ca9701c38da5af0314bfbcf3743a7a64de9fd1386209d9cc988408"
+        "buffer": "ebf83f35393fcdc174f7873dd8bbdcf182712f9d6fcafdf77922d365194c9068",
+        "value": "ebf83f35393fcdc174f7873dd8bbdcf182712f9d6fcafdf77922d365194c9068"
       },
       "datatype": "mixed",
       "hash_pattern": null,
@@ -1810,10 +1774,6 @@
       "path": [
         "rmsd1"
       ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
       "type": "cell"
     },
     {
@@ -1825,26 +1785,14 @@
       "path": [
         "rmsd2"
       ],
-      "share": {
-        "path": null,
-        "readonly": false
-      },
-      "type": "cell"
-    },
-    {
-      "celltype": "text",
-      "datatype": "mixed",
-      "path": [
-        "specificity"
-      ],
-      "share": {
-        "path": null,
-        "readonly": true
-      },
       "type": "cell"
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "fada29ce89ab99fb55bf91f5ef94c595e9955b97771146933f81a72a68b165e4",
+        "value": "fada29ce89ab99fb55bf91f5ef94c595e9955b97771146933f81a72a68b165e4"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [
@@ -1858,8 +1806,9 @@
       "SCHEMA": null,
       "checksum": {
         "code": "d773004943ea366d24099a1b10ef6ad0b19162aa9966c0e180bfc07346305efb",
-        "input": "5aa7c12a9e857bc4af42e3bbbb0996d0c7dd5d7f20be8c29141f4e6ca00dff41",
-        "input_buffer": "5aa7c12a9e857bc4af42e3bbbb0996d0c7dd5d7f20be8c29141f4e6ca00dff41",
+        "input": "9f1a765c58427b547eb6787903e93a62b58f0225d157a7923470bbef2f4e39fb",
+        "input_buffer": "9f1a765c58427b547eb6787903e93a62b58f0225d157a7923470bbef2f4e39fb",
+        "result": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571",
         "result_schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c",
         "schema": "d0a1b2af1705c1b8495b00145082ef7470384e62ac1c4d9b9cdbbe0476c28f8c"
       },
@@ -1885,6 +1834,10 @@
     },
     {
       "celltype": "structured",
+      "checksum": {
+        "buffer": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571",
+        "value": "e6e8abdbbad9c6d8b011e031110a6422805ac876cc348c27665b02a7ed057571"
+      },
       "datatype": "mixed",
       "hash_pattern": null,
       "path": [

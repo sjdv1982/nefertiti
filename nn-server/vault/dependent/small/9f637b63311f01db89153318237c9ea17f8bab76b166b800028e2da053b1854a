@@ -1,0 +1,9 @@
+{
+  "ctx_nefertiti.package.status": "Status: OK",
+  "ctx_nefertiti.package_dirdict.status": "Status: OK",
+  "ctx_nefertiti.package_dirdict_value.status": "Status: OK",
+  "ctx_nefertiti.python_package.ctx.build_package.inp.status": "Status: OK",
+  "ctx_nefertiti.python_package.ctx.build_package.status": "Status: OK",
+  "ctx_nefertiti.python_package.ctx.package.status": "Status: OK",
+  "ctx_nefertiti.python_package.ctx.package_dirdict.status": "Status: OK"
+}

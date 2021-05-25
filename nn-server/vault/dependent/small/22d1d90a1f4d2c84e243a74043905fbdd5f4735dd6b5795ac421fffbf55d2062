@@ -1,0 +1,672 @@
+{
+  "connections": [
+    {
+      "source": 9,
+      "target": 10,
+      "type": "connection"
+    },
+    {
+      "source": 44,
+      "target": 28,
+      "type": "connection"
+    },
+    {
+      "source": 28,
+      "target": 29,
+      "type": "connection"
+    },
+    {
+      "source": 41,
+      "target": 42,
+      "type": "connection"
+    },
+    {
+      "source": 42,
+      "target": 43,
+      "type": "connection"
+    },
+    {
+      "source": 42,
+      "target": 43,
+      "type": "connection"
+    },
+    {
+      "source": 29,
+      "target": 43,
+      "type": "connection"
+    },
+    {
+      "source": 43,
+      "target": 40,
+      "type": "connection"
+    },
+    {
+      "source": 40,
+      "target": 51,
+      "type": "connection"
+    },
+    {
+      "source": 51,
+      "target": 52,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 15,
+      "type": "connection"
+    },
+    {
+      "source": 15,
+      "target": 16,
+      "type": "connection"
+    },
+    {
+      "source": 16,
+      "target": 0,
+      "type": "connection"
+    },
+    {
+      "source": 29,
+      "target": 0,
+      "type": "connection"
+    },
+    {
+      "source": 19,
+      "target": 0,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 0,
+      "type": "connection"
+    },
+    {
+      "source": 16,
+      "target": 2,
+      "type": "connection"
+    },
+    {
+      "source": 29,
+      "target": 2,
+      "type": "connection"
+    },
+    {
+      "source": 19,
+      "target": 2,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 2,
+      "type": "connection"
+    },
+    {
+      "source": 2,
+      "target": 3,
+      "type": "connection"
+    },
+    {
+      "source": 16,
+      "target": 7,
+      "type": "connection"
+    },
+    {
+      "source": 29,
+      "target": 7,
+      "type": "connection"
+    },
+    {
+      "source": 19,
+      "target": 7,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 7,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 7,
+      "type": "connection"
+    },
+    {
+      "source": 7,
+      "target": 50,
+      "type": "connection"
+    },
+    {
+      "source": 16,
+      "target": 4,
+      "type": "connection"
+    },
+    {
+      "source": 29,
+      "target": 4,
+      "type": "connection"
+    },
+    {
+      "source": 19,
+      "target": 4,
+      "type": "connection"
+    },
+    {
+      "source": 52,
+      "target": 4,
+      "type": "connection"
+    },
+    {
+      "source": 50,
+      "target": 4,
+      "type": "connection"
+    },
+    {
+      "source": 0,
+      "target": 1,
+      "type": "connection"
+    },
+    {
+      "source": 1,
+      "target": 14,
+      "type": "connection"
+    },
+    {
+      "source": 50,
+      "target": 14,
+      "type": "connection"
+    },
+    {
+      "source": 4,
+      "target": 5,
+      "type": "connection"
+    },
+    {
+      "source": 5,
+      "target": 14,
+      "type": "connection"
+    },
+    {
+      "source": 3,
+      "target": 14,
+      "type": "connection"
+    },
+    {
+      "source": 39,
+      "target": 17,
+      "type": "connection"
+    },
+    {
+      "source": 18,
+      "target": 17,
+      "type": "connection"
+    },
+    {
+      "source": 14,
+      "target": 17,
+      "type": "connection"
+    },
+    {
+      "source": 40,
+      "target": 17,
+      "type": "connection"
+    },
+    {
+      "source": 17,
+      "target": 47,
+      "type": "connection"
+    },
+    {
+      "source": 47,
+      "target": 46,
+      "type": "connection"
+    },
+    {
+      "source": 46,
+      "target": 45,
+      "type": "connection"
+    },
+    {
+      "source": 48,
+      "target": 6,
+      "type": "connection"
+    },
+    {
+      "source": 49,
+      "target": 6,
+      "type": "connection"
+    },
+    {
+      "source": 47,
+      "target": 6,
+      "type": "connection"
+    },
+    {
+      "source": 25,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 26,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 27,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 20,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 21,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 24,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 22,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 23,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 37,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 38,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 33,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 30,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 32,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 31,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 34,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 36,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 35,
+      "target": 41,
+      "type": "connection"
+    },
+    {
+      "source": 9,
+      "target": 13,
+      "type": "connection"
+    },
+    {
+      "source": 12,
+      "target": 8,
+      "type": "connection"
+    },
+    {
+      "source": 13,
+      "target": 11,
+      "type": "connection"
+    },
+    {
+      "source": 11,
+      "target": 12,
+      "type": "connection"
+    }
+  ],
+  "nodes": [
+    {
+      "color": "royalblue",
+      "id": 0,
+      "name": "calc_greedy",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 1,
+      "name": "calc_greedy_result",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 2,
+      "name": "calc_nn",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 3,
+      "name": "calc_nn_result",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 4,
+      "name": "calc_random",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 5,
+      "name": "calc_random_result",
+      "type": "cell"
+    },
+    {
+      "color": "orange",
+      "id": 6,
+      "name": "calc_specificity",
+      "status": "*** status ***\nStatus: upstream => equation undefined\n**************************************************\n\n",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 7,
+      "name": "calc_threshold",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 8,
+      "name": "ctx_nefertiti.package",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 9,
+      "name": "ctx_nefertiti.package_dirdict",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 10,
+      "name": "ctx_nefertiti.package_dirdict_value",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 11,
+      "name": "ctx_nefertiti.python_package.ctx.build_package",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 12,
+      "name": "ctx_nefertiti.python_package.ctx.package",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 13,
+      "name": "ctx_nefertiti.python_package.ctx.package_dirdict",
+      "type": "cell"
+    },
+    {
+      "color": "red",
+      "id": 14,
+      "name": "data",
+      "status": "*** exception ***\nTraceback (most recent call last):\nKeyError: 'greedy'\n**************************************************\n\n",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 15,
+      "name": "do_run",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 16,
+      "name": "do_run_result",
+      "type": "cell"
+    },
+    {
+      "color": "orange",
+      "id": 17,
+      "name": "fit_nn",
+      "status": "*** status ***\nStatus: upstream => data undefined\n**************************************************\n\n",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 18,
+      "name": "fraglen",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 19,
+      "name": "fraglib",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 20,
+      "name": "high_ana_mode",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 21,
+      "name": "high_ana_random_bins",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 22,
+      "name": "high_ana_random_discard_lower",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 23,
+      "name": "high_ana_random_discard_upper",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 24,
+      "name": "high_ana_random_mode",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 25,
+      "name": "high_comp_random_nstructures",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 26,
+      "name": "high_comp_threshold_factor",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 27,
+      "name": "high_comp_threshold_redundancy",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 28,
+      "name": "load_pdb",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 29,
+      "name": "load_pdb_result",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 30,
+      "name": "low_ana_greedy_bins",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 31,
+      "name": "low_ana_greedy_discard",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 32,
+      "name": "low_ana_greedy_mode",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 33,
+      "name": "low_ana_mode",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 34,
+      "name": "low_ana_nn_bins",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 35,
+      "name": "low_ana_nn_discard",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 36,
+      "name": "low_ana_nn_mode",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 37,
+      "name": "low_comp_greedy_poolsize",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 38,
+      "name": "low_comp_nn_k",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 39,
+      "name": "nfraglib",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 40,
+      "name": "params",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 41,
+      "name": "params0",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 42,
+      "name": "params0a",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 43,
+      "name": "params0b",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 44,
+      "name": "pdb",
+      "type": "cell"
+    },
+    {
+      "color": "orange",
+      "id": 45,
+      "name": "plot",
+      "type": "cell"
+    },
+    {
+      "color": "red",
+      "id": 46,
+      "name": "plot0",
+      "type": "cell"
+    },
+    {
+      "color": "red",
+      "id": 47,
+      "name": "result",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 48,
+      "name": "rmsd1",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 49,
+      "name": "rmsd2",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 50,
+      "name": "threshold",
+      "type": "cell"
+    },
+    {
+      "color": "royalblue",
+      "id": 51,
+      "name": "validate_cost",
+      "type": "transformer"
+    },
+    {
+      "color": "royalblue",
+      "id": 52,
+      "name": "validated_params",
+      "type": "cell"
+    }
+  ]
+}

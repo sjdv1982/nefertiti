@@ -1,0 +1,488 @@
+{
+  "cells": {
+    "high_ana_mode": {
+      "celltype": "str",
+      "component": "select",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "options": [
+          {
+            "text": "No high-RMSD analysis or fitting",
+            "value": "no"
+          },
+          {
+            "text": "No high-RMSD fitting, but show detected threshold for comparison",
+            "value": "no,threshold"
+          },
+          {
+            "text": "No high-RMSD fitting, but show thresholded randombest for comparison",
+            "value": "no,random"
+          },
+          {
+            "text": "Fit only on threshold",
+            "value": "threshold"
+          },
+          {
+            "text": "Fit only on threshold, but show thresholded randombest for comparison",
+            "value": "threshold,random"
+          },
+          {
+            "text": "Fit on thresholded randombest",
+            "value": "random"
+          }
+        ],
+        "title": "High-RMSD analysis and fitting mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_ana_random_bins": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 50,
+        "min": 0,
+        "title": "Number of bins"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_ana_random_discard_lower": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 500,
+        "min": 0,
+        "title": "Structures to discard at the low-RMSD range"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_ana_random_discard_upper": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 500,
+        "min": 0,
+        "title": "Structures to discard at the high-RMSD range"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_ana_random_mode": {
+      "celltype": "str",
+      "component": "select",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "options": [
+          {
+            "text": "Binning",
+            "value": "binning"
+          },
+          {
+            "text": "Lowest RMSD point",
+            "value": "lowest_point"
+          },
+          {
+            "text": "Median RMSD point",
+            "value": "midpoint"
+          },
+          {
+            "text": "Highest RMSD point",
+            "value": "highest_point"
+          }
+        ],
+        "title": "Thresholded randombest fitting mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_comp_random_nstructures": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 2000,
+        "min": 0,
+        "title": "Number of structures to generate"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_comp_threshold_factor": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 1000,
+        "min": 0,
+        "title": "Threshold best-of factor"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "high_comp_threshold_redundancy": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 300,
+        "min": 0,
+        "title": "Threshold redundancy parameter"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_greedy_bins": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 50,
+        "min": 0,
+        "title": "Number of bins"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_greedy_discard": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 1000,
+        "min": 0,
+        "title": "Number of lowest-RMSD structures to discard"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_greedy_mode": {
+      "celltype": "str",
+      "component": "select",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "options": [
+          {
+            "text": "Binning",
+            "value": "binning"
+          },
+          {
+            "text": "Lowest RMSD point",
+            "value": "lowest_point"
+          }
+        ],
+        "title": "Greedy fitting mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_mode": {
+      "celltype": "str",
+      "component": "select",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "options": [
+          {
+            "text": "No low-RMSD analysis or fitting",
+            "value": "no"
+          },
+          {
+            "text": "No low-RMSD fitting, but show greedy intercept for comparison",
+            "value": "no,greedy"
+          },
+          {
+            "text": "No low-RMSD fitting, but show near-native intercept for comparison",
+            "value": "no,nn_intercept"
+          },
+          {
+            "text": "Greedy intercept",
+            "value": "greedy"
+          },
+          {
+            "text": "Fit on greedy intercept, but show near-native intercept for comparison",
+            "value": "greedy,nn_intercept"
+          },
+          {
+            "text": "Fit on greedy intercept, but show near-native ensemble for comparison",
+            "value": "greedy,nn"
+          },
+          {
+            "text": "Near-native intercept",
+            "value": "nn_intercept"
+          },
+          {
+            "text": "Fit on near-native intercept, but show greedy intercept for comparison",
+            "value": "nn_intercept,greedy"
+          },
+          {
+            "text": "Fit on near-native intercept, but show near-native ensemble for comparison",
+            "value": "nn_intercept,nn"
+          },
+          {
+            "text": "Near-native ensemble",
+            "value": "nn"
+          },
+          {
+            "text": "Fit on near-native ensemble, but show greedy intercept for comparison",
+            "value": "nn,greedy"
+          }
+        ],
+        "title": "Low-RMSD analysis and fitting mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_bins": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 50,
+        "min": 0,
+        "title": "Number of bins"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_discard": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 10000,
+        "min": 0,
+        "title": "Number of lowest-RMSD structures to discard"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_ana_nn_mode": {
+      "celltype": "str",
+      "component": "select",
+      "params": {
+        "auto_read": true,
+        "editable": true,
+        "options": [
+          {
+            "text": "Binning",
+            "value": "binning"
+          },
+          {
+            "text": "Lowest RMSD point",
+            "value": "lowest_point"
+          },
+          {
+            "text": "Median RMSD point",
+            "value": "midpoint"
+          },
+          {
+            "text": "Highest RMSD point",
+            "value": "highest_point"
+          }
+        ],
+        "title": "Near-native ensemble fitting mode"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_comp_greedy_poolsize": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 1000,
+        "min": 0,
+        "title": "Pool size"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "low_comp_nn_k": {
+      "celltype": "int",
+      "component": "slider",
+      "params": {
+        "auto_read": true,
+        "max": 100000,
+        "min": 0,
+        "title": "Size"
+      },
+      "share": {
+        "encoding": "json",
+        "read": true,
+        "write": true
+      }
+    },
+    "pdb": {
+      "celltype": "text",
+      "component": "fileupload",
+      "params": {
+        "auto_read": true,
+        "title": "Protein or peptide in PDB format"
+      },
+      "share": {
+        "encoding": "text",
+        "read": true,
+        "write": true
+      }
+    },
+    "plot": {
+      "celltype": "bytes",
+      "component": "image",
+      "params": {
+        "auto_read": true,
+        "title": "Conformational space plot"
+      },
+      "share": {
+        "encoding": "text",
+        "read": true
+      }
+    }
+  },
+  "extra_components": [
+    {
+      "cell": "high_ana_mode",
+      "component": "",
+      "id": "EXAMPLE_ID",
+      "params": {}
+    }
+  ],
+  "index": {
+    "title": "Conformational ensemble size modeller"
+  },
+  "order": [
+    "pdb",
+    "high_ana_mode",
+    "high_comp_threshold_factor",
+    "high_comp_threshold_redundancy",
+    "high_comp_random_nstructures",
+    "high_ana_random_discard_upper",
+    "high_ana_random_discard_lower",
+    "high_ana_random_mode",
+    "high_ana_random_bins",
+    "low_ana_mode",
+    "low_comp_greedy_poolsize",
+    "low_ana_greedy_discard",
+    "low_ana_greedy_mode",
+    "low_ana_greedy_bins",
+    "low_comp_nn_k",
+    "low_ana_nn_discard",
+    "low_ana_nn_mode",
+    "low_ana_nn_bins",
+    "plot",
+    "rmsd1",
+    "rmsd2",
+    "specificity"
+  ],
+  "transformers": {
+    "calc_greedy": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_greedy"
+      }
+    },
+    "calc_nn": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_nn"
+      }
+    },
+    "calc_random": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_random"
+      }
+    },
+    "calc_specificity": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_specificity"
+      }
+    },
+    "calc_threshold": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer calc_threshold"
+      }
+    },
+    "do_run": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer do_run"
+      }
+    },
+    "fit_nn": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer fit_nn"
+      }
+    },
+    "load_pdb": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer load_pdb"
+      }
+    },
+    "validate_cost": {
+      "component": "transformer-status",
+      "params": {
+        "title": "Transformer validate_cost"
+      }
+    }
+  }
+}

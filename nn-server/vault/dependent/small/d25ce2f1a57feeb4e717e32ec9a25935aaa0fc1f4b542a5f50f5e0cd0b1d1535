@@ -1,0 +1,3 @@
+log(N)² = 359.88 * RMSD + -435.87
+RMSD = 2.778679e-03 * log(N)² + 1.211
+RMSD 1 is 4.30 orders of magnitude more specific than RMSD 2

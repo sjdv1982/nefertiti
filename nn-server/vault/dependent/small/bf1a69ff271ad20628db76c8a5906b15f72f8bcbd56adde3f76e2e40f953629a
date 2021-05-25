@@ -1,0 +1,20 @@
+{
+  "package": {
+    "celltype": "plain",
+    "help": "Python package dict, to be set as the code attribute of a Module",
+    "io": "output",
+    "type": "cell"
+  },
+  "package_dirdict": {
+    "celltype": "plain",
+    "help": "Dict containing all package code\nas obtained by mounting the package directory as a plain",
+    "io": "input",
+    "type": "cell"
+  },
+  "package_name": {
+    "celltype": "str",
+    "default": "",
+    "help": "Package name, if absolute imports are used",
+    "type": "value"
+  }
+}

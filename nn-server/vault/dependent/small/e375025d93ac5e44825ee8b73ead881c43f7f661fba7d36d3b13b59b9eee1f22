@@ -1,0 +1,6 @@
+{
+  "run_greedy": false,
+  "run_nn": false,
+  "run_random": true,
+  "run_threshold": true
+}

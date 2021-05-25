@@ -1,0 +1,1 @@
+"log(N)\u00b2 = 332.10 * RMSD + -382.83\nRMSD = 3.011147e-03 * log(N)\u00b2 + 1.153\nRMSD 1 is below the lowest RMSD"
