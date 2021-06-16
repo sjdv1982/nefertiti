@@ -69,7 +69,8 @@ def write_pdb_atom(atom) -> str:
 #/adapted
 
 def write_pdb(struc: np.ndarray) -> str:
-    from . import parse_pdb
+    ### from . import parse_pdb
+    import parse_pdb
     assert struc.dtype == parse_pdb.atomic_dtype
     assert struc.ndim == 1
     pdb = ""
@@ -92,7 +93,8 @@ def build_pdb_backbone(
     assert len(struc) < 10000
     if sequence is not None:
         assert len(sequence) == len(struc)
-    from . import parse_pdb
+    ### from . import parse_pdb
+    import parse_pdb
     newstruc = np.zeros(
         (len(struc), len(bb_atoms)),
         parse_pdb.atomic_dtype
@@ -149,3 +151,12 @@ def build_pdb_fragment_backbone(
         )
     return atoms
     
+
+if __name__ == "__main__":
+    import sys
+    npy_file = sys.argv[1]
+    outfile = sys.argv[2]
+    struc = np.load(npy_file)
+    pdb_data = write_pdb(struc)
+    with open(outfile, "w") as f:
+        f.write(pdb_data)
