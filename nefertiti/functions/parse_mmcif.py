@@ -20,7 +20,7 @@ atomic_dtype = [
     ("name", "S4"),
     ("altloc","S1"),
     ("resname", "S3"),            
-    ("chain","S1"),
+    ("chain","S4"),
     ("index", 'uint32'),
     ("icode", "S1"), 
     ("resid", 'uint16'),            
@@ -35,11 +35,16 @@ atomic_dtype = [
 
 atomic_dtype = np.dtype(atomic_dtype, align=True)
 
-def parse_mmcif(mmcif_data: str) -> np.ndarray:
+def parse_mmcif(mmcif_data: str, auth_chains=True, auth_residues=True) -> np.ndarray:
     
     mmcif_obj = StringIO(mmcif_data)
     
-    p = Bio.PDB.MMCIFParser()
+    try:
+        p = Bio.PDB.MMCIFParser(auth_chains=auth_chains, auth_residues=auth_residues)
+    except TypeError:
+        if auth_residues is not True or auth_chains is not True:
+            raise TypeError("auth_residues / auth_chains is not supported in your version of Biopython")
+        p = Bio.PDB.MMCIFParser()
     struc = p.get_structure("PDB", mmcif_obj)
     natoms = len(list(struc.get_atoms()))        
     atomstate = np.zeros(natoms,dtype=atomic_dtype)
@@ -102,29 +107,30 @@ def get_backbone(struc: np.ndarray, backbone_atoms: List[str]) -> np.ndarray:
         result[:, snr] = s
     return result
 
+code = {
+    "ALA": "A",
+    "CYS": "C",
+    "ASP": "D",
+    "GLU": "E",
+    "PHE": "F",
+    "GLY": "G",
+    "HIS": "H",
+    "ILE": "I",
+    "LYS": "K",
+    "LEU": "L",
+    "MET": "M",
+    "ASN": "N",
+    "PRO": "P",
+    "GLN": "Q",
+    "ARG": "R",
+    "SER": "S",
+    "THR": "T",
+    "VAL": "V",
+    "TRP": "W",
+    "TYR": "Y",
+}
+
 def get_sequence(struc:np.ndarray) -> str:
-    code = {
-        "ALA": "A",
-        "CYS": "C",
-        "ASP": "D",
-        "GLU": "E",
-        "PHE": "F",
-        "GLY": "G",
-        "HIS": "H",
-        "ILE": "I",
-        "LYS": "K",
-        "LEU": "L",
-        "MET": "M",
-        "ASN": "N",
-        "PRO": "P",
-        "GLN": "Q",
-        "ARG": "R",
-        "SER": "S",
-        "THR": "T",
-        "VAL": "V",
-        "TRP": "W",
-        "TYR": "Y",
-    }
     result = ""
     assert struc.ndim == 1
     res = None

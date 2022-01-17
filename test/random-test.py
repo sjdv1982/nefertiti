@@ -8,8 +8,8 @@ logging.getLogger("nefertiti").setLevel(logging.INFO)
 """
 
 fraglib = np.load("../fraglib/dummy.npy")
-refe = np.load("../benchmarks/octacommon-aligned.npy")[0]
-#refe = np.load("../benchmarks/dodecacommon-aligned.npy")[13]
+#refe = np.load("../benchmarks/octacommon-aligned.npy")[0] # 3 mins
+refe = np.load("../benchmarks/dodecacommon-aligned.npy")[13] # 10 mins
 _, rmsds = randombest_backbone_rmsd(
     refe, fraglib,
     format="npy",

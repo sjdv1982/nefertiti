@@ -5,6 +5,9 @@ import logging
 logging.basicConfig()
 logging.getLogger("nefertiti").setLevel(logging.INFO)
 
+# unlike random-test.py, this is purely brute force! (use_downstream_best=False)
+# 11m42s for full trypsin, only top 1 % (top 0.01 % for random-test.py)
+
 fraglib = np.load("../fraglib/dummy.npy")
 refe = open("1AVXA-unbound-heavy.pdb").read()
 #refe = "\n".join(refe.splitlines()[:99])
