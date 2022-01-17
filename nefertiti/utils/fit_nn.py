@@ -19,6 +19,10 @@ def format_fn(tick_val, tick_pos):
         size = logN2_to_size(tick_val)
         if size < 100000:
             return str(int(size))
+        elif np.isinf(size):
+            exp = np.sqrt(tick_val) / np.log(10)                        
+            s = "$1.00\cdot 10^{%d}$" % np.floor(exp)
+            return s
         else:    
             s = ("$%3.2e}$" % size).replace("e+0", "e+").replace("e+", "\cdot 10^{")
             return s
@@ -50,10 +54,9 @@ def fit(x, y):
 def fit_nn(parameters, data, nfraglib, fraglen):
 
     nres = parameters["nresidues"]
-    maxrmsd = 10
+    maxrmsd = 3
+    xlim_margin=1.05
     threshold = data.get("threshold")
-    if threshold is not None:
-        maxrmsd = threshold
 
     fig = plt.figure()
     fig.set_figwidth(14*0.6)
@@ -62,36 +65,12 @@ def fit_nn(parameters, data, nfraglib, fraglen):
 
     ax.yaxis.set_major_formatter(FuncFormatter(format_fn))
     log_maxsize = np.log(nfraglib) * (nres - fraglen + 1)
+    upper = log_maxsize**2 * 1.05
     ax.plot(
         [0, 1000], [log_maxsize**2, log_maxsize**2], 
         color="red",
-        linestyle="dashed"
+        linestyle="dashed",linewidth=3
     )
-    upper = log_maxsize**2 * 1.05
-    ax.set_ylim([0, upper])
-    oom = np.sqrt(upper)/np.log(10)
-    best = None
-    for inc in 1,2,5:
-        ticks1 = oom/inc
-        scale = 10**(np.floor(np.log(ticks1)/np.log(10)) - 1)
-        ticks2 = int(ticks1 / scale) + 1
-        if ticks2 >= 10:      
-            if best is None or ticks2 < best[0]:
-                best = ticks2, scale *  inc
-    yticks0 = np.arange(best[0]) * best[1]
-    if best[0] < 20:
-        skip = int(max(10 - 0.7 * (20-best[0]), 0))
-    else:
-        skip = int(0.5 * best[0])
-    yticks0 = yticks0[:1].tolist() + yticks0[skip:].tolist()
-    yticks = [(t*np.log(10))**2 for t in yticks0]
-    
-    pos = ax.get_position()
-    pos = [pos.x0 + 0.05, pos.y0+0.03,  pos.width, pos.height] 
-    ax.set_position(pos)
-    ax.set_ylabel("Cumulative ensemble size", size = "x-large")
-    ax.set_yticks(yticks)
-    ax.set_xlabel("RMSD (Å)", size="x-large")
 
     fit_points = []
 
@@ -117,6 +96,7 @@ def fit_nn(parameters, data, nfraglib, fraglen):
         show_threshold = False
 
     if show_threshold:
+        maxrmsd = threshold
         best_of_factor = phigh1["threshold"]["best_of_factor"]
         tlog = log_maxsize - np.log(best_of_factor)
         if show_random:
@@ -129,12 +109,12 @@ def fit_nn(parameters, data, nfraglib, fraglen):
                 discard_upper = phigh2["random"].get("discard_upper")
                 if discard_upper:
                     discard_upper = min(discard_upper, len(x)-1)
-                    ax.plot(x[-discard_upper:], y[-discard_upper:], color="red")
+                    ax.plot(x[-discard_upper:], y[-discard_upper:], color="blue", linestyle="dashed",linewidth=3)
                     x = x[:-discard_upper]
                     y = y[:-discard_upper]
                 discard_lower = phigh2["random"].get("discard_lower")
                 if discard_lower:
-                    ax.plot(x[:discard_lower], y[:discard_lower], color="red")
+                    ax.plot(x[:discard_lower], y[:discard_lower], color="blue", linestyle="dashed",linewidth=3)
                     discard_lower = min(discard_lower, len(x)-1)
                     x = x[discard_lower:]
                     y = y[discard_lower:]
@@ -143,17 +123,19 @@ def fit_nn(parameters, data, nfraglib, fraglen):
                     discard_lower,
                     -sample_log
                 )
+                """
                 size = 50 if len(xm) < 20 else 15
                 ax.scatter(
                     xm, ym, color="black", 
                     marker="x", s=size,
                 )
+                """
                 fit_points.append((xm, ym))
             
-            color = "blue" if high_fit_mode == "random" else "purple"
-            ax.plot(x, y, color=color)
-        color = "blue" if high_fit_mode == "threshold" else "purple"
-        ax.scatter([threshold], [tlog**2], color=color, marker="x",s=150)
+            color = "blue"
+            ax.plot(x, y, color=color,linewidth=3)
+        color = "blue"
+        ax.scatter([threshold], [tlog**2], color=color, marker="x",s=200)
         if high_fit_mode == "threshold":
             fit_points.append(([threshold], [tlog**2]))
     
@@ -187,7 +169,8 @@ def fit_nn(parameters, data, nfraglib, fraglen):
         nn_intercept = nn_rmsds[0]
         xmin = nn_intercept
         color = "blue" if low_fit_mode == "nn_intercept" else "green"
-        ax.scatter(nn_intercept, 1, color=color, marker="x", s=150,clip_on=False)
+        color = "red"
+        ax.scatter(nn_intercept, 1, color=color, marker="x", s=200,clip_on=False)
         if low_fit_mode == "nn_intercept":
             fit_points.append(([nn_intercept], [0]))
 
@@ -202,43 +185,63 @@ def fit_nn(parameters, data, nfraglib, fraglen):
         discard = plow2["greedy"].get("discard")
         if discard:
             if not show_nn:
-                ax.plot(x[:discard], y[:discard], color="red")
+                ax.plot(x[:discard], y[:discard], color="green")
             discard = min(discard, len(x)-1)
             x = x[discard:]
             y = y[discard:]
         else:
             discard = 0
-        if low_fit_mode == "greedy":
-            color = "blue"
-        else:
-            color = "purple"
         xm, ym = get_fitmarkers(
             x, y, plow2["greedy"], discard
         )
         if len(xm) > 1:
-            size = 50 if len(xm) < 20 else 10
-            if not show_nn:
-                ax.scatter(
-                    xm, ym, color="black", 
-                    marker="x", s=size,
-                )
+            if not show_threshold:
+                maxrmsd=xm[-1]
+                xlim_margin = 1.001
+                upper = ym[-1]*1.05
             a,b,c,p,q,r = fit(xm, ym)
             greedy_intercept = c
         else:
             greedy_intercept = xm[0]
-        if not show_nn:
-            ax.plot(x, y, color=color)
+        ax.plot(x, y, color="green", linewidth=10)
         ax.scatter(
             [greedy_intercept], [0], 
-            color=color, marker="x", s=150,
+            color="green", marker="x", s=200,
             clip_on=False,
         )
         if low_fit_mode == "greedy":
-            fit_points.append(([greedy_intercept], [0]))
+            if high_fit_mode == "no":
+                fit_points.append((xm, ym))
+            else:
+                fit_points.append(([greedy_intercept], [0]))
 
         if xmin is None or xmin > greedy_rmsds[0]:
             xmin = greedy_rmsds[0]
     
+    ax.set_ylim([0, upper])
+    oom = np.sqrt(upper)/np.log(10)
+    best = None
+    for inc in 1,2,5:
+        ticks1 = oom/inc
+        scale = 10**(np.floor(np.log(ticks1)/np.log(10)) - 1)
+        ticks2 = int(ticks1 / scale) + 1
+        if ticks2 >= 10:      
+            if best is None or ticks2 < best[0]:
+                best = ticks2, scale *  inc
+    yticks0 = np.arange(best[0]) * best[1]
+    if best[0] < 20:
+        skip = int(max(10 - 0.7 * (20-best[0]), 0))
+    else:
+        skip = int(0.5 * best[0])
+    yticks0 = yticks0[:1].tolist() + yticks0[skip:].tolist()
+    yticks = [(t*np.log(10))**2 for t in yticks0]
+    
+    pos = ax.get_position()
+    pos = [pos.x0 + 0.05, pos.y0+0.03,  pos.width, pos.height] 
+    ax.set_position(pos)
+    ax.set_ylabel("Cumulative ensemble size", size = "x-large")
+    ax.set_yticks(yticks)
+    ax.set_xlabel("RMSD (Å)", size="x-large")
 
     if show_nn:
         logn = np.log(np.arange(len(nn_rmsds))+1)
@@ -246,7 +249,7 @@ def fit_nn(parameters, data, nfraglib, fraglen):
         if low_fit_mode == "nn" and len(nn_rmsds) > 1:
             discard = plow2["near-native"].get("discard")
             if discard:
-                ax.plot(x[:discard], y[:discard], color="red")
+                ax.plot(x[:discard], y[:discard], color="red", linestyle="dotted", clip_on=False, linewidth=4)
                 discard = min(discard, len(x)-1)
                 x = x[discard:]
                 y = y[discard:]
@@ -255,17 +258,17 @@ def fit_nn(parameters, data, nfraglib, fraglen):
             xm, ym = get_fitmarkers(
                 x, y, plow2["near-native"],discard
             )
-            size=150 if len(xm) == 1 else (50 if len(xm) < 20 else 15)
+            size=200 if len(xm) == 1 else (50 if len(xm) < 20 else 15)
+            """
             ax.scatter(
                 xm, ym, color="black", 
                 marker="x", s=size,
                 clip_on=False
             )
+            """
             fit_points.append((xm, ym))
-            color = "blue"
-        else:
-            color = "green"
-        ax.plot(x, y, color=color)
+        color = "red"
+        ax.plot(x, y, color=color,linewidth=3)
 
     result = {}
     
@@ -283,7 +286,7 @@ def fit_nn(parameters, data, nfraglib, fraglen):
             ax.plot(
                 [c, maxrmsd], [0, fit_size],
                 color="black",
-                linestyle="dotted"
+                linestyle="dotted",linewidth=5
             )
             equation = {
                 "a": a,
@@ -301,7 +304,7 @@ def fit_nn(parameters, data, nfraglib, fraglen):
 
     if xmin is None:
         xmin = 0
-    ax.set_xlim(left=xmin*0.95, right=maxrmsd*1.05)
+    ax.set_xlim(left=xmin/xlim_margin, right=maxrmsd*xlim_margin)
 
     plotobj = BytesIO()
     plt.savefig(plotobj)    

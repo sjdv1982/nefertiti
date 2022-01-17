@@ -59,8 +59,14 @@ def load_parameters(name):
         return
     p = [pp for pp in testdata if pp["name"] == name][0]
     parameters = p.copy()
+
+    has_nn = "near-native" in parameters["low-rmsd"]["computation"]
+
     high = {}
-    high["mode"] = "random"
+    if not has_nn:
+        high["mode"] = "threshold,random"
+    else:    
+        high["mode"] = "random"
     high["mode_@1"] = "no"
     high["mode_@2"] = "no,threshold"
     high["mode_@3"] = "no,random"
@@ -69,7 +75,7 @@ def load_parameters(name):
     high["mode_@6"] = "random"
     high["random"] = {
         "discard_upper": 0,
-        "discard_lower": 0,
+        "discard_lower": 20,
         "mode": "binning",
         "mode_@1": "binning",
         "mode_@2": "lowest_point",
@@ -80,7 +86,6 @@ def load_parameters(name):
     parameters["high-rmsd"]["analysis"] = high
 
     low = {}
-    has_nn = "near-native" in parameters["low-rmsd"]["computation"]
     c = parameters["low-rmsd"]["computation"]
     c["greedy"]["poolsize"] = 500
     c["greedy"]["poolsize_@1"] = 100
@@ -92,7 +97,9 @@ def load_parameters(name):
         c["near-native"]["k_@1"] = 1
         c["near-native"]["k_@2"] = 10000
         c["near-native"]["k_@3"] = 100000
-    low["mode"] = "nn"
+        low["mode"] = "nn,greedy"
+    else:
+        low["mode"] = "greedy"
     low["mode_@1"] = "no"
     low["mode_@2"] = "no,greedy"
     if has_nn:
@@ -109,7 +116,7 @@ def load_parameters(name):
         low["mode_@A"] = "nn"
         low["mode_@B"] = "nn,greedy"
     low["greedy"] = {
-        "discard": 0,
+        "discard": 20,
         "mode": "binning",
         "mode_@1": "binning",
         "mode_@2": "lowest_point",
@@ -117,7 +124,7 @@ def load_parameters(name):
     }
     if has_nn:
         low["near-native"] = {
-            "discard": 0,
+            "discard": 20,
             "mode": "binning",
             "mode_@1": "binning",
             "mode_@2": "lowest_point",
@@ -155,6 +162,15 @@ def load_data(greedy=True, random=True, threshold=True, nn_intercept=True, nn=Tr
             data["random"] = rmsds
     ctx.data = data
 
-load_parameters("octa1")
-ctx.compute(0.1)
-load_data()        
+import os
+for nam in "octa1", "octa4", "octa17", "dodeca1", "dodeca14", "casp14", "trypsin":
+    load_parameters(nam)
+    ctx.compute(0.1)
+    if nam in ("casp14", "trypsin"):
+        load_data(nn_intercept=False, nn=False)
+    else:
+        load_data()    
+    ctx.compute()
+    print(nam)       
+    os.system("cp plot.png figures/%s.png" % nam)
+    os.system("cp equation.json figures/equation-%s.json" % nam)
