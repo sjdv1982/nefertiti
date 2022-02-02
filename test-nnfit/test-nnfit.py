@@ -98,6 +98,7 @@ def load_parameters(name):
         c["near-native"]["k_@2"] = 10000
         c["near-native"]["k_@3"] = 100000
         low["mode"] = "nn,greedy"
+        #c["greedy"]["poolsize"] = 1000
     else:
         low["mode"] = "greedy"
     low["mode_@1"] = "no"
@@ -171,6 +172,7 @@ for nam in "octa1", "octa4", "octa17", "dodeca1", "dodeca14", "casp14", "trypsin
     else:
         load_data()    
     ctx.compute()
+    print(ctx.fit_nn.exception)
     print(nam)       
     os.system("cp plot.png figures/%s.png" % nam)
     os.system("cp equation.json figures/equation-%s.json" % nam)
