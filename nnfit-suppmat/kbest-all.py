@@ -50,5 +50,5 @@ def run(d):
 if __name__ == "__main__":
     fraglib = np.load("../fraglib/dummy.npy")
     import multiprocessing
-    pool = multiprocessing.Pool(8) # some parallelization is already inside the Nefertiti code
+    pool = multiprocessing.Pool(16) # some parallelization is already inside the Nefertiti code
     pool.map(run, data)  
