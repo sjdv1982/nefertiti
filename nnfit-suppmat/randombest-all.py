@@ -66,6 +66,10 @@ def run(d):
     np.save(outpattern + "-traj.npy", trajectories)
     np.save(outpattern + "-rmsd.npy", rmsds)
     print("/" + d["name"])
+    del rmsds, trajectories
+    import gc
+    gc.collect()
+    return
 
 if __name__ == "__main__":
     fraglib = np.load("../fraglib/dummy.npy")

@@ -42,6 +42,10 @@ def run(d):
     outpattern = "data/kbest-" + d["name"] + "-k-%d" % k
     np.save(outpattern + "-traj.npy", trajectories)
     np.save(outpattern + "-rmsd.npy", rmsds)
+    del rmsds, trajectories
+    import gc
+    gc.collect()
+    return
 
 if __name__ == "__main__":
     fraglib = np.load("../fraglib/dummy.npy")
