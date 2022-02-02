@@ -105,6 +105,6 @@ def run(d):
     print("/" + d["name"])
 
 if __name__ == "__main__":
-    import multiprocessing
-    pool = multiprocessing.Pool()
-    pool.map(run, data)  
+import multiprocessing
+pool = multiprocessing.Pool()
+pool.map(run, data)  
