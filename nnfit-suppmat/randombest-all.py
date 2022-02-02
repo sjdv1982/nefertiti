@@ -1,68 +1,31 @@
-import numpy as np
-from nefertiti.protocols.randombest import randombest_backbone_rmsd
+if __name__ == "__main__":
+    import numpy as np
+    from nefertiti.protocols.randombest import randombest_backbone_rmsd
 
 ntraj = 1000
-data = [
-    {
-        "name": "octa1",        
+data = []
+for n in range(100):
+    d = {
+        "name": "octa{}".format(n+1),        
         "file": "../benchmarks/octacommon-aligned.npy",
-        "index": 1,
+        "index": n,
         "format": "npy",
         "best_of_factor": 1000,
         "redundancy": 200,
-    },
-    {
-        "name": "octa4",        
-        "file": "../benchmarks/octacommon-aligned.npy",
-        "index": 3,
-        "format": "npy",
-        "best_of_factor": 1000,
-        "redundancy": 200,
-    },
-    {
-        "name": "octa17",        
-        "file": "../benchmarks/octacommon-aligned.npy",
-        "index": 16,
-        "format": "npy",
-        "best_of_factor": 1000,
-        "redundancy": 200,
-    },
+    }
+    data.append(d)
 
-    {
-        "name": "dodeca1",        
+for n in range(100):
+    d = {
+        "name": "dodeca{}".format(n+1),
         "file": "../benchmarks/dodecacommon-aligned.npy",
-        "index": 0,
+        "index": n,
         "format": "npy",
         "best_of_factor": 1000,
         "redundancy": 200,
-    },
-    {
-        "name": "dodeca14",        
-        "file": "../benchmarks/dodecacommon-aligned.npy",
-        "index": 13,
-        "format": "npy",
-        "best_of_factor": 1000,
-        "redundancy": 200,
-    },
+    }
+    data.append(d)
 
-    {
-        "name": "casp14",        
-        "file": "casp14-T1033-D1.pdb",
-        "format": "pdb",
-        "best_of_factor": 100,
-        "redundancy": 200,
-    },
-
-    {
-        "name": "trypsin",        
-        "file": "1AVXA-unbound-heavy.pdb",
-        "format": "pdb",
-        "best_of_factor": 100,
-        "redundancy": 200,
-    },
-]
-
-fraglib = np.load("../fraglib/dummy.npy")
 
 def run(d):
     f = d["file"]
@@ -105,6 +68,7 @@ def run(d):
     print("/" + d["name"])
 
 if __name__ == "__main__":
+    fraglib = np.load("../fraglib/dummy.npy")
     import multiprocessing
-    pool = multiprocessing.Pool()
+    pool = multiprocessing.Pool(8) # some parallelization is already inside the Nefertiti code
     pool.map(run, data)  
