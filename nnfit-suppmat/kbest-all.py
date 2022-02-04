@@ -1,4 +1,5 @@
 if __name__ == "__main__":
+    import os
     import numpy as np
     from nefertiti.protocols.kbest import kbest_backbone_rmsd
 
@@ -23,6 +24,10 @@ for n in range(100):
 
 k = 100000  # for smaller k, just take the top
 def run(d):
+    outpattern = "data/kbest-" + d["name"] + "-k-%d" % k
+    if os.path.exists(outpattern + "-traj.npy"):
+        return
+
     f = d["file"]
     if d["format"] == "pdb":
         refe = open(f).read()
@@ -39,7 +44,6 @@ def run(d):
 
     print("/" + d["name"])
     assert len(trajectories) == len(rmsds) == k
-    outpattern = "data/kbest-" + d["name"] + "-k-%d" % k
     np.save(outpattern + "-traj.npy", trajectories)
     np.save(outpattern + "-rmsd.npy", rmsds)
     del rmsds, trajectories
