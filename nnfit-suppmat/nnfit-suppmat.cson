@@ -1,0 +1,54 @@
+[
+  {
+    "name": "octa",
+    "nresidues": 8
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+  {
+    "name": "dodeca",
+    "nresidues": 12
+    "high-rmsd": {
+      "computation": {
+        "threshold": {
+          "best_of_factor": 1000,
+          "redundancy": 200
+        }
+        "random": {
+            "nstructures": 1000
+        }
+      }
+    },
+    "low-rmsd": {
+        "computation": {
+            "greedy": {
+                "poolsize": 0
+            }
+            "near-native": {
+                "k": 0
+            }
+        }
+    }
+  },
+
+]
