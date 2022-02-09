@@ -1,0 +1,28 @@
+HEADER   
+ATOM    259  N   ILE A  31      11.044  14.520   2.448               
+ATOM    260  CA  ILE A  31      11.073  15.074   3.780               
+ATOM    261  C   ILE A  31       9.859  14.565   4.552               
+ATOM    262  O   ILE A  31       8.743  15.049   4.365               
+ATOM    263  CB  ILE A  31      11.061  16.608   3.738               
+ATOM    264  CG1 ILE A  31      12.232  17.112   2.873               
+ATOM    265  CG2 ILE A  31      11.142  17.158   5.153               
+ATOM    266  CD1 ILE A  31      12.317  18.645   2.739               
+ATOM    267  N   GLU A  32      10.089  13.574   5.407               
+ATOM    268  CA  GLU A  32       9.041  12.968   6.234               
+ATOM    269  C   GLU A  32       8.853  13.688   7.580               
+ATOM    270  O   GLU A  32       9.816  13.904   8.321               
+ATOM    271  CB  GLU A  32       9.376  11.487   6.471               
+ATOM    272  CG  GLU A  32       8.550  10.777   7.531               
+ATOM    273  CD  GLU A  32       8.691   9.243   7.467               
+ATOM    274  OE1 GLU A  32       9.817   8.735   7.243               
+ATOM    275  OE2 GLU A  32       7.671   8.543   7.654               
+ATOM    276  N   GLY A  33       7.613  14.063   7.884               
+ATOM    277  CA  GLY A  33       7.330  14.729   9.140               
+ATOM    278  C   GLY A  33       6.972  16.194   9.005               
+ATOM    279  O   GLY A  33       7.666  16.957   8.326               
+ATOM    280  N   ALA A  34       5.895  16.593   9.673               
+ATOM    281  CA  ALA A  34       5.419  17.969   9.634               
+ATOM    282  C   ALA A  34       6.429  18.989  10.150               
+ATOM    283  O   ALA A  34       6.533  20.101   9.610               
+ATOM    284  CB  ALA A  34       4.127  18.087  10.417               
+TER

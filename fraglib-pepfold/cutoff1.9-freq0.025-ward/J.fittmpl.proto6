@@ -1,0 +1,51 @@
+HEADER   
+ATOM     48  N   SER A   6      12.518  15.490   3.705               
+ATOM     49  CA  SER A   6      11.194  14.908   3.566               
+ATOM     50  C   SER A   6      10.843  14.101   4.818               
+ATOM     51  O   SER A   6      11.726  13.550   5.474               
+ATOM     52  CB  SER A   6      11.110  14.021   2.322               
+ATOM     53  OG  SER A   6      11.725  12.752   2.528               
+ATOM     54      SER A   6      13.255  14.832   3.862               
+ATOM     55  A   SER A   6      10.517  15.754   3.454               
+ATOM     56  B2  SER A   6      10.065  13.877   2.049               
+ATOM     57  B3  SER A   6      11.592  14.526   1.484               
+ATOM     58  G   SER A   6      12.474  12.838   3.185               
+ATOM     59  N   GLY A   7       9.552  14.056   5.111               
+ATOM     60  CA  GLY A   7       9.073  13.326   6.273               
+ATOM     61  C   GLY A   7       8.156  14.200   7.130               
+ATOM     62  O   GLY A   7       7.606  15.189   6.648               
+ATOM     63      GLY A   7       8.840  14.507   4.572               
+ATOM     64  A2  GLY A   7       8.535  12.435   5.950               
+ATOM     65  A3  GLY A   7       9.921  12.987   6.869               
+ATOM     66  N   MET A   8       8.018  13.803   8.387               
+ATOM     67  CA  MET A   8       7.177  14.537   9.316               
+ATOM     68  C   MET A   8       7.631  14.315  10.760               
+ATOM     69  O   MET A   8       8.284  13.318  11.062               
+ATOM     70  CB  MET A   8       5.725  14.081   9.160               
+ATOM     71  CG  MET A   8       5.622  12.556   9.207               
+ATOM     72  SD  MET A   8       4.348  11.994   8.090               
+ATOM     73  CE  MET A   8       2.897  12.375   9.057               
+ATOM     74      MET A   8       8.469  12.997   8.770               
+ATOM     75  A   MET A   8       7.294  15.587   9.049               
+ATOM     76  B2  MET A   8       5.117  14.515   9.954               
+ATOM     77  B3  MET A   8       5.325  14.448   8.216               
+ATOM     78  G2  MET A   8       6.579  12.109   8.935               
+ATOM     79  G3  MET A   8       5.395  12.229  10.223               
+ATOM     80  E1  MET A   8       3.049  13.316   9.585               
+ATOM     81  E2  MET A   8       2.034  12.464   8.397               
+ATOM     82  E3  MET A   8       2.723  11.578   9.779               
+ATOM     83  N   THR A   9       7.267  15.261  11.613               
+ATOM     84  CA  THR A   9       7.629  15.180  13.018               
+ATOM     85  C   THR A   9       6.408  14.806  13.862               
+ATOM     86  O   THR A   9       5.574  15.657  14.166               
+ATOM     87  CB  THR A   9       8.259  16.515  13.421               
+ATOM     88  OG1 THR A   9       9.622  16.388  13.024               
+ATOM     89  CG2 THR A   9       8.329  16.695  14.939               
+ATOM     90      THR A   9       6.735  16.069  11.359               
+ATOM     91  A   THR A   9       8.358  14.381  13.140               
+ATOM     92  B   THR A   9       7.737  17.349  12.954               
+ATOM     93  G1  THR A   9      10.051  17.290  12.982               
+ATOM     94  G21 THR A   9       7.570  17.410  15.256               
+ATOM     95  G22 THR A   9       8.151  15.736  15.428               
+ATOM     96  G23 THR A   9       9.316  17.065  15.217               
+TER

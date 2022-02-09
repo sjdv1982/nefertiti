@@ -1,0 +1,32 @@
+HEADER   
+ATOM    526  N   LEU A  69      10.385  14.573   2.576               
+ATOM    527  CA  LEU A  69      11.081  15.053   3.765               
+ATOM    528  C   LEU A  69      10.616  14.428   5.069               
+ATOM    529  O   LEU A  69      11.210  14.683   6.118               
+ATOM    530  CB  LEU A  69      10.958  16.582   3.871               
+ATOM    531  CG  LEU A  69      11.591  17.357   2.720               
+ATOM    532  CD1 LEU A  69      11.346  18.861   2.886               
+ATOM    533  CD2 LEU A  69      13.089  17.044   2.685               
+ATOM    534  N   GLY A  70       9.561  13.620   5.010               
+ATOM    535  CA  GLY A  70       9.052  13.007   6.228               
+ATOM    536  C   GLY A  70       8.219  14.001   7.022               
+ATOM    537  O   GLY A  70       7.676  14.941   6.447               
+ATOM    538  N   LYS A  71       8.117  13.813   8.336               
+ATOM    539  CA  LYS A  71       7.312  14.711   9.161               
+ATOM    540  C   LYS A  71       7.956  16.063   9.370               
+ATOM    541  O   LYS A  71       9.065  16.172   9.881               
+ATOM    542  CB  LYS A  71       6.960  14.060  10.507               
+ATOM    543  CG  LYS A  71       6.022  12.835  10.395               
+ATOM    544  CD  LYS A  71       4.653  13.192   9.746               
+ATOM    545  CE  LYS A  71       3.631  12.023   9.764               
+ATOM    546  NZ  LYS A  71       3.949  10.878   8.825               
+ATOM    547  N   LYS A  72       7.234  17.102   8.994               
+ATOM    548  CA  LYS A  72       7.736  18.463   9.114               
+ATOM    549  C   LYS A  72       8.334  18.852  10.470               
+ATOM    550  O   LYS A  72       9.414  19.451  10.534               
+ATOM    551  CB  LYS A  72       6.640  19.459   8.721               
+ATOM    552  CG  LYS A  72       7.092  20.900   8.763               
+ATOM    553  CD  LYS A  72       5.976  21.811   8.306               
+ATOM    554  CE  LYS A  72       6.360  23.262   8.464               
+ATOM    555  NZ  LYS A  72       7.583  23.566   7.686               
+TER
