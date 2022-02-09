@@ -7,6 +7,12 @@ This file is part of the Nefertiti project.
 """
 import numpy as np
 from typing import List
+import importlib
+def _import(name):
+    name2 = name.lstrip(".")
+    if name2 not in globals():
+        mod = importlib.import_module(name, __name__) 
+        globals()[name2] = mod
 
 code = {
   "ALA": "A",
@@ -69,14 +75,24 @@ def write_pdb_atom(atom) -> str:
 #/adapted
 
 def write_pdb(struc: np.ndarray) -> str:
-    ### from . import parse_pdb
-    import parse_pdb
+    _import("..parse_pdb")
     assert struc.dtype == parse_pdb.atomic_dtype
     assert struc.ndim == 1
     pdb = ""
     for atom in struc:
         line = write_pdb_atom(atom)
         pdb += line
+    return pdb
+
+def write_multi_pdb(struc: np.ndarray) -> str:
+    _import("..parse_pdb")
+    assert struc.dtype == parse_pdb.atomic_dtype
+    assert struc.ndim == 2
+    pdb = ""
+    for n, substruc in enumerate(struc):
+        pdb += "MODEL {}\n".format(n+1)
+        pdb += write_pdb(substruc)
+        pdb += "ENDMDL\n"
     return pdb
 
 def build_pdb_backbone(
@@ -87,14 +103,13 @@ def build_pdb_backbone(
     atomindex_offset=0,
     resid_offset=0,
 ) -> np.ndarray:
+    _import("..parse_pdb")
     assert struc.ndim == 3, struc.shape
     assert struc.shape[1] == len(bb_atoms), struc.shape
     assert struc.shape[2] in (3,4), struc.shape
     assert len(struc) < 10000
     if sequence is not None:
         assert len(sequence) == len(struc)
-    ### from . import parse_pdb
-    import parse_pdb
     newstruc = np.zeros(
         (len(struc), len(bb_atoms)),
         parse_pdb.atomic_dtype
@@ -127,6 +142,7 @@ def build_pdb_fragment_backbone(
     bb_atoms: List[str],
     sequence:str = None
 ):
+    _import("..parse_pdb")
     assert struc.ndim == 4
     assert struc.shape[2] == len(bb_atoms)
     assert struc.shape[3] in (3,4)
@@ -138,7 +154,6 @@ def build_pdb_fragment_backbone(
     offset = 10 if fraglen < 10 else 100
     assert len(sequence) * offset < 10000
 
-    from . import parse_pdb
     atoms = np.empty(nfrag * fraglen * len(bb_atoms), parse_pdb.atomic_dtype)
     for n in range(nfrag):
         stride = fraglen * len(bb_atoms)
@@ -154,6 +169,7 @@ def build_pdb_fragment_backbone(
 
 if __name__ == "__main__":
     import sys
+    import parse_pdb
     npy_file = sys.argv[1]
     outfile = sys.argv[2]
     struc = np.load(npy_file)
