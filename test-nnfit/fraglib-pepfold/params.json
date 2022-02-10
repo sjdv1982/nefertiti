@@ -1,0 +1,58 @@
+{
+  "high-rmsd": {
+    "analysis": {
+      "mode": "threshold,random",
+      "mode_@1": "no",
+      "mode_@2": "no,threshold",
+      "mode_@3": "no,random",
+      "mode_@4": "threshold",
+      "mode_@5": "threshold,random",
+      "mode_@6": "random",
+      "random": {
+        "bins": 50,
+        "discard_lower": 20,
+        "discard_upper": 0,
+        "mode": "binning",
+        "mode_@1": "binning",
+        "mode_@2": "lowest_point",
+        "mode_@3": "midpoint",
+        "mode_@4": "highest_point"
+      }
+    },
+    "computation": {
+      "random": {
+        "nstructures": 1000
+      },
+      "threshold": {
+        "best_of_factor": 100,
+        "redundancy": 200
+      }
+    }
+  },
+  "low-rmsd": {
+    "analysis": {
+      "greedy": {
+        "bins": 50,
+        "discard": 20,
+        "mode": "binning",
+        "mode_@1": "binning",
+        "mode_@2": "lowest_point"
+      },
+      "mode": "greedy",
+      "mode_@1": "no",
+      "mode_@2": "no,greedy",
+      "mode_@3": "greedy"
+    },
+    "computation": {
+      "greedy": {
+        "poolsize": 500,
+        "poolsize_@1": 100,
+        "poolsize_@2": 200,
+        "poolsize_@3": 500,
+        "poolsize_@4": 1000
+      }
+    }
+  },
+  "name": "trypsin",
+  "nresidues": 223
+}
