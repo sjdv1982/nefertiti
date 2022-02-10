@@ -30,7 +30,7 @@ ctx.fit_nn = Transformer()
 ctx.fit_nn.code.mount("fit_nn.py")
 ctx.fit_nn.parameters = ctx.parameters
 ctx.fit_nn.data = ctx.data
-ctx.fit_nn.nfraglib = 111
+ctx.fit_nn.nfraglib = 33
 ctx.fit_nn.fraglen = 4
 ctx.fitted_nn = Cell()
 ctx.fitted_nn = ctx.fit_nn
