@@ -1,9 +1,9 @@
 """
 Answer the question:
-if you sample around structure A, that has a certain RMSD X from structure B,
- how many of the samples are closer to B than X?
+if you sample around structure A, that has a certain RMSD R from structure B,
+ how many of the samples are closer to B than R?
 
-How many of them are closer than 0.99 * X, 0.95 * X, etc?
+How many of them are closer than 0.99 * R, 0.95 * R, etc?
 
 How does this scale with the sampling distance around structure A?
 """
@@ -23,33 +23,32 @@ assert os.path.exists(rmsdfile), rmsdfile
 rmsd_original = np.load(rmsdfile)
 
 refe_array = sys.argv[2]  # e.g. ../benchmarks/octacommon-aligned.npy
-refe_index = int(sys.argv[3])  # structure A. position in refe_array, starting at 1. "7" for octa7
-alt_refe_index = int(sys.argv[4])  # structure B
+structure_A_index = int(sys.argv[3])  # structure A. position in refe_array, starting at 1. "7" for octa7
+structure_B_index = int(sys.argv[4])  # structure B
 
 fraglib = sys.argv[5] # e.g. ../fraglib/dummy.npy
 refe_array = np.load(refe_array)
-refe_struc0 = refe_array[refe_index-1]  # (nfrags, 4, 3) backbone coordinates
+structure_A_0 = refe_array[structure_A_index-1]  # (nfrags, 4, 3) backbone coordinates
 
-alt_refe_struc0 = refe_array[alt_refe_index-1]  # (nfrags, 4, 3) backbone coordinates
+structure_B_0 = refe_array[structure_B_index-1]  # (nfrags, 4, 3) backbone coordinates
 
 traj = np.load(trajfile)
 fraglib = np.load(fraglib)
 
 fraglen = fraglib.shape[1]
-_, refe_struc, _, _ = prepare_backbone(refe_struc0, fraglen) # (nfrags, fraglen, 4, 3)
-refe_struc = refe_struc.reshape(-1, 4)[:, :3]
-_, alt_refe_struc, _, _ = prepare_backbone(alt_refe_struc0, fraglen) # (nfrags, fraglen, 4, 3)
-alt_refe_struc = alt_refe_struc.reshape(-1, 4)[:, :3]
+_, structure_A, _, _ = prepare_backbone(structure_A_0, fraglen) # (nfrags, fraglen, 4, 3)
+structure_A = structure_A.reshape(-1, 4)[:, :3]
+_, structure_B, _, _ = prepare_backbone(structure_B_0, fraglen) # (nfrags, fraglen, 4, 3)
+structure_B = structure_B.reshape(-1, 4)[:, :3]
 
-_, rmsd_X = superimpose(refe_struc, alt_refe_struc)
+_, rmsd_R = superimpose(structure_A, structure_B)
 
 
 print()
-print("Original RMSD: {:.3f}".format(rmsd_X))
+print("Original RMSD between structures A and B: {:.3f} Å".format(rmsd_R))
 
-rmsd_alt = calc_rmsd(traj, alt_refe_struc0, fraglib)
-print("Original RMSD: {:.3f}".format(rmsd_X))
-print("RMSD of nearest-native ({:.3f} A): {:.3f} A".format(rmsd_original[0], rmsd_alt[0]))
+rmsd_alt = calc_rmsd(traj, structure_B_0, fraglib)
+print("RMSD of nearest-native ({:.3f} Å to structure A) to structure B: {:.3f} Å".format(rmsd_original[0], rmsd_alt[0]))
 print()
 
 from scipy.special import betainc, gamma
@@ -85,18 +84,28 @@ def error_function(dimensionality0, angle, target_frac):
 
 
 for top in 100000, 10000:
-    mean_sampling = rmsd_original[:top].mean()
+    msd_original = rmsd_original[:top]**2
+    msd_alt = rmsd_alt[:top]**2
+    mean_sampling = np.sqrt(msd_original.mean())
     print("#" * 50)
-    print("# top {:d}, mean_sampling {:.2f} A".format(top, mean_sampling))
+    print("# top {:d}, mean sampling {:.2f} Å".format(top, mean_sampling))
     print("#" * 50)
     print()
-    for improvement in 0, 0.02, 0.05, 0.1, 0.15:
-        threshold = rmsd_X * (1-improvement)
-        print("Improvement threshold: {:d} % ({:.2f} A)".format(int(100*improvement), improvement*rmsd_X))
-        frac = (rmsd_alt[:top] <= threshold).sum() / len(rmsd_alt[:top])
+    alt_mean_rmsd = np.sqrt(msd_alt.mean())
+    print("Root mean distance to structure B: {:.2f} Å".format(alt_mean_rmsd))
+    alt_mean_rmsd_expected = np.sqrt((msd_original + rmsd_R**2).mean())
+    #dist_scale = np.sqrt(alt_mean_rmsd / alt_mean_rmsd_expected)
+    print("(expected based on independent distances): {:.2f} Å".format(alt_mean_rmsd_expected))
+    #print(dist_scale)
+    print()
+    for improvement in 0, 0.02, 0.05, 0.1, 0.15, 0.2:
+        threshold = rmsd_R * (1-improvement) #* dist_scale
+        print("Improvement threshold: {:d} % ({:.2f} Å)".format(int(100*improvement), improvement*rmsd_R))
+        npass = (rmsd_alt[:top] <= threshold).sum()
+        frac = npass / len(rmsd_alt[:top])
         print("Percentage that passes: {:.2f}".format(frac*100))
-        if frac > 0:
-            cosang = (mean_sampling**2 + rmsd_X **2 - threshold**2)/(2 * mean_sampling * rmsd_X )
+        if npass >= 10:
+            cosang = (mean_sampling**2 + rmsd_R **2 - threshold**2)/(2 * mean_sampling * rmsd_R )
             ang = acos(cosang)
             print("Hypercap angle: {:.1f} degrees".format(ang/pi * 180))
             func = functools.partial(error_function, angle=ang, target_frac=frac)

@@ -1,0 +1,80 @@
+
+Original RMSD between structures A and B: 2.340 Å
+RMSD of nearest-native (1.202 Å to structure A) to structure B: 2.364 Å
+
+##################################################
+# top 100000, mean sampling 1.44 Å
+##################################################
+
+Root mean distance to structure B: 2.35 Å
+(expected based on independent distances): 2.75 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 48.05
+Hypercap angle: 72.1 degrees
+Dimensionality: 6.50
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 36.13
+Hypercap angle: 70.2 degrees
+Dimensionality: 8.29
+
+Improvement threshold: 5 % (0.12 Å)
+Percentage that passes: 20.93
+Hypercap angle: 67.3 degrees
+Dimensionality: 11.23
+
+Improvement threshold: 10 % (0.23 Å)
+Percentage that passes: 6.29
+Hypercap angle: 62.5 degrees
+Dimensionality: 15.91
+
+Improvement threshold: 15 % (0.35 Å)
+Percentage that passes: 1.35
+Hypercap angle: 57.8 degrees
+Dimensionality: 19.88
+
+Improvement threshold: 20 % (0.47 Å)
+Percentage that passes: 0.18
+Hypercap angle: 53.1 degrees
+Dimensionality: 23.50
+
+
+##################################################
+# top 10000, mean sampling 1.36 Å
+##################################################
+
+Root mean distance to structure B: 2.35 Å
+(expected based on independent distances): 2.71 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 47.43
+Hypercap angle: 73.0 degrees
+Dimensionality: 7.23
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 34.65
+Hypercap angle: 71.0 degrees
+Dimensionality: 9.39
+
+Improvement threshold: 5 % (0.12 Å)
+Percentage that passes: 19.23
+Hypercap angle: 68.0 degrees
+Dimensionality: 12.68
+
+Improvement threshold: 10 % (0.23 Å)
+Percentage that passes: 5.22
+Hypercap angle: 63.0 degrees
+Dimensionality: 17.77
+
+Improvement threshold: 15 % (0.35 Å)
+Percentage that passes: 0.93
+Hypercap angle: 58.0 degrees
+Dimensionality: 22.00
+
+Improvement threshold: 20 % (0.47 Å)
+Percentage that passes: 0.12
+Hypercap angle: 53.1 degrees
+Dimensionality: 25.00
+
+

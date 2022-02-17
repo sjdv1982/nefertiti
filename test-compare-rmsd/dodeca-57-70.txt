@@ -1,0 +1,80 @@
+
+Original RMSD between structures A and B: 2.506 Å
+RMSD of nearest-native (1.187 Å to structure A) to structure B: 2.360 Å
+
+##################################################
+# top 100000, mean sampling 1.55 Å
+##################################################
+
+Root mean distance to structure B: 2.66 Å
+(expected based on independent distances): 2.95 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 23.07
+Hypercap angle: 71.9 degrees
+Dimensionality: 15.68
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 16.72
+Hypercap angle: 70.0 degrees
+Dimensionality: 16.81
+
+Improvement threshold: 5 % (0.13 Å)
+Percentage that passes: 9.67
+Hypercap angle: 67.1 degrees
+Dimensionality: 18.33
+
+Improvement threshold: 10 % (0.25 Å)
+Percentage that passes: 3.27
+Hypercap angle: 62.4 degrees
+Dimensionality: 20.35
+
+Improvement threshold: 15 % (0.38 Å)
+Percentage that passes: 0.89
+Hypercap angle: 57.7 degrees
+Dimensionality: 22.00
+
+Improvement threshold: 20 % (0.50 Å)
+Percentage that passes: 0.19
+Hypercap angle: 53.1 degrees
+Dimensionality: 23.00
+
+
+##################################################
+# top 10000, mean sampling 1.45 Å
+##################################################
+
+Root mean distance to structure B: 2.61 Å
+(expected based on independent distances): 2.90 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 30.01
+Hypercap angle: 73.2 degrees
+Dimensionality: 13.74
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 21.94
+Hypercap angle: 71.1 degrees
+Dimensionality: 15.10
+
+Improvement threshold: 5 % (0.13 Å)
+Percentage that passes: 12.67
+Hypercap angle: 68.0 degrees
+Dimensionality: 16.98
+
+Improvement threshold: 10 % (0.25 Å)
+Percentage that passes: 4.09
+Hypercap angle: 63.0 degrees
+Dimensionality: 19.63
+
+Improvement threshold: 15 % (0.38 Å)
+Percentage that passes: 0.96
+Hypercap angle: 58.1 degrees
+Dimensionality: 22.00
+
+Improvement threshold: 20 % (0.50 Å)
+Percentage that passes: 0.16
+Hypercap angle: 53.1 degrees
+Dimensionality: 24.00
+
+

@@ -1,0 +1,70 @@
+
+Original RMSD between structures A and B: 4.004 Å
+RMSD of nearest-native (1.135 Å to structure A) to structure B: 4.039 Å
+
+##################################################
+# top 100000, mean sampling 1.31 Å
+##################################################
+
+Root mean distance to structure B: 4.03 Å
+(expected based on independent distances): 4.21 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 43.19
+Hypercap angle: 80.6 degrees
+Dimensionality: 24.27
+
+Improvement threshold: 2 % (0.08 Å)
+Percentage that passes: 22.54
+Hypercap angle: 77.1 degrees
+Dimensionality: 30.02
+
+Improvement threshold: 5 % (0.20 Å)
+Percentage that passes: 5.42
+Hypercap angle: 71.8 degrees
+Dimensionality: 37.54
+
+Improvement threshold: 10 % (0.40 Å)
+Percentage that passes: 0.11
+Hypercap angle: 63.0 degrees
+Dimensionality: 47.50
+
+Improvement threshold: 15 % (0.60 Å)
+Percentage that passes: 0.00
+
+Improvement threshold: 20 % (0.80 Å)
+Percentage that passes: 0.00
+
+
+##################################################
+# top 10000, mean sampling 1.26 Å
+##################################################
+
+Root mean distance to structure B: 4.02 Å
+(expected based on independent distances): 4.20 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 44.33
+Hypercap angle: 80.9 degrees
+Dimensionality: 24.89
+
+Improvement threshold: 2 % (0.08 Å)
+Percentage that passes: 22.40
+Hypercap angle: 77.3 degrees
+Dimensionality: 31.20
+
+Improvement threshold: 5 % (0.20 Å)
+Percentage that passes: 4.63
+Hypercap angle: 71.8 degrees
+Dimensionality: 40.19
+
+Improvement threshold: 10 % (0.40 Å)
+Percentage that passes: 0.06
+
+Improvement threshold: 15 % (0.60 Å)
+Percentage that passes: 0.00
+
+Improvement threshold: 20 % (0.80 Å)
+Percentage that passes: 0.00
+
+

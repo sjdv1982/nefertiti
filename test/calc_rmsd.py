@@ -20,7 +20,7 @@ def calc_rmsd(traj, refe_struc0, fraglib):
 
     rmsd = np.zeros(len(traj))
 
-    chunksize = 10000
+    chunksize = 100000
     curr_matrices = np.empty((chunksize, 4, 4))
     coors = np.empty((chunksize, nfrags, fraglen*4, 3))
     matmult_indices = np.empty((chunksize, 3), dtype=np.uint)
@@ -28,7 +28,8 @@ def calc_rmsd(traj, refe_struc0, fraglib):
     for n in range(0, len(traj), chunksize):
         n2 = min(n+chunksize, len(traj))
         real_chunksize = n2 - n
-        print("{}/{}".format(n, len(traj)))
+        if n > 0:
+            print("{}/{}".format(n, len(traj)))
         curr_matrices[:] = np.eye(4)
         for i in range(nfrags):
             curr_coors = coors[:, i]

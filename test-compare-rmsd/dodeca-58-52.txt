@@ -1,0 +1,80 @@
+
+Original RMSD between structures A and B: 2.340 Å
+RMSD of nearest-native (1.437 Å to structure A) to structure B: 2.182 Å
+
+##################################################
+# top 100000, mean sampling 1.87 Å
+##################################################
+
+Root mean distance to structure B: 2.36 Å
+(expected based on independent distances): 2.99 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 47.57
+Hypercap angle: 66.5 degrees
+Dimensionality: 4.38
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 38.71
+Hypercap angle: 64.9 degrees
+Dimensionality: 5.23
+
+Improvement threshold: 5 % (0.12 Å)
+Percentage that passes: 26.55
+Hypercap angle: 62.6 degrees
+Dimensionality: 6.67
+
+Improvement threshold: 10 % (0.23 Å)
+Percentage that passes: 11.72
+Hypercap angle: 58.8 degrees
+Dimensionality: 9.32
+
+Improvement threshold: 15 % (0.35 Å)
+Percentage that passes: 4.02
+Hypercap angle: 55.0 degrees
+Dimensionality: 12.04
+
+Improvement threshold: 20 % (0.47 Å)
+Percentage that passes: 1.07
+Hypercap angle: 51.3 degrees
+Dimensionality: 14.64
+
+
+##################################################
+# top 10000, mean sampling 1.76 Å
+##################################################
+
+Root mean distance to structure B: 2.31 Å
+(expected based on independent distances): 2.93 Å
+
+Improvement threshold: 0 % (0.00 Å)
+Percentage that passes: 56.93
+Hypercap angle: 67.9 degrees
+Dimensionality: 3.56
+
+Improvement threshold: 2 % (0.05 Å)
+Percentage that passes: 47.95
+Hypercap angle: 66.3 degrees
+Dimensionality: 4.28
+
+Improvement threshold: 5 % (0.12 Å)
+Percentage that passes: 34.53
+Hypercap angle: 63.8 degrees
+Dimensionality: 5.58
+
+Improvement threshold: 10 % (0.23 Å)
+Percentage that passes: 15.94
+Hypercap angle: 59.8 degrees
+Dimensionality: 8.28
+
+Improvement threshold: 15 % (0.35 Å)
+Percentage that passes: 5.85
+Hypercap angle: 55.9 degrees
+Dimensionality: 10.96
+
+Improvement threshold: 20 % (0.47 Å)
+Percentage that passes: 1.90
+Hypercap angle: 52.0 degrees
+Dimensionality: 13.03
+
+
