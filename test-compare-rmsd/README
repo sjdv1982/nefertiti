@@ -1,0 +1,8 @@
+Comparing near-native ensembles computed towards structure A to their RMSDs towards structure B
+(../test/compare-rmsd.py tool)
+Structures are dodecapeptides or octapeptides.
+Fragment library is PEP-FOLD.
+Look for dodeca 66 vs 2 for a case where RMSD space looks flat
+From dodeca 21 to 58 it is also flat, but definitely not from 58 to 21!
+
+dodecadummy for dummy fragment library

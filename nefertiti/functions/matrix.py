@@ -40,8 +40,8 @@ def dotmat(
     No verification of array shape is done!
 
     Inputs: 
-    - vectors of shape NxVx4
     - matrices of shape Mx4x4
+    - vectors of shape NxVx4
     - Indices (ind) of shape M, 
         with ind in range 0..N
     
