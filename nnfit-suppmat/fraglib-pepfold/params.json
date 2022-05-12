@@ -1,0 +1,81 @@
+{
+  "high-rmsd": {
+    "analysis": {
+      "mode": "random",
+      "mode_@1": "no",
+      "mode_@2": "no,threshold",
+      "mode_@3": "no,random",
+      "mode_@4": "threshold",
+      "mode_@5": "threshold,random",
+      "mode_@6": "random",
+      "random": {
+        "bins": 50,
+        "discard_lower": 20,
+        "discard_upper": 0,
+        "mode": "binning",
+        "mode_@1": "binning",
+        "mode_@2": "lowest_point",
+        "mode_@3": "midpoint",
+        "mode_@4": "highest_point"
+      }
+    },
+    "computation": {
+      "random": {
+        "nstructures": 1000
+      },
+      "threshold": {
+        "best_of_factor": 1000,
+        "redundancy": 200
+      }
+    }
+  },
+  "low-rmsd": {
+    "analysis": {
+      "greedy": {
+        "bins": 50,
+        "discard": 20,
+        "mode": "binning",
+        "mode_@1": "binning",
+        "mode_@2": "lowest_point"
+      },
+      "mode": "nn,greedy",
+      "mode_@1": "no",
+      "mode_@2": "no,greedy",
+      "mode_@3": "no,nn_intercept",
+      "mode_@4": "greedy",
+      "mode_@5": "greedy,nn_intercept",
+      "mode_@6": "greedy,nn",
+      "mode_@7": "nn_intercept",
+      "mode_@8": "nn_intercept,greedy",
+      "mode_@9": "nn_intercept,nn",
+      "mode_@A": "nn",
+      "mode_@B": "nn,greedy",
+      "near-native": {
+        "bins": 50,
+        "discard": 20,
+        "mode": "binning",
+        "mode_@1": "binning",
+        "mode_@2": "lowest_point",
+        "mode_@3": "midpoint",
+        "mode_@4": "highest_point"
+      }
+    },
+    "computation": {
+      "greedy": {
+        "poolsize": 500,
+        "poolsize_@1": 100,
+        "poolsize_@2": 200,
+        "poolsize_@3": 500,
+        "poolsize_@4": 1000
+      },
+      "near-native": {
+        "k": 100000,
+        "k_@1": 1,
+        "k_@2": 10000,
+        "k_@3": 100000
+      }
+    }
+  },
+  "name": "dodeca",
+  "nresidues": 12
+}

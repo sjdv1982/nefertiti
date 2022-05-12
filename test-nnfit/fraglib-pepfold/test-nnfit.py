@@ -1,5 +1,7 @@
 import numpy as np
 
+NAME = ""
+
 def load_greedy(name, poolsize):
     f = "data/greedy-%s-poolsize-%d-rmsd.npy"
     return np.load(f % (name, poolsize))
@@ -21,9 +23,10 @@ def load_randombest(name):
 from seamless.highlevel import Context, Cell, Transformer
 ctx = Context()
 ctx.testdata0 = Cell("cson")
-ctx.testdata0.mount("nnfit-suppmat.cson")
+ctx.testdata0.mount("test-nnfit.cson")
 ctx.testdata = Cell("plain")
 ctx.testdata = ctx.testdata0
+ctx.testdata.mount("test-nnfit.json", "w")
 ctx.parameters = Cell("plain").mount("params.json", authority="cell")#.set({})
 ctx.data = Cell("mixed")
 ctx.fit_nn = Transformer()
@@ -47,6 +50,8 @@ ctx.validated_parameters = ctx.nn_cost
 ctx.compute()
 
 def load_parameters(name):
+    global NAME
+    NAME = name
     ctx.data = None
     testdata = ctx.testdata.value
     if testdata is None:
@@ -133,12 +138,12 @@ def load_parameters(name):
     ctx.parameters.set(parameters)
 
 
-def load_data(name, greedy=True, random=True, threshold=True, nn_intercept=True, nn=True):
+def load_data(greedy=True, random=True, threshold=True, nn_intercept=True, nn=True):
     parameters = ctx.parameters.value
     data = {}
     if greedy:
         d = load_greedy(
-            name, 
+            NAME, 
             parameters["low-rmsd"]["computation"]["greedy"]["poolsize"]
         )
         data["greedy"] = d
@@ -147,26 +152,27 @@ def load_data(name, greedy=True, random=True, threshold=True, nn_intercept=True,
             k = parameters["low-rmsd"]["computation"]["near-native"]["k"]
         else:
             k = 1
-        d = load_kbest(name, k)
+        d = load_kbest(NAME, k)
         data["near-native"] = d
     if random:
         assert threshold
     if threshold:
-        rmsds, threshold = load_randombest(name)
+        rmsds, threshold = load_randombest(NAME)
         data["threshold"] = threshold
         if random:
             data["random"] = rmsds
     ctx.data = data
 
 import os
-for nam0 in "octa", "dodeca":
-    for n in range(100):
-        nam = nam0 + str(n+1)
-        load_parameters(nam0)
-        ctx.compute(0.1)
-        load_data(nam)    
-        ctx.compute()
-        print(nam, ctx.fit_nn.exception)
-        print()
-        os.system("mv plot.png figures/%s.png" % nam)
-        os.system("mv equation.json figures/equation-%s.json" % nam)
+for nam in "octa1", "octa4", "octa17", "dodeca1", "dodeca14", "casp14", "trypsin":
+    load_parameters(nam)
+    ctx.compute(0.1)
+    if nam in ("casp14", "trypsin"):
+        load_data(nn_intercept=False, nn=False)
+    else:
+        load_data()    
+    ctx.compute()
+    print(ctx.fit_nn.exception)
+    print(nam)       
+    os.system("cp plot.png figures/%s.png" % nam)
+    os.system("cp equation.json figures/equation-%s.json" % nam)
