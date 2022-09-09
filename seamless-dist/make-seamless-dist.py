@@ -1,11 +1,12 @@
 from seamless.highlevel import Context, Cell, Module
-from seamless.stdlib import stdlib
+from seamless.highlevel import stdlib
 
 import numpy as np
 fraglib = np.load("../fraglib/dummy.npy")
 refe = np.load("../benchmarks/octacommon-aligned.npy")[0]
 
 ctx = Context()
+'''
 ctx.include(stdlib.python_package)
 
 ctx.package_dirdict = Cell("plain")
@@ -22,9 +23,13 @@ ctx.python_package = ctx.lib.python_package(
     package_name = "nefertiti",
     package = ctx.package
 )
-
+'''
 ctx.module = Module()
-ctx.module.code = ctx.package
+#ctx.module.code = ctx.package
+ctx.module.multi = True
+ctx.module.mount("../nefertiti", authority="cell")
+ctx.module._get_hnode()["mount"]["directory_text_only"]=True  ## HACK
+ctx.module.internal_package_name = "nefertiti"
 ctx.compute()
 graph = ctx.get_graph()
 zip = ctx.get_zip()
