@@ -17,6 +17,6 @@ if __name__ == "__main__":
     import sys
     euler = np.load(sys.argv[1])
     dat_txt = euler2dat(euler)
-    print(dat_txt)
+    print(dat_txt, end="")
 
     
