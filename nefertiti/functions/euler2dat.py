@@ -2,7 +2,7 @@ import numpy as np
 from io import StringIO
 
 def euler2dat(euler: np.ndarray):
-    """writes out Euler angles in ATTRACT .dat format"""
+    """writes out Euler angles in ATTRACT 2-body .dat format"""
     result = StringIO()
     print("""#pivot auto
 #centered receptor: true
