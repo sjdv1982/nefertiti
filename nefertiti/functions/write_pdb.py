@@ -55,11 +55,11 @@ def write_pdb_atom(atom) -> str:
         occ = 0
     args = (
         "ATOM  " if atom["hetero"].decode().strip() == "" else "HETATM",
-        atom["index"],
+        atom["index"] % 100000,
         name,
         atom["altloc"].decode(),
         atom["resname"].decode(),
-        atom["chain"].decode(),
+        atom["chain"].decode()[0],
         atom["resid"],
         atom["icode"].decode(),
         atom["x"],

@@ -20,7 +20,7 @@ atomic_dtype = [
     ("name", "S4"),
     ("altloc","S1"),
     ("resname", "S3"),            
-    ("chain","S1"),
+    ("chain","S4"),
     ("index", 'uint32'),
     ("icode", "S1"), 
     ("resid", 'uint16'),            
