@@ -74,14 +74,20 @@ def write_pdb_atom(atom) -> str:
     return _ATOM_FORMAT_STRING % args
 #/adapted
 
-def write_pdb(struc: np.ndarray) -> str:
+def write_pdb(struc: np.ndarray, ter=False) -> str:
     _import("..parse_pdb")
     assert struc.dtype == parse_pdb.atomic_dtype
     assert struc.ndim == 1
     pdb = ""
+    curr_id = None
     for atom in struc:
         line = write_pdb_atom(atom)
+        new_id = atom["chain"], atom["resid"]
+        if curr_id is not None and new_id != curr_id:
+            if new_id[0] != curr_id[0] or new_id[1] != curr_id[1] + 1:
+                pdb +="TER\n"
         pdb += line
+        curr_id = new_id
     return pdb
 
 def write_multi_pdb(struc: np.ndarray) -> str:
@@ -173,6 +179,6 @@ if __name__ == "__main__":
     npy_file = sys.argv[1]
     outfile = sys.argv[2]
     struc = np.load(npy_file)
-    pdb_data = write_pdb(struc)
+    pdb_data = write_pdb(struc, ter=True)
     with open(outfile, "w") as f:
         f.write(pdb_data)
