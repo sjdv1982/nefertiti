@@ -1,0 +1,5 @@
+canonical:
+  - command: python parse_mmcif.py infile.cif outfile.npy
+  - command: python parse_mmcif.py infile.cif outfile.npy --no-auth-chains
+  - command: python parse_mmcif.py infile.cif outfile.npy --no-auth-residues
+  - command: python parse_mmcif.py infile.cif outfile.npy --no-auth-chains --no-auth-residues

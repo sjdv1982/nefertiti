@@ -1,0 +1,2 @@
+canonical:
+  - command: python parse_pdb.py infile.pdb outfile.npy
